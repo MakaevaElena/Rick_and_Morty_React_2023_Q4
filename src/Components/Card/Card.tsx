@@ -1,44 +1,59 @@
+import axios from 'axios';
 import React from 'react';
-// import { useState } from 'react';
+import './style.css';
 
-interface CounterProps {
+interface Props {
+  PokemonData: PokemonData;
+  isLoading: boolean;
+}
+
+type PokemonData = {
   name: string;
+  url: string;
+};
+
+type Details = {
+  sprites: {
+    front_default: string;
+  };
+};
+
+interface State {
+  details: Details;
 }
 
-interface CounterState {
-  count: number;
-}
-
-export default class Card extends React.Component<CounterProps, CounterState> {
-  constructor(props: CounterProps) {
+export default class Card extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
-      count: 0,
+      details: {
+        sprites: {
+          front_default: '',
+        },
+      },
     };
   }
 
-  // const [count, setCount] = useState(0);
+  private async fetchPokemonDetails() {
+    const response = await axios.get(this.props.PokemonData.url);
+    console.log(response.data);
+    return response.data;
+  }
 
-  handleClick = () => {
-    this.setState(({ count }) => ({
-      count: count + 1,
-    }));
-  };
+  componentDidMount(): void {
+    this.fetchPokemonDetails().then((details) => this.setState({ details }));
+  }
 
   render() {
     return (
       <>
-        <h1>Привет, {this.props.name}</h1>;
         <div className="card">
-          {/* <button onClick={() => setCount((count) => count + 1)}>count is {count}</button> */}
-          <p>name: Pokemon</p>
-          <img src="" alt="" />
-          <button onClick={() => this.handleClick}>count is {this.state.count}</button>
+          <h3>name: {this.props.PokemonData.name}</h3>
+          <img className="pokemon-img" src={this.state.details.sprites.front_default} alt="" />
+          {/* <button onClick={this.handleClick}>count is {this.state.count}</button> */}
         </div>
       </>
     );
   }
 }
-
-// https://www.coderdoc.ru/start/35_typescript/14_component/14_1_class.php

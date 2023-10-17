@@ -1,17 +1,21 @@
 import { Component } from 'react';
 import './App.css';
-import Card from './Components/Card/Card';
-import Pagination from './Components/Pagination/Pagination';
 import axios from 'axios';
-
-// interface CounterState {
-//   data: [];
-// isLoading: boolean;
-// }
+import PokemonList from './Components/PokemonList/PokemonList';
 
 const url = 'https://pokeapi.co/api/v2/pokemon/';
 
-class App extends Component {
+interface Props {}
+
+interface State {
+  data: [];
+  isLoading: boolean;
+  url: string;
+  nextUrl: string;
+  prevUrl: string;
+}
+
+class App extends Component<Props, State> {
   constructor(props: object) {
     // todo super(props);
     super(props);
@@ -20,29 +24,33 @@ class App extends Component {
       data: [],
       isLoading: false,
       url: 'https://pokeapi.co/api/v2/pokemon/',
+      nextUrl: '',
+      prevUrl: '',
     };
   }
 
   private async fetchData() {
     this.setState({ isLoading: true });
     const response = await axios.get(url);
-    console.log(response.data);
-    return response.data;
+    this.setState({ nextUrl: response.data.next });
+    this.setState({ prevUrl: response.data.previous });
+    // console.log(response.data);
+    this.setState({ isLoading: false });
+    return response.data.results;
   }
 
   componentDidMount(): void {
-    this.fetchData().then((data) => this.setState({ data }));
+    this.fetchData().then((data) => {
+      this.setState({ data });
+      // console.log(this.state.data);
+    });
   }
 
   render() {
     return (
       <>
         <div className="container">
-          <section className="pokemonList">
-            <h2>pokemonList</h2>
-            <Card name="Card" />
-            <Pagination />
-          </section>
+          <PokemonList data={this.state.data} isLoading={this.state.isLoading} />
           <section className="pokemonInfo">
             <h2>pokemonInfo</h2>
           </section>
