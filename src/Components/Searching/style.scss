@@ -1,0 +1,39 @@
+form {
+  position: relative;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.search-input {
+  width: 100%;
+  height: 3em;
+  padding-left: 1em;
+  border: 2px solid #7ba7ab;
+  border-radius: 3%;
+  outline: none;
+  background: #f9f0da;
+  color: #9e9c9c;
+  box-shadow: 0px 5px 10px 2px #556b4f;
+  // https://active-vision.ru/icon/box-shadow/
+}
+.search-button {
+  position: absolute;
+  top: 0.45em;
+  right: -4%;
+  width: 2em;
+  height: 2em;
+  border: none;
+  border-radius: 3%;
+  cursor: pointer;
+  background-image: url('../../assets/img/loupe.svg');
+  background-repeat: no-repeat;
+  transition: 0.2s;
+}
+
+.search-button:hover {
+  transform: scale(1.1);
+}
+
+.search-button:active {
+  border: none;
+}

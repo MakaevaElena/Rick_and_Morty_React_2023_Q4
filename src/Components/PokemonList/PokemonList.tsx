@@ -20,7 +20,7 @@ export default class PokemonList extends React.Component<Props> {
   render() {
     return (
       <>
-        <h2>pokemonList</h2>
+        <h2>pokemonList {this.props.data.length}</h2>
         <section className="pokemon-list">
           {/* {this.props.data.map((data) => (
             <p key={data.name}>{data.name}</p>
@@ -29,7 +29,6 @@ export default class PokemonList extends React.Component<Props> {
             <Card key={data.name} PokemonData={data} isLoading={this.props.isLoading} />
           ))}
         </section>
-        
       </>
     );
   }

@@ -1,14 +1,14 @@
 import React from 'react';
 
-interface CounterProps {
-  name: string;
-}
+// interface CounterProps {
+//   name: string;
+// }
 
-interface CounterState {
-  count: number;
-}
+// interface CounterState {
+//   count: number;
+// }
 
-export default class Info extends React.Component<CounterProps, CounterState> {
+export default class Info extends React.Component {
   // constructor(props: CounterProps) {
   //   super(props);
 
@@ -27,7 +27,7 @@ export default class Info extends React.Component<CounterProps, CounterState> {
     return (
       <>
         <h2>pokemonInfo</h2>
-        <h1>Info about {this.props.name}</h1>;
+        {/* <h1>Info about {this.props.name}</h1>; */}
         <section className="pokemon-info">
           <p>name: Pokemon</p>
           <img src="" alt="" />

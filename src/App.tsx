@@ -3,7 +3,8 @@ import './App.scss';
 import axios from 'axios';
 import PokemonList from './Components/PokemonList/PokemonList';
 import Pagination from './Components/Pagination/Pagination';
-// import Info from './Components/Info/Info';
+import Searching from './Components/Searching/Searching';
+import Info from './Components/Info/Info';
 
 const url = 'https://pokeapi.co/api/v2/pokemon/';
 
@@ -52,8 +53,9 @@ class App extends Component<Props, State> {
     return (
       <>
         <div className="container">
+          <Searching />
           <PokemonList data={this.state.data} isLoading={this.state.isLoading} />
-          {/* <Info /> */}
+          <Info />
           <Pagination />
         </div>
       </>
