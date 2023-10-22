@@ -26,12 +26,13 @@ export default class Info extends React.Component<CounterProps, CounterState> {
   render() {
     return (
       <>
+        <h2>pokemonInfo</h2>
         <h1>Info about {this.props.name}</h1>;
-        <div className="card">
+        <section className="pokemon-info">
           <p>name: Pokemon</p>
           <img src="" alt="" />
           {/* <button onClick={() => this.handleClick}>count is {this.state.count}</button> */}
-        </div>
+        </section>
       </>
     );
   }

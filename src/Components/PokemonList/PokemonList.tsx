@@ -1,6 +1,6 @@
 import React from 'react';
+import './style.scss';
 import Card from '../Card/Card';
-import Pagination from '../Pagination/Pagination';
 
 type PokemonData = {
   name: string;
@@ -20,17 +20,16 @@ export default class PokemonList extends React.Component<Props> {
   render() {
     return (
       <>
-        <section className="pokemonList">
-          <h2>pokemonList</h2>
+        <h2>pokemonList</h2>
+        <section className="pokemon-list">
           {/* {this.props.data.map((data) => (
             <p key={data.name}>{data.name}</p>
           ))} */}
           {this.props.data.map((data) => (
             <Card key={data.name} PokemonData={data} isLoading={this.props.isLoading} />
           ))}
-
-          <Pagination />
         </section>
+        
       </>
     );
   }

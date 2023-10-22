@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import './style.css';
+import './style.scss';
 
 interface Props {
   PokemonData: PokemonData;
@@ -49,7 +49,7 @@ export default class Card extends React.Component<Props, State> {
     return (
       <>
         <div className="card">
-          <h3>name: {this.props.PokemonData.name}</h3>
+          <h3>{this.props.PokemonData.name}</h3>
           <img className="pokemon-img" src={this.state.details.sprites.front_default} alt="" />
           {/* <button onClick={this.handleClick}>count is {this.state.count}</button> */}
         </div>

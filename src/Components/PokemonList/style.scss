@@ -1,0 +1,10 @@
+.pokemon-list {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  flex-wrap: wrap;
+  row-gap: 1em;
+  // column-gap: 2em;
+  background-color: rgb(172, 206, 163);
+}
