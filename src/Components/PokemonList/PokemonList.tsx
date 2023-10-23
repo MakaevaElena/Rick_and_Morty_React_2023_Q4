@@ -3,19 +3,7 @@ import './style.scss';
 import Card from '../Card/Card';
 import { Pokemon } from '../../types/pokemon-types';
 
-// type Stat = {
-//   name: string;
-//   base_stat: number;
-// };
-
-// type PokemonData = {
-//   name: string;
-//   url: string;
-//   stats: Stat[];
-// };
-
 interface Props {
-  // data: PokemonData[];
   data: Pokemon[];
   isLoading: boolean;
 }
@@ -28,7 +16,7 @@ export default class PokemonList extends React.Component<Props> {
   render() {
     return (
       <>
-        <h2>pokemonList {this.props.data.length}</h2>
+        <h2>Pokemon List {this.props.data.length}</h2>
         <section className="pokemon-list">
           {/* {this.props.data.map((data) => (
             <p key={data.name}>{data.name}</p>

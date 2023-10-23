@@ -10,19 +10,6 @@ interface Props {
   isLoading: boolean;
 }
 
-// type PokemonData = {
-//   name: string;
-//   url: string;
-//   stats: Stat[];
-//   details: Details;
-// };
-
-// type Details = {
-//   sprites: {
-//     front_default: string;
-//   };
-// };
-
 interface State {
   details: Pokemon;
 }
@@ -64,6 +51,7 @@ export default class Card extends React.Component<Props, State> {
   private async fetchPokemonDetails() {
     // const response = await axios.get(this.props.PokemonData.url);
     const response = await axios.get(`${url}${this.props.PokemonData.name}`);
+    console.log(this.props);
     return response.data;
   }
 
@@ -76,7 +64,6 @@ export default class Card extends React.Component<Props, State> {
       <>
         <div className="card">
           <h3>{this.props.PokemonData.name}</h3>
-          {/* <img className="pokemon-img" src={this.state.details.sprites.front_default} alt="" /> */}
           <img
             className="pokemon-img"
             src={
@@ -86,8 +73,15 @@ export default class Card extends React.Component<Props, State> {
             }
             alt=""
           />
-          <div className="stats"></div>
-          {/* <button onClick={this.handleClick}>count is {this.state.count}</button> */}
+          <div className="stats">
+            {this.state.details.stats.map((stat) => {
+              return (
+                <li className="stat">
+                  {stat.stat.name}: {stat.base_stat}
+                </li>
+              );
+            })}
+          </div>
         </div>
       </>
     );

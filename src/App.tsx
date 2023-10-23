@@ -12,17 +12,6 @@ const url = 'https://pokeapi.co/api/v2/pokemon/';
 
 interface Props {}
 
-// type Stat = {
-//   name: string;
-//   base_stat: number;
-// };
-
-// type PokemonData = {
-//   name: string;
-//   url: string;
-//   stats: Stat[];
-// };
-
 interface State {
   data: Pokemon[];
   isLoading: boolean;
@@ -39,7 +28,7 @@ class App extends Component<Props, State> {
     this.state = {
       data: [],
       isLoading: false,
-      url: 'https://pokeapi.co/api/v2/?offset=100&limit=100',
+      url: '',
       nextUrl: '',
       prevUrl: '',
     };
@@ -56,6 +45,9 @@ class App extends Component<Props, State> {
   }
 
   componentDidMount(): void {
+    // if(localStorage.getItem('searchValue'){
+
+    // })
     this.fetchData().then((data) => {
       this.setState({ data });
       // console.log(this.state.data);
@@ -63,7 +55,7 @@ class App extends Component<Props, State> {
   }
 
   searchData = (searchingData: Pokemon[]) => {
-    console.log(searchingData);
+    // console.log(searchingData);
     this.setState({ data: searchingData });
   };
 

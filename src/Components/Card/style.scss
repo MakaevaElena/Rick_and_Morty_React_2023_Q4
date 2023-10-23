@@ -1,5 +1,6 @@
 .card {
   width: 9%;
+  padding: 2.5vw;
   border: 1px solid white;
   border-radius: 3%;
   background-color: #accea3;
@@ -18,9 +19,22 @@
   }
 
   transition: 0.2s;
+
+  h3 {
+    font-size: 1.4vw;
+    margin: 0;
+  }
 }
 
 .pokemon-img {
   width: 100%;
   height: 100%;
+}
+
+.stats {
+  font-size: 0.8vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }

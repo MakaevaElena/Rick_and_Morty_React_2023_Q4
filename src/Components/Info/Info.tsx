@@ -26,7 +26,7 @@ export default class Info extends React.Component {
   render() {
     return (
       <>
-        <h2>pokemonInfo</h2>
+        <h2>Pokemon Info</h2>
         {/* <h1>Info about {this.props.name}</h1>; */}
         <section className="pokemon-info">
           <p>name: Pokemon</p>

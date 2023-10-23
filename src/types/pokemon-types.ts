@@ -126,11 +126,18 @@ export interface PokemonMoveVersion {
  */
 export interface PokemonStat {
   /** The stat the Pokémon has */
-  // stat: NamedAPIResource;
+  stat: NamedAPIResource;
   /** The effort points (EV) the Pokémon has in the stat */
   effort: number;
   /** The base value of the stat */
   base_stat: number;
+}
+
+export interface NamedAPIResource {
+  /** The name of the referenced resource */
+  name: string;
+  /** The URL of the referenced resource */
+  url: string;
 }
 
 /** Version Sprites */

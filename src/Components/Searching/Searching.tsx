@@ -5,11 +5,6 @@ import { Pokemon } from '../../types/pokemon-types';
 
 const url = 'https://pokeapi.co/api/v2/pokemon/';
 
-// type PokemonData = {
-//   name: string;
-//   url: string;
-// };
-
 interface Props {
   data: Pokemon[];
   isLoading: boolean;
