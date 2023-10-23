@@ -49,9 +49,8 @@ export default class Card extends React.Component<Props, State> {
   }
 
   private async fetchPokemonDetails() {
-    // const response = await axios.get(this.props.PokemonData.url);
     const response = await axios.get(`${url}${this.props.PokemonData.name}`);
-    console.log(this.props);
+    // console.log(this.props);
     return response.data;
   }
 
@@ -74,9 +73,10 @@ export default class Card extends React.Component<Props, State> {
             alt=""
           />
           <div className="stats">
+            <li>id: {this.state.details.id}</li>
             {this.state.details.stats.map((stat) => {
               return (
-                <li className="stat">
+                <li key={stat.stat.name} className="stat">
                   {stat.stat.name}: {stat.base_stat}
                 </li>
               );

@@ -45,12 +45,15 @@ class App extends Component<Props, State> {
   }
 
   componentDidMount(): void {
-    // if(localStorage.getItem('searchValue'){
-
-    // })
     this.fetchData().then((data) => {
-      this.setState({ data });
-      // console.log(this.state.data);
+      const value = localStorage.getItem('searchValue');
+      if (value) {
+        this.setState({ data: data.filter((el: Pokemon) => el.name.includes(value)) });
+      } else {
+        this.setState({ data });
+      }
+
+      console.log(this.state.data);
     });
   }
 

@@ -41,7 +41,7 @@ export default class Searching extends React.Component<Props, State> {
     // this.props.isLoading(true);
     const response = await axios.get(url);
     this.props.searchData(
-      response.data.results.filter((el: Pokemon) => el.name === this.state.value)
+      response.data.results.filter((el: Pokemon) => el.name.includes(this.state.value))
     );
     // this.props.isLoading(false);
     // return response.data.results;
@@ -56,6 +56,13 @@ export default class Searching extends React.Component<Props, State> {
   private handleSearchClick() {
     this.fetchData();
     localStorage.setItem('searchValue', this.state.value);
+  }
+
+  componentDidMount(): void {
+    const value = localStorage.getItem('searchValue');
+    if (value) {
+      this.setState({ value });
+    }
   }
 
   render() {
