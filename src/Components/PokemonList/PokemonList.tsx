@@ -1,14 +1,22 @@
 import React from 'react';
 import './style.scss';
 import Card from '../Card/Card';
+import { Pokemon } from '../../types/pokemon-types';
 
-type PokemonData = {
-  name: string;
-  url: string;
-};
+// type Stat = {
+//   name: string;
+//   base_stat: number;
+// };
+
+// type PokemonData = {
+//   name: string;
+//   url: string;
+//   stats: Stat[];
+// };
 
 interface Props {
-  data: PokemonData[];
+  // data: PokemonData[];
+  data: Pokemon[];
   isLoading: boolean;
 }
 

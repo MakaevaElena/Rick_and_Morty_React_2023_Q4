@@ -1,16 +1,17 @@
 import React from 'react';
 import './style.scss';
 import axios from 'axios';
+import { Pokemon } from '../../types/pokemon-types';
 
 const url = 'https://pokeapi.co/api/v2/pokemon/';
 
-type PokemonData = {
-  name: string;
-  url: string;
-};
+// type PokemonData = {
+//   name: string;
+//   url: string;
+// };
 
 interface Props {
-  data: PokemonData[];
+  data: Pokemon[];
   isLoading: boolean;
   searchData: (data: []) => void;
 }
@@ -45,7 +46,7 @@ export default class Searching extends React.Component<Props, State> {
     // this.props.isLoading(true);
     const response = await axios.get(url);
     this.props.searchData(
-      response.data.results.filter((el: PokemonData) => el.name === this.state.value)
+      response.data.results.filter((el: Pokemon) => el.name === this.state.value)
     );
     // this.props.isLoading(false);
     // return response.data.results;

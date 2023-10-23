@@ -5,19 +5,26 @@ import PokemonList from './Components/PokemonList/PokemonList';
 import Pagination from './Components/Pagination/Pagination';
 import Searching from './Components/Searching/Searching';
 import Info from './Components/Info/Info';
+import { Pokemon } from './types/pokemon-types';
 
 const url = 'https://pokeapi.co/api/v2/pokemon/';
 // const url = 'https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20';
 
 interface Props {}
 
-type PokemonData = {
-  name: string;
-  url: string;
-};
+// type Stat = {
+//   name: string;
+//   base_stat: number;
+// };
+
+// type PokemonData = {
+//   name: string;
+//   url: string;
+//   stats: Stat[];
+// };
 
 interface State {
-  data: PokemonData[];
+  data: Pokemon[];
   isLoading: boolean;
   url: string;
   nextUrl: string;
@@ -55,7 +62,7 @@ class App extends Component<Props, State> {
     });
   }
 
-  searchData = (searchingData: PokemonData[]) => {
+  searchData = (searchingData: Pokemon[]) => {
     console.log(searchingData);
     this.setState({ data: searchingData });
   };
