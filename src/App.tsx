@@ -7,11 +7,17 @@ import Searching from './Components/Searching/Searching';
 import Info from './Components/Info/Info';
 
 const url = 'https://pokeapi.co/api/v2/pokemon/';
+// const url = 'https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20';
 
 interface Props {}
 
+type PokemonData = {
+  name: string;
+  url: string;
+};
+
 interface State {
-  data: [];
+  data: PokemonData[];
   isLoading: boolean;
   url: string;
   nextUrl: string;
@@ -26,7 +32,7 @@ class App extends Component<Props, State> {
     this.state = {
       data: [],
       isLoading: false,
-      url: 'https://pokeapi.co/api/v2/pokemon/',
+      url: 'https://pokeapi.co/api/v2/?offset=100&limit=100',
       nextUrl: '',
       prevUrl: '',
     };
@@ -49,11 +55,20 @@ class App extends Component<Props, State> {
     });
   }
 
+  searchData = (searchingData: PokemonData[]) => {
+    console.log(searchingData);
+    this.setState({ data: searchingData });
+  };
+
   render() {
     return (
       <>
         <div className="container">
-          <Searching />
+          <Searching
+            data={this.state.data}
+            searchData={this.searchData}
+            isLoading={this.state.isLoading}
+          />
           <PokemonList data={this.state.data} isLoading={this.state.isLoading} />
           <Info />
           <Pagination />

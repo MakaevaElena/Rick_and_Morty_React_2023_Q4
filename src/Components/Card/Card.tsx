@@ -37,7 +37,6 @@ export default class Card extends React.Component<Props, State> {
 
   private async fetchPokemonDetails() {
     const response = await axios.get(this.props.PokemonData.url);
-    console.log(response.data);
     return response.data;
   }
 
