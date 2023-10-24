@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, ReactNode } from 'react';
 import './App.scss';
 import axios from 'axios';
 import PokemonList from './Components/PokemonList/PokemonList';
@@ -6,11 +6,14 @@ import Pagination from './Components/Pagination/Pagination';
 import Searching from './Components/Searching/Searching';
 import Info from './Components/Info/Info';
 import { Pokemon } from './types/pokemon-types';
+import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary';
 
 const url = 'https://pokeapi.co/api/v2/pokemon/';
 // const url = 'https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20';
 
-interface Props {}
+interface Props {
+  children?: ReactNode;
+}
 
 interface State {
   data: Pokemon[];
@@ -57,6 +60,8 @@ class App extends Component<Props, State> {
     });
   }
 
+  // https://www.coderdoc.ru/start/35_typescript/14_component/14_1_class.php
+
   searchData = (searchingData: Pokemon[]) => {
     // console.log(searchingData);
     this.setState({ data: searchingData });
@@ -66,14 +71,22 @@ class App extends Component<Props, State> {
     return (
       <>
         <div className="container">
-          <Searching
-            data={this.state.data}
-            searchData={this.searchData}
-            isLoading={this.state.isLoading}
-          />
-          <PokemonList data={this.state.data} isLoading={this.state.isLoading} />
-          <Info />
-          <Pagination />
+          <ErrorBoundary>
+            <Searching
+              data={this.state.data}
+              searchData={this.searchData}
+              isLoading={this.state.isLoading}
+            />
+          </ErrorBoundary>
+          <ErrorBoundary>
+            <PokemonList data={this.state.data} isLoading={this.state.isLoading} />
+          </ErrorBoundary>
+          <ErrorBoundary>
+            <Info />
+          </ErrorBoundary>
+          <ErrorBoundary>
+            <Pagination />
+          </ErrorBoundary>
         </div>
       </>
     );
