@@ -21,6 +21,7 @@ interface State {
   url: string;
   nextUrl: string;
   prevUrl: string;
+  // inputValue: string;
 }
 
 class App extends Component<Props, State> {
@@ -34,6 +35,7 @@ class App extends Component<Props, State> {
       url: '',
       nextUrl: '',
       prevUrl: '',
+      // inputValue: '',
     };
   }
 
@@ -56,7 +58,7 @@ class App extends Component<Props, State> {
         this.setState({ data });
       }
 
-      console.log(this.state.data);
+      // console.log(this.state.data);
     });
   }
 
@@ -65,7 +67,12 @@ class App extends Component<Props, State> {
   searchData = (searchingData: Pokemon[]) => {
     // console.log(searchingData);
     this.setState({ data: searchingData });
+    console.log(searchingData);
   };
+
+  // getInputValue = (inputValue: string) => {
+  //   this.setState({ inputValue });
+  // };
 
   render() {
     return (
@@ -75,11 +82,17 @@ class App extends Component<Props, State> {
             <Searching
               data={this.state.data}
               searchData={this.searchData}
+              // getInputValue={this.getInputValue}
               isLoading={this.state.isLoading}
             />
           </ErrorBoundary>
+
           <ErrorBoundary>
-            <PokemonList data={this.state.data} isLoading={this.state.isLoading} />
+            <PokemonList
+              data={this.state.data}
+              isLoading={this.state.isLoading}
+              // inputValue={this.state.inputValue}
+            />
           </ErrorBoundary>
           <ErrorBoundary>
             <Info />

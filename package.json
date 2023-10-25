@@ -9,7 +9,10 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "fix": "prettier --write src",
-    "pre-commit": "npm lint & npm run fix"
+    "format:fix": "prettier --write src",
+    "pre-commit": "npm run lint & npm run fix",
+    "prepare": "husky install",
+    "test": "npm run lint & npm run fix"
   },
   "dependencies": {
     "axios": "^1.5.1",

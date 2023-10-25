@@ -6,6 +6,7 @@ import { Pokemon } from '../../types/pokemon-types';
 interface Props {
   data: Pokemon[];
   isLoading: boolean;
+  // inputValue: string;
 }
 
 export default class PokemonList extends React.Component<Props> {
@@ -18,12 +19,15 @@ export default class PokemonList extends React.Component<Props> {
       <>
         <h2>Pokemon List {this.props.data.length}</h2>
         <section className="pokemon-list">
-          {/* {this.props.data.map((data) => (
-            <p key={data.name}>{data.name}</p>
-          ))} */}
-          {this.props.data.map((data) => (
-            <Card key={data.name} PokemonData={data} isLoading={this.props.isLoading} />
-          ))}
+          {/* {this.props.inputValue.length > 0 ? ( */}
+          {
+            this.props.data.map((data) => (
+              <Card key={data.name} PokemonData={data} isLoading={this.props.isLoading} />
+            ))
+            // ) : (
+            //   <h2>Pokemon not found</h2>
+            // )}
+          }
         </section>
       </>
     );
