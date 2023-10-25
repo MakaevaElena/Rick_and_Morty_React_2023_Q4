@@ -37,3 +37,7 @@ form {
 .search-button:active {
   border: none;
 }
+
+.disable {
+  pointer-events: none;
+}

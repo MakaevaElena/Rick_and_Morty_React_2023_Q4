@@ -10,6 +10,7 @@ import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary';
 
 const url = 'https://pokeapi.co/api/v2/pokemon/';
 // const url = 'https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20';
+// const url = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0';
 
 interface Props {
   children?: ReactNode;
@@ -65,9 +66,8 @@ class App extends Component<Props, State> {
   // https://www.coderdoc.ru/start/35_typescript/14_component/14_1_class.php
 
   searchData = (searchingData: Pokemon[]) => {
-    // console.log(searchingData);
     this.setState({ data: searchingData });
-    console.log(searchingData);
+    // console.log(searchingData);
   };
 
   // getInputValue = (inputValue: string) => {
