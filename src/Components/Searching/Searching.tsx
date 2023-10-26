@@ -3,8 +3,8 @@ import './style.scss';
 import axios from 'axios';
 import { Pokemon } from '../../types/pokemon-types';
 
-// const url = 'https://pokeapi.co/api/v2/pokemon/';
-const url = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0';
+const defaultUrl = 'https://pokeapi.co/api/v2/pokemon/';
+const searchUrl = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0';
 
 interface Props {
   data: Pokemon[];
@@ -48,6 +48,13 @@ export default class Searching extends React.Component<Props, State> {
 
   private async fetchData() {
     // this.props.isLoading(true);
+
+    let url = '';
+    // const value = localStorage.getItem('searchValue');
+
+    this.state.value.length !== 0 ? (url = searchUrl) : (url = defaultUrl);
+    console.log('value', this.state.value);
+    console.log('url', url);
     const response = await axios.get(url);
     this.props.searchData(
       response.data.results.filter((el: Pokemon) => el.name.includes(this.state.value))
@@ -96,13 +103,13 @@ export default class Searching extends React.Component<Props, State> {
     localStorage.setItem('searchValue', this.state.value);
   }
 
-  private handleFocus() {
-    const EMPTY_FIELD = `THE FIELD IS EMPTY`;
-    if (this.inputRef.current) {
-      this.inputRef.current.setCustomValidity(EMPTY_FIELD);
-      this.inputRef.current.reportValidity();
-    }
-  }
+  // private handleFocus() {
+  //   const EMPTY_FIELD = `THE FIELD IS EMPTY`;
+  //   if (this.inputRef.current) {
+  //     this.inputRef.current.setCustomValidity(EMPTY_FIELD);
+  //     this.inputRef.current.reportValidity();
+  //   }
+  // }
 
   componentDidMount(): void {
     const value = localStorage.getItem('searchValue');
@@ -127,7 +134,7 @@ export default class Searching extends React.Component<Props, State> {
               placeholder="search..."
               value={this.state.value}
               onChange={this.handleChange}
-              onFocus={this.handleFocus}
+              // onFocus={this.handleFocus}
             />
             <div
               className="search-button"

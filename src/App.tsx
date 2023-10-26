@@ -8,9 +8,9 @@ import Info from './Components/Info/Info';
 import { Pokemon } from './types/pokemon-types';
 import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary';
 
-const url = 'https://pokeapi.co/api/v2/pokemon/';
-// const url = 'https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20';
-// const url = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0';
+// const defaultUrl = 'https://pokeapi.co/api/v2/pokemon/';
+const defaultUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=100&limit=20';
+const searchUrl = 'https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0';
 
 interface Props {
   children?: ReactNode;
@@ -41,7 +41,12 @@ class App extends Component<Props, State> {
   }
 
   private async fetchData() {
+    let url = '';
+    const value = localStorage.getItem('searchValue');
     this.setState({ isLoading: true });
+
+    value && value.length > 0 ? (url = searchUrl) : (url = defaultUrl);
+    // console.log('url', url);
     const response = await axios.get(url);
     this.setState({ nextUrl: response.data.next });
     this.setState({ prevUrl: response.data.previous });
@@ -51,8 +56,8 @@ class App extends Component<Props, State> {
   }
 
   componentDidMount(): void {
+    const value = localStorage.getItem('searchValue');
     this.fetchData().then((data) => {
-      const value = localStorage.getItem('searchValue');
       if (value) {
         this.setState({ data: data.filter((el: Pokemon) => el.name.includes(value)) });
       } else {

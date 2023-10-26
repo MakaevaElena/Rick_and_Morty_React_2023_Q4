@@ -19,15 +19,15 @@ export default class PokemonList extends React.Component<Props> {
       <>
         <h2>Pokemon List {this.props.data.length}</h2>
         <section className="pokemon-list">
-          {/* {this.props.inputValue.length > 0 ? ( */}
-          {
+          {this.props.data.length > 0 ? (
+            // {
             this.props.data.map((data) => (
               <Card key={data.name} PokemonData={data} isLoading={this.props.isLoading} />
             ))
-            // ) : (
-            //   <h2>Pokemon not found</h2>
-            // )}
-          }
+          ) : (
+            <h2>Pokemon not found</h2>
+          )}
+          {/* } */}
         </section>
       </>
     );
