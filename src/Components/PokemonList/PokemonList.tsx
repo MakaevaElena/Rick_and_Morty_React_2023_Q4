@@ -1,12 +1,11 @@
 import React from 'react';
 import './style.scss';
 import Card from '../Card/Card';
-import { Pokemon } from '../../types/pokemon-types';
+import { Rickandmorty } from '../../types/rickandmorty-types';
 
 interface Props {
-  data: Pokemon[];
+  data: Rickandmorty[];
   isLoading: boolean;
-  // inputValue: string;
 }
 
 export default class PokemonList extends React.Component<Props> {
@@ -17,17 +16,15 @@ export default class PokemonList extends React.Component<Props> {
   render() {
     return (
       <>
-        <h2>Pokemon List {this.props.data.length}</h2>
+        <h2>Character List {this.props.data.length}</h2>
         <section className="pokemon-list">
           {this.props.data.length > 0 ? (
-            // {
             this.props.data.map((data) => (
-              <Card key={data.name} PokemonData={data} isLoading={this.props.isLoading} />
+              <Card key={data.id} RickandmortyData={data} isLoading={this.props.isLoading} />
             ))
           ) : (
             <h2>Pokemon not found</h2>
           )}
-          {/* } */}
         </section>
       </>
     );

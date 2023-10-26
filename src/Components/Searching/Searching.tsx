@@ -1,15 +1,14 @@
 import React from 'react';
 import './style.scss';
 import axios from 'axios';
-import { Pokemon } from '../../types/pokemon-types';
+import { Rickandmorty } from '../../types/rickandmorty-types';
 
-const defaultUrl = 'https://pokeapi.co/api/v2/pokemon/';
-const searchUrl = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0';
+const baseUrl = 'https://rickandmortyapi.com/api';
 
 interface Props {
-  data: Pokemon[];
+  data: Rickandmorty[];
   isLoading: boolean;
-  searchData: (data: Pokemon[]) => void;
+  searchData: (data: Rickandmorty[]) => void;
   // getInputValue: (data: string) => void;
 }
 
@@ -34,31 +33,12 @@ export default class Searching extends React.Component<Props, State> {
     // this.fetchData = this.fetchData.bind(this);
   }
 
-  // private async fetchData() {
-  //   // this.props.isLoading(true);
-  //   const response = await axios.get(`${url}${this.state.value}`);
-  //   const arr = [];
-  //   arr.push(response.data);
-  //   this.props.searchData(arr);
-  //   // this.props.getInputValue(this.state.value);
-  //   // console.log(response);
-  //   // this.props.isLoading(false);
-  //   // return response.data.results;
-  // }
-
   private async fetchData() {
     // this.props.isLoading(true);
-
-    let url = '';
-    // const value = localStorage.getItem('searchValue');
-
-    this.state.value.length !== 0 ? (url = searchUrl) : (url = defaultUrl);
-    console.log('value', this.state.value);
-    console.log('url', url);
-    const response = await axios.get(url);
-    this.props.searchData(
-      response.data.results.filter((el: Pokemon) => el.name.includes(this.state.value))
-    );
+    const response = await axios.get(`${baseUrl}/character/?name=${this.state.value}`);
+    const arr: Rickandmorty[] = [];
+    arr.push(...response.data.results);
+    this.props.searchData(arr);
     // this.props.isLoading(false);
     // return response.data.results;
   }
