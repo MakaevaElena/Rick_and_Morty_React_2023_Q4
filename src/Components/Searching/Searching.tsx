@@ -7,7 +7,6 @@ const baseUrl = 'https://rickandmortyapi.com/api';
 
 interface Props {
   data: Rickandmorty[];
-  isLoading: boolean;
   searchData: (data: Rickandmorty[]) => void;
 }
 
@@ -34,7 +33,6 @@ export default class Searching extends React.Component<Props, State> {
   private async fetchData() {
     // this.props.isLoading(true);
     const response = await axios.get(`${baseUrl}/character/?name=${this.state.value}`);
-    console.log('response', response);
     const arr: Rickandmorty[] = [];
     arr.push(...response.data.results);
     this.props.searchData(arr);

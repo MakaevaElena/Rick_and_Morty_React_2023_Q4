@@ -73,7 +73,6 @@ class App extends Component<Props, State> {
             <Searching
               data={this.state.data}
               searchData={this.searchData}
-              isLoading={this.state.isLoading}
             />
           </ErrorBoundary>
 

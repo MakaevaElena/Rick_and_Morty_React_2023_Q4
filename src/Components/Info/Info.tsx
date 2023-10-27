@@ -13,5 +13,3 @@ export default class Info extends React.Component {
     );
   }
 }
-
-// https://www.coderdoc.ru/start/35_typescript/14_component/14_1_class.php
