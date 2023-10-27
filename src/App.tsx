@@ -70,10 +70,7 @@ class App extends Component<Props, State> {
             <TestErrorButton />
           </ErrorBoundary>
           <ErrorBoundary>
-            <Searching
-              data={this.state.data}
-              searchData={this.searchData}
-            />
+            <Searching data={this.state.data} searchData={this.searchData} />
           </ErrorBoundary>
 
           <ErrorBoundary>
