@@ -58,7 +58,7 @@ class App extends Component<Props, State> {
   }
 
   searchData = (searchingData: Rickandmorty[]) => {
-    console.log('searchingData', searchingData);
+    // console.log('searchingData', searchingData);
     this.setState({ data: searchingData });
   };
 
