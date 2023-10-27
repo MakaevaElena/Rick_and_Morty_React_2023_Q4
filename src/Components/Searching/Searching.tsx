@@ -9,7 +9,6 @@ interface Props {
   data: Rickandmorty[];
   isLoading: boolean;
   searchData: (data: Rickandmorty[]) => void;
-  // getInputValue: (data: string) => void;
 }
 
 interface State {
@@ -30,7 +29,6 @@ export default class Searching extends React.Component<Props, State> {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSearchClick = this.handleSearchClick.bind(this);
-    // this.fetchData = this.fetchData.bind(this);
   }
 
   private async fetchData() {
@@ -52,20 +50,12 @@ export default class Searching extends React.Component<Props, State> {
 
   private validateInputValue(input: HTMLInputElement) {
     const checkWhiteSpace = /^\s|\s$/;
-    // const checkFilling = /\w+/;
     const VALUE_CONTAIN_WHITESPACE = `Searching must not contain leading or trailing whitespace.`;
-    // const EMPTY_FIELD = `THE FIELD IS EMPTY`;
     switch (true) {
       case checkWhiteSpace.test(input.value):
         input.setCustomValidity(VALUE_CONTAIN_WHITESPACE);
         this.searchButtonRef.current?.classList.add('disable');
         break;
-
-      // case checkFilling.test(input.value):
-      // case input.value.length === 0:
-      //   input.setCustomValidity(EMPTY_FIELD);
-      //   this.searchButtonRef.current?.classList.add('disable');
-      //   break;
 
       default:
         input.setCustomValidity('');
@@ -83,22 +73,11 @@ export default class Searching extends React.Component<Props, State> {
     localStorage.setItem('searchValue', this.state.value);
   }
 
-  // private handleFocus() {
-  //   const EMPTY_FIELD = `THE FIELD IS EMPTY`;
-  //   if (this.inputRef.current) {
-  //     this.inputRef.current.setCustomValidity(EMPTY_FIELD);
-  //     this.inputRef.current.reportValidity();
-  //   }
-  // }
-
   componentDidMount(): void {
     const value = localStorage.getItem('searchValue');
     if (value) {
       this.setState({ value });
     }
-    // if (this.inputRef.current) {
-    //   this.validateInputValue(this.inputRef.current);
-    // }
   }
 
   render() {
@@ -114,7 +93,6 @@ export default class Searching extends React.Component<Props, State> {
               placeholder="search..."
               value={this.state.value}
               onChange={this.handleChange}
-              // onFocus={this.handleFocus}
             />
             <div
               className="search-button"
@@ -127,7 +105,3 @@ export default class Searching extends React.Component<Props, State> {
     );
   }
 }
-
-// https://ru.legacy.reactjs.org/docs/forms.html
-// https://tokmakov.msk.ru/blog/item/637
-// https://ru.legacy.reactjs.org/docs/lifting-state-up.html
