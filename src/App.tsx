@@ -66,6 +66,7 @@ class App extends Component<Props, State> {
     return (
       <>
         <div className="container">
+          {/* <ErrorBoundary fallback={<p>Something went wrong</p>}> */}
           <ErrorBoundary>
             <TestErrorButton />
           </ErrorBoundary>

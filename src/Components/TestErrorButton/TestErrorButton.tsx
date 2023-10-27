@@ -1,4 +1,5 @@
 import React from 'react';
+import './style.scss';
 
 interface State {
   hasError: boolean;
@@ -9,16 +10,22 @@ export default class TestErrorButton extends React.Component {
     hasError: false,
   };
 
+  componentDidUpdate(): void {
+    if (this.state.hasError === true) {
+      throw new Error('Test Boundary Error');
+    }
+  }
+
   private handleClick = () => {
-    this.setState({ hasError: !this.state.hasError });
-    console.log('this.state.hasError', this.state.hasError);
-    throw new Error('Test Error Boundary Error');
+    this.setState({ hasError: true });
   };
 
   render() {
     return (
       <>
-        <button onClick={() => this.handleClick}>TestErrorButton</button>
+        <button className="error-button" onClick={this.handleClick}>
+          TestErrorButton
+        </button>
       </>
     );
   }

@@ -1,0 +1,21 @@
+.error-button {
+  width: 10vw;
+  height: 3em;
+  min-width: 200px;
+  // padding-left: 1em;
+  border: 2px solid #7bab91;
+  border-radius: 3%;
+  outline: none;
+  background: #f9f0da;
+  color: #9e9c9c;
+  box-shadow: 0px 5px 10px 2px #556b4f;
+  transition: 0.2s;
+}
+
+.error-button:hover {
+  transform: scale(1.1);
+}
+
+.error-button:active {
+  border: none;
+}

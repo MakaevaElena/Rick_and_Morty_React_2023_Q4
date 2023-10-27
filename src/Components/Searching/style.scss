@@ -1,6 +1,7 @@
 form {
   position: relative;
-  width: 300px;
+  width: 18vw;
+  min-width: 200px;
   margin: 0 auto;
 }
 
@@ -14,8 +15,8 @@ form {
   background: #f9f0da;
   color: #9e9c9c;
   box-shadow: 0px 5px 10px 2px #556b4f;
-  // https://active-vision.ru/icon/box-shadow/
 }
+
 .search-button {
   position: absolute;
   top: 0.45em;

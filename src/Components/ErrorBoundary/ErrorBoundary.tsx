@@ -2,13 +2,14 @@ import React, { ErrorInfo, ReactNode } from 'react';
 
 interface Props {
   children?: ReactNode;
+  fallback?: ReactNode;
 }
 
 interface State {
   hasError: boolean;
 }
 
-export default class ErrorBoundary extends React.Component<Props> {
+export default class ErrorBoundary extends React.Component<Props, State> {
   public state: State = {
     hasError: false,
   };
@@ -18,7 +19,7 @@ export default class ErrorBoundary extends React.Component<Props> {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError() {
+  public static getDerivedStateFromError(): State {
     return { hasError: true };
   }
 
@@ -29,6 +30,7 @@ export default class ErrorBoundary extends React.Component<Props> {
   public render() {
     if (this.state.hasError) {
       return <h1>Sorry.. there was an error</h1>;
+      // return this.props.fallback;
     }
 
     return this.props.children;

@@ -1,4 +1,4 @@
-# Pokeapi_React_2023_Q4
+# Rick_and_Morty_React_2023_Q4
 
 ### Eslint and prettier configurations
 
