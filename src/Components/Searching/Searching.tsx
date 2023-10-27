@@ -85,7 +85,7 @@ export default class Searching extends React.Component<Props, State> {
     return (
       <>
         <h2>Searching</h2>
-        <section className="pokemon-searching">
+        <section className="character-searching">
           <form>
             <input
               ref={this.inputRef}

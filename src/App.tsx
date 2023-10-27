@@ -1,12 +1,13 @@
 import { Component, ReactNode } from 'react';
 import './App.scss';
 import axios from 'axios';
-import PokemonList from './Components/PokemonList/PokemonList';
+import CharacterList from './Components/CharacterList/CharacterList';
 import Pagination from './Components/Pagination/Pagination';
 import Searching from './Components/Searching/Searching';
 import Info from './Components/Info/Info';
 import { Rickandmorty } from './types/rickandmorty-types';
 import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary';
+import TestErrorButton from './Components/TestErrorButton/TestErrorButton';
 
 const baseUrl = 'https://rickandmortyapi.com/api';
 
@@ -58,7 +59,6 @@ class App extends Component<Props, State> {
   }
 
   searchData = (searchingData: Rickandmorty[]) => {
-    // console.log('searchingData', searchingData);
     this.setState({ data: searchingData });
   };
 
@@ -66,6 +66,9 @@ class App extends Component<Props, State> {
     return (
       <>
         <div className="container">
+          <ErrorBoundary>
+            <TestErrorButton />
+          </ErrorBoundary>
           <ErrorBoundary>
             <Searching
               data={this.state.data}
@@ -75,7 +78,7 @@ class App extends Component<Props, State> {
           </ErrorBoundary>
 
           <ErrorBoundary>
-            <PokemonList data={this.state.data} isLoading={this.state.isLoading} />
+            <CharacterList data={this.state.data} isLoading={this.state.isLoading} />
           </ErrorBoundary>
           <ErrorBoundary>
             <Info />

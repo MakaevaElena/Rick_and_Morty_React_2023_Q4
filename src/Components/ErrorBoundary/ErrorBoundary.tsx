@@ -19,13 +19,11 @@ export default class ErrorBoundary extends React.Component<Props> {
   }
 
   static getDerivedStateFromError() {
-    // Обновить состояние с тем, чтобы следующий рендер показал запасной UI.
     return { hasError: true };
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    // Можно также сохранить информацию об ошибке в соответствующую службу журнала ошибок
-    console.error('Uncaught error:', error, errorInfo);
+    console.error('ErrorBoundary Uncaught error:', error, errorInfo);
   }
 
   public render() {
@@ -36,5 +34,3 @@ export default class ErrorBoundary extends React.Component<Props> {
     return this.props.children;
   }
 }
-
-// https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/error_boundaries/

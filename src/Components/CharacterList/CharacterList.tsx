@@ -8,7 +8,7 @@ interface Props {
   isLoading: boolean;
 }
 
-export default class PokemonList extends React.Component<Props> {
+export default class CharacterList extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
   }
@@ -17,18 +17,16 @@ export default class PokemonList extends React.Component<Props> {
     return (
       <>
         <h2>Character List {this.props.data.length}</h2>
-        <section className="pokemon-list">
+        <section className="character-list">
           {this.props.data.length > 0 ? (
             this.props.data.map((data) => (
               <Card key={data.id} RickandmortyData={data} isLoading={this.props.isLoading} />
             ))
           ) : (
-            <h2>Pokemon not found</h2>
+            <h2>Character not found</h2>
           )}
         </section>
       </>
     );
   }
 }
-
-// https://www.coderdoc.ru/start/35_typescript/14_component/14_1_class.php

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React from 'react';
-// import { Pokemon } from '../../types/pokemon-types';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import './style.scss';
 
@@ -58,7 +57,7 @@ export default class Card extends React.Component<Props, State> {
         <div className="card">
           <h3>{this.props.RickandmortyData.name}</h3>
           <img
-            className="pokemon-img"
+            className="character-img"
             src={this.state.details.image ? this.state.details.image : ''}
             alt=""
           />
