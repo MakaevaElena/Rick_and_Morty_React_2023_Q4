@@ -2,8 +2,7 @@ import React from 'react';
 import './style.scss';
 import axios from 'axios';
 import { Rickandmorty } from '../../types/rickandmorty-types';
-
-const baseUrl = 'https://rickandmortyapi.com/api';
+import { BASE_URL } from '../../constants';
 
 interface Props {
   data: Rickandmorty[];
@@ -31,13 +30,10 @@ export default class Searching extends React.Component<Props, State> {
   }
 
   private async fetchData() {
-    // this.props.isLoading(true);
-    const response = await axios.get(`${baseUrl}/character/?name=${this.state.value}`);
+    const response = await axios.get(`${BASE_URL}/character/?name=${this.state.value}`);
     const arr: Rickandmorty[] = [];
     arr.push(...response.data.results);
     this.props.searchData(arr);
-    // this.props.isLoading(false);
-    // return response.data.results;
   }
 
   private handleChange(evt: React.FormEvent<HTMLInputElement>) {

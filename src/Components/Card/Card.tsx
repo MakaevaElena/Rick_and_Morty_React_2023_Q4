@@ -3,8 +3,7 @@ import React from 'react';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import './style.scss';
 import Loader from '../Loader/Loader';
-
-const baseUrl = 'https://rickandmortyapi.com/api/';
+import { BASE_URL } from '../../constants';
 
 interface Props {
   RickandmortyData: Rickandmorty;
@@ -46,7 +45,7 @@ export default class Card extends React.Component<Props, State> {
 
   private async fetchRickandmortyDetails() {
     this.setState({ isLoading: true });
-    const response = await axios.get(`${baseUrl}/character/${this.props.RickandmortyData.id}`);
+    const response = await axios.get(`${BASE_URL}/character/${this.props.RickandmortyData.id}`);
     this.setState({ isLoading: false });
     return response.data;
   }

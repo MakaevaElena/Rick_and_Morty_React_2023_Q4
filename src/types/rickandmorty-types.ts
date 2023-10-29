@@ -14,11 +14,7 @@ export interface Rickandmorty {
     url: string;
   };
   image: string;
-  episode: [
-    string,
-    string,
-    // ...
-  ];
+  episode: [string, string];
   url: string;
   created: string;
 }

@@ -2,14 +2,11 @@ import { Component, ReactNode } from 'react';
 import './App.scss';
 import axios from 'axios';
 import CharacterList from './Components/CharacterList/CharacterList';
-import Pagination from './Components/Pagination/Pagination';
 import Searching from './Components/Searching/Searching';
-import Info from './Components/Info/Info';
 import { Rickandmorty } from './types/rickandmorty-types';
 import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary';
 import TestErrorButton from './Components/TestErrorButton/TestErrorButton';
-
-const baseUrl = 'https://rickandmortyapi.com/api';
+import { BASE_URL } from './constants';
 
 interface Props {
   children?: ReactNode;
@@ -42,8 +39,8 @@ class App extends Component<Props, State> {
     this.setState({ isLoading: true });
 
     value && value.length > 0
-      ? (url = `${baseUrl}/character/?name=${value}`)
-      : (url = `${baseUrl}/character`);
+      ? (url = `${BASE_URL}/character/?name=${value}`)
+      : (url = `${BASE_URL}/character`);
 
     const response = await axios.get(url);
     this.setState({ nextUrl: response.data.next });
@@ -66,22 +63,14 @@ class App extends Component<Props, State> {
     return (
       <>
         <div className="container">
-          {/* <ErrorBoundary fallback={<p>Something went wrong</p>}> */}
           <ErrorBoundary>
             <TestErrorButton />
-          </ErrorBoundary>
-          <ErrorBoundary>
-            <Searching data={this.state.data} searchData={this.searchData} />
-          </ErrorBoundary>
-
-          <ErrorBoundary>
-            <CharacterList data={this.state.data} isLoading={this.state.isLoading} />
-          </ErrorBoundary>
-          <ErrorBoundary>
-            <Info />
-          </ErrorBoundary>
-          <ErrorBoundary>
-            <Pagination />
+            <ErrorBoundary>
+              <Searching data={this.state.data} searchData={this.searchData} />
+            </ErrorBoundary>
+            <ErrorBoundary>
+              <CharacterList data={this.state.data} isLoading={this.state.isLoading} />
+            </ErrorBoundary>
           </ErrorBoundary>
         </div>
       </>

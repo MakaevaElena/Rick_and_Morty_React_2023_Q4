@@ -1,7 +1,6 @@
 .card {
   width: 9%;
   padding: 2vw;
-  // border: 1px solid white;
   border-radius: 3%;
   background-color: #accea3;
   cursor: pointer;
@@ -14,6 +13,7 @@
 
   &:hover {
     transform: scale(1.1);
+    border: 1px solid #7e9777;
     box-shadow: 10px -10px 8px 3px #00000080;
   }
 
