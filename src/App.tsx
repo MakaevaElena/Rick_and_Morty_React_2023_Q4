@@ -1,4 +1,5 @@
-import { Component, ReactNode } from 'react';
+import { ReactNode } from 'react';
+import { useState, useEffect } from 'react';
 import './App.scss';
 import axios from 'axios';
 import CharacterList from './Components/CharacterList/CharacterList';
@@ -12,70 +13,53 @@ interface Props {
   children?: ReactNode;
 }
 
-interface State {
-  data: Rickandmorty[];
-  isLoading: boolean;
-  url: string;
-  nextUrl: string;
-  prevUrl: string;
-}
+const App: React.FC<Props> = () => {
+  const [data, setData] = useState<Rickandmorty[]>([]);
+  const [isLoading, setisLoading] = useState<boolean>(false);
+  // const [nextUrl, setnextUrl] = useState<string>('');
+  // const [prevUrl, setprevUrl] = useState<string>('');
 
-class App extends Component<Props, State> {
-  constructor(props: object) {
-    super(props);
+  useEffect(() => {
+    fetchData().then((data: Rickandmorty[]) => {
+      setData(data);
+    });
+  }, []);
 
-    this.state = {
-      data: [],
-      isLoading: false,
-      url: '',
-      nextUrl: '',
-      prevUrl: '',
-    };
-  }
-
-  private async fetchData() {
+  async function fetchData() {
     let url = '';
     const value = localStorage.getItem('searchValue');
-    this.setState({ isLoading: true });
+    setisLoading(true);
 
     value && value.length > 0
       ? (url = `${BASE_URL}/character/?name=${value}`)
       : (url = `${BASE_URL}/character`);
 
     const response = await axios.get(url);
-    this.setState({ nextUrl: response.data.next });
-    this.setState({ prevUrl: response.data.previous });
-    this.setState({ isLoading: false });
+    // this.setState({ nextUrl: response.data.next });
+    // this.setState({ prevUrl: response.data.previous });
+    setisLoading(false);
     return response.data.results;
   }
 
-  componentDidMount(): void {
-    this.fetchData().then((data) => {
-      this.setState({ data });
-    });
-  }
-
-  searchData = (searchingData: Rickandmorty[]) => {
-    this.setState({ data: searchingData });
+  const searchData = (searchingData: Rickandmorty[]) => {
+    setData(searchingData);
   };
 
-  render() {
-    return (
-      <>
-        <div className="container">
+  return (
+    <>
+      <div className="container">
+        <ErrorBoundary>
+          <TestErrorButton />
           <ErrorBoundary>
-            <TestErrorButton />
-            <ErrorBoundary>
-              <Searching data={this.state.data} searchData={this.searchData} />
-            </ErrorBoundary>
-            <ErrorBoundary>
-              <CharacterList data={this.state.data} isLoading={this.state.isLoading} />
-            </ErrorBoundary>
+            <Searching data={data} searchData={searchData} />
           </ErrorBoundary>
-        </div>
-      </>
-    );
-  }
-}
+          <ErrorBoundary>
+            <CharacterList data={data} isLoading={isLoading} />
+          </ErrorBoundary>
+        </ErrorBoundary>
+      </div>
+    </>
+  );
+};
 
 export default App;
