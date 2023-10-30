@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.scss';
 import axios from 'axios';
 import { Rickandmorty } from '../../types/rickandmorty-types';
@@ -9,52 +9,50 @@ interface Props {
   searchData: (data: Rickandmorty[]) => void;
 }
 
-interface State {
-  value: string;
-}
+const Searching: React.FC<Props> = (props) => {
+  const [value, setValue] = useState('');
 
-export default class Searching extends React.Component<Props, State> {
-  private inputRef: React.RefObject<HTMLInputElement>;
-  private searchButtonRef: React.RefObject<HTMLDivElement>;
-  constructor(props: Props) {
-    super(props);
-    this.inputRef = React.createRef();
-    this.searchButtonRef = React.createRef();
+  const inputRef: React.RefObject<HTMLInputElement> = React.createRef();
+  const searchButtonRef: React.RefObject<HTMLDivElement> = React.createRef();
 
-    this.state = {
-      value: '',
-    };
+  useEffect(() => {
+    const value = localStorage.getItem('searchValue');
+    if (value) {
+      setValue(value);
+    }
+  }, []);
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSearchClick = this.handleSearchClick.bind(this);
-  }
-
-  private async fetchData() {
-    const response = await axios.get(`${BASE_URL}/character/?name=${this.state.value}`);
+  async function fetchData() {
+    const response = await axios.get(`${BASE_URL}/character/?name=${value}`);
     const arr: Rickandmorty[] = [];
     arr.push(...response.data.results);
-    this.props.searchData(arr);
+    props.searchData(arr);
   }
 
-  private handleChange(evt: React.FormEvent<HTMLInputElement>) {
+  function handleSearchClick() {
+    fetchData().catch(() => props.searchData([]));
+    localStorage.setItem('searchValue', value);
+  }
+
+  function handleChange(evt: React.FormEvent<HTMLInputElement>) {
     if (evt?.target instanceof HTMLInputElement) {
-      this.validateInputValue(evt?.target);
-      this.setState({ value: evt?.target.value });
+      validateInputValue(evt?.target);
+      setValue(evt?.target.value);
     }
   }
 
-  private validateInputValue(input: HTMLInputElement) {
+  function validateInputValue(input: HTMLInputElement) {
     const checkWhiteSpace = /^\s|\s$/;
     const VALUE_CONTAIN_WHITESPACE = `Searching must not contain leading or trailing whitespace.`;
     switch (true) {
       case checkWhiteSpace.test(input.value):
         input.setCustomValidity(VALUE_CONTAIN_WHITESPACE);
-        this.searchButtonRef.current?.classList.add('disable');
+        searchButtonRef.current?.classList.add('disable');
         break;
 
       default:
         input.setCustomValidity('');
-        this.searchButtonRef.current?.classList.remove('disable');
+        searchButtonRef.current?.classList.remove('disable');
         return true;
     }
 
@@ -63,40 +61,24 @@ export default class Searching extends React.Component<Props, State> {
     return false;
   }
 
-  private handleSearchClick() {
-    this.fetchData().catch(() => this.props.searchData([]));
-    localStorage.setItem('searchValue', this.state.value);
-  }
+  return (
+    <>
+      <h2>Searching</h2>
+      <section className="character-searching">
+        <form>
+          <input
+            ref={inputRef}
+            className="search-input"
+            type="text"
+            placeholder="search..."
+            value={value}
+            onChange={handleChange}
+          />
+          <div className="search-button" onClick={handleSearchClick} ref={searchButtonRef}></div>
+        </form>
+      </section>
+    </>
+  );
+};
 
-  componentDidMount(): void {
-    const value = localStorage.getItem('searchValue');
-    if (value) {
-      this.setState({ value });
-    }
-  }
-
-  render() {
-    return (
-      <>
-        <h2>Searching</h2>
-        <section className="character-searching">
-          <form>
-            <input
-              ref={this.inputRef}
-              className="search-input"
-              type="text"
-              placeholder="search..."
-              value={this.state.value}
-              onChange={this.handleChange}
-            />
-            <div
-              className="search-button"
-              onClick={this.handleSearchClick}
-              ref={this.searchButtonRef}
-            ></div>
-          </form>
-        </section>
-      </>
-    );
-  }
-}
+export default Searching;
