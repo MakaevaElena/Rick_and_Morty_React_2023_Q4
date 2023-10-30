@@ -34,16 +34,16 @@ const Card: React.FC<Props> = (props) => {
   const [data, setData] = useState(defaultDetails);
   const [isLoading, setisLoading] = useState<boolean>(false);
 
-  async function fetchRickandmortyDetails(): Promise<Rickandmorty> {
-    setisLoading(true);
-    const response = await axios.get(`${BASE_URL}/character/${props.RickandmortyData.id}`);
-    setisLoading(false);
-    return response.data;
-  }
-
   useEffect(() => {
+    async function fetchRickandmortyDetails(): Promise<Rickandmorty> {
+      setisLoading(true);
+      const response = await axios.get(`${BASE_URL}/character/${props.RickandmortyData.id}`);
+      setisLoading(false);
+      return response.data;
+    }
+
     fetchRickandmortyDetails().then((details: Rickandmorty) => setData(details));
-  }, []);
+  }, [props.RickandmortyData.id]);
 
   return isLoading ? (
     <Loader />

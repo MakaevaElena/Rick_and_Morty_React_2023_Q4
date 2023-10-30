@@ -9,27 +9,21 @@ interface Props {
   isLoading: boolean;
 }
 
-export default class CharacterList extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-  }
+const CharacterList: React.FC<Props> = (props) => {
+  return props.isLoading ? (
+    <Loader />
+  ) : (
+    <>
+      <h2>Character List {props.data.length}</h2>
+      <section className="character-list">
+        {props.data.length > 0 ? (
+          props.data.map((character) => <Card key={character.id} RickandmortyData={character} />)
+        ) : (
+          <h2>Character not found</h2>
+        )}
+      </section>
+    </>
+  );
+};
 
-  render() {
-    return this.props.isLoading ? (
-      <Loader />
-    ) : (
-      <>
-        <h2>Character List {this.props.data.length}</h2>
-        <section className="character-list">
-          {this.props.data.length > 0 ? (
-            this.props.data.map((character) => (
-              <Card key={character.id} RickandmortyData={character} />
-            ))
-          ) : (
-            <h2>Character not found</h2>
-          )}
-        </section>
-      </>
-    );
-  }
-}
+export default CharacterList;

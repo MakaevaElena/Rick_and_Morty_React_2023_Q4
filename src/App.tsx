@@ -33,12 +33,15 @@ const App: React.FC<Props> = () => {
     value && value.length > 0
       ? (url = `${BASE_URL}/character/?name=${value}`)
       : (url = `${BASE_URL}/character`);
-
-    const response = await axios.get(url);
-    // this.setState({ nextUrl: response.data.next });
-    // this.setState({ prevUrl: response.data.previous });
-    setisLoading(false);
-    return response.data.results;
+    try {
+      const response = await axios.get(url);
+      // this.setState({ nextUrl: response.data.next });
+      // this.setState({ prevUrl: response.data.previous });
+      setisLoading(false);
+      return response.data.results;
+    } catch {
+      setisLoading(false);
+    }
   }
 
   const searchData = (searchingData: Rickandmorty[]) => {
