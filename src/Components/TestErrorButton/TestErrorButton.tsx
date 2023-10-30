@@ -1,32 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.scss';
 
-interface State {
-  hasError: boolean;
-}
+const TestErrorButton: React.FC = () => {
+  const [hasError, setHasError] = useState<boolean>(false);
 
-export default class TestErrorButton extends React.Component {
-  public state: State = {
-    hasError: false,
-  };
+  function handleClick() {
+    setHasError(true);
+  }
 
-  componentDidUpdate(): void {
-    if (this.state.hasError === true) {
+  useEffect(() => {
+    if (hasError === true) {
       throw new Error('Test Boundary Error');
     }
-  }
+  }, [hasError]);
 
-  private handleClick = () => {
-    this.setState({ hasError: true });
-  };
+  return (
+    <>
+      <button className="error-button" onClick={handleClick}>
+        TestErrorButton
+      </button>
+    </>
+  );
+};
 
-  render() {
-    return (
-      <>
-        <button className="error-button" onClick={this.handleClick}>
-          TestErrorButton
-        </button>
-      </>
-    );
-  }
-}
+export default TestErrorButton;

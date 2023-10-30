@@ -41,6 +41,7 @@ const App: React.FC<Props> = () => {
       return response.data.results;
     } catch {
       setisLoading(false);
+      return [];
     }
   }
 
