@@ -1,5 +1,5 @@
 export interface Rickandmorty {
-  id: 1;
+  id: number;
   name: string;
   status: string;
   species: string;

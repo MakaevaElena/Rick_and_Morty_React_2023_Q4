@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import './style.scss';
 import Loader from '../Loader/Loader';
@@ -9,70 +9,57 @@ interface Props {
   RickandmortyData: Rickandmorty;
 }
 
-interface State {
-  details: Rickandmorty;
-  isLoading: boolean;
-}
+const defaultDetails = {
+  id: 1,
+  name: '',
+  status: '',
+  species: '',
+  type: '',
+  gender: '',
+  origin: {
+    name: '',
+    url: '',
+  },
+  location: {
+    name: '',
+    url: '',
+  },
+  image: '',
+  episode: ['', ''],
+  url: '',
+  created: '',
+};
 
-export default class Card extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
+const Card: React.FC<Props> = (props) => {
+  const [data, setData] = useState(defaultDetails);
+  const [isLoading, setisLoading] = useState<boolean>(false);
 
-    this.state = {
-      details: {
-        id: 1,
-        name: '',
-        status: '',
-        species: '',
-        type: '',
-        gender: '',
-        origin: {
-          name: '',
-          url: '',
-        },
-        location: {
-          name: '',
-          url: '',
-        },
-        image: '',
-        episode: ['', ''],
-        url: '',
-        created: '',
-      },
-      isLoading: false,
-    };
-  }
-
-  private async fetchRickandmortyDetails() {
-    this.setState({ isLoading: true });
-    const response = await axios.get(`${BASE_URL}/character/${this.props.RickandmortyData.id}`);
-    this.setState({ isLoading: false });
+  async function fetchRickandmortyDetails(): Promise<Rickandmorty> {
+    setisLoading(true);
+    const response = await axios.get(`${BASE_URL}/character/${props.RickandmortyData.id}`);
+    setisLoading(false);
     return response.data;
   }
 
-  componentDidMount(): void {
-    this.fetchRickandmortyDetails().then((details) => this.setState({ details }));
-  }
+  useEffect(() => {
+    fetchRickandmortyDetails().then((details: Rickandmorty) => setData(details));
+  }, []);
 
-  render() {
-    return this.state.isLoading ? (
-      <Loader />
-    ) : (
-      <>
-        <div className="card">
-          <h3>{this.props.RickandmortyData.name}</h3>
-          <img
-            className="character-img"
-            src={this.state.details.image ? this.state.details.image : ''}
-            alt=""
-          />
-          <div className="stats">
-            <li> species: {this.state.details.species}</li>
-            <li> gender: {this.state.details.gender}</li>
-            <li> location: {this.state.details.location.name}</li>
-          </div>
+  return isLoading ? (
+    <Loader />
+  ) : (
+    <>
+      <div className="card">
+        <h3>{props.RickandmortyData.name}</h3>
+        <img className="character-img" src={data.image ? data.image : ''} alt="" />
+        <div className="stats">
+          <li> species: {data.species}</li>
+          <li> gender: {data.gender}</li>
+          <li> location: {data.location.name}</li>
         </div>
-      </>
-    );
-  }
-}
+      </div>
+    </>
+  );
+};
+
+export default Card;
