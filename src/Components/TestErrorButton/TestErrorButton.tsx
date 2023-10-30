@@ -1,12 +1,12 @@
 import React from 'react';
 import './style.scss';
+import { TestErrorButtonProps, TestErrorButtonState } from '../../types/common-types';
 
-interface State {
-  hasError: boolean;
-}
-
-export default class TestErrorButton extends React.Component {
-  public state: State = {
+export default class TestErrorButton extends React.Component<
+  TestErrorButtonProps,
+  TestErrorButtonState
+> {
+  public state: TestErrorButtonState = {
     hasError: false,
   };
 

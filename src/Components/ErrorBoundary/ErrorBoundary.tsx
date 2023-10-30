@@ -1,16 +1,8 @@
-import React, { ErrorInfo, ReactNode } from 'react';
+import React, { ErrorInfo } from 'react';
+import { ErrorBoundaryProps, ErrorBoundaryState } from '../../types/common-types';
 
-interface Props {
-  children?: ReactNode;
-  fallback?: ReactNode;
-}
-
-interface State {
-  hasError: boolean;
-}
-
-export default class ErrorBoundary extends React.Component<Props, State> {
-  public state: State = {
+export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  public state: ErrorBoundaryState = {
     hasError: false,
   };
 
@@ -19,7 +11,7 @@ export default class ErrorBoundary extends React.Component<Props, State> {
     this.state = { hasError: false };
   }
 
-  public static getDerivedStateFromError(): State {
+  public static getDerivedStateFromError(): ErrorBoundaryState {
     return { hasError: true };
   }
 

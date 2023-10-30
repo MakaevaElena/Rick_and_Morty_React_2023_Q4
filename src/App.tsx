@@ -1,6 +1,7 @@
-import { Component, ReactNode } from 'react';
+import { Component } from 'react';
 import './App.scss';
 import axios from 'axios';
+import { AppProps, AppState } from './types/common-types';
 import CharacterList from './Components/CharacterList/CharacterList';
 import Searching from './Components/Searching/Searching';
 import { Rickandmorty } from './types/rickandmorty-types';
@@ -8,19 +9,7 @@ import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary';
 import TestErrorButton from './Components/TestErrorButton/TestErrorButton';
 import { BASE_URL } from './constants';
 
-interface Props {
-  children?: ReactNode;
-}
-
-interface State {
-  data: Rickandmorty[];
-  isLoading: boolean;
-  url: string;
-  nextUrl: string;
-  prevUrl: string;
-}
-
-class App extends Component<Props, State> {
+class App extends Component<AppProps, AppState> {
   constructor(props: object) {
     super(props);
 

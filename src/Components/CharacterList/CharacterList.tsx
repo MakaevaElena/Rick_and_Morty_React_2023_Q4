@@ -1,16 +1,11 @@
 import React from 'react';
 import './style.scss';
 import Card from '../Card/Card';
-import { Rickandmorty } from '../../types/rickandmorty-types';
+import { CharacterListProps } from '../../types/common-types';
 import Loader from '../Loader/Loader';
 
-interface Props {
-  data: Rickandmorty[];
-  isLoading: boolean;
-}
-
-export default class CharacterList extends React.Component<Props> {
-  constructor(props: Props) {
+export default class CharacterList extends React.Component<CharacterListProps> {
+  constructor(props: CharacterListProps) {
     super(props);
   }
 

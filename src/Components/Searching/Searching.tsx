@@ -1,22 +1,14 @@
 import React from 'react';
 import './style.scss';
 import axios from 'axios';
+import { SearchingProps, SearchingState } from '../../types/common-types';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import { BASE_URL } from '../../constants';
 
-interface Props {
-  data: Rickandmorty[];
-  searchData: (data: Rickandmorty[]) => void;
-}
-
-interface State {
-  value: string;
-}
-
-export default class Searching extends React.Component<Props, State> {
+export default class Searching extends React.Component<SearchingProps, SearchingState> {
   private inputRef: React.RefObject<HTMLInputElement>;
   private searchButtonRef: React.RefObject<HTMLDivElement>;
-  constructor(props: Props) {
+  constructor(props: SearchingProps) {
     super(props);
     this.inputRef = React.createRef();
     this.searchButtonRef = React.createRef();

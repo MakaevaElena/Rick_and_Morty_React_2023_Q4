@@ -1,21 +1,12 @@
 import axios from 'axios';
 import React from 'react';
-import { Rickandmorty } from '../../types/rickandmorty-types';
+import { CardProps, CardState } from '../../types/common-types';
 import './style.scss';
 import Loader from '../Loader/Loader';
 import { BASE_URL } from '../../constants';
 
-interface Props {
-  RickandmortyData: Rickandmorty;
-}
-
-interface State {
-  details: Rickandmorty;
-  isLoading: boolean;
-}
-
-export default class Card extends React.Component<Props, State> {
-  constructor(props: Props) {
+export default class Card extends React.Component<CardProps, CardState> {
+  constructor(props: CardProps) {
     super(props);
 
     this.state = {
