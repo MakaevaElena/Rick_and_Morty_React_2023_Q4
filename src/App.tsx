@@ -31,11 +31,17 @@ class App extends Component<AppProps, AppState> {
       ? (url = `${BASE_URL}/character/?name=${value}`)
       : (url = `${BASE_URL}/character`);
 
-    const response = await axios.get(url);
-    this.setState({ nextUrl: response.data.next });
-    this.setState({ prevUrl: response.data.previous });
-    this.setState({ isLoading: false });
-    return response.data.results;
+    try {
+      const response = await axios.get(url);
+      this.setState({ nextUrl: response.data.next });
+      this.setState({ prevUrl: response.data.previous });
+      this.setState({ isLoading: false });
+      return response.data.results;
+    } catch {
+      this.setState({ isLoading: false });
+      this.setState({ data: [] });
+      return [];
+    }
   }
 
   componentDidMount(): void {
