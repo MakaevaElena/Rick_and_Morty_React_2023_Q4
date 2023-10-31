@@ -1,15 +1,12 @@
 import React from 'react';
 import './style.scss';
 import Card from '../Card/Card';
-import { Rickandmorty } from '../../types/rickandmorty-types';
+// import { Rickandmorty } from '../../types/rickandmorty-types';
 import Loader from '../Loader/Loader';
+import { CharacterListProps } from '../../types/common-types';
+import Pagination from '../Pagination/Pagination';
 
-interface Props {
-  data: Rickandmorty[];
-  isLoading: boolean;
-}
-
-const CharacterList: React.FC<Props> = (props) => {
+const CharacterList: React.FC<CharacterListProps> = (props) => {
   return props.isLoading ? (
     <Loader />
   ) : (
@@ -22,6 +19,7 @@ const CharacterList: React.FC<Props> = (props) => {
           <h2>Character not found</h2>
         )}
       </section>
+      <Pagination />
     </>
   );
 };

@@ -1,19 +1,17 @@
-import { ReactNode } from 'react';
 import { useState, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.scss';
 import axios from 'axios';
+import PageNotFound from './Components/PageNotFound/PageNotFound';
 import CharacterList from './Components/CharacterList/CharacterList';
 import Searching from './Components/Searching/Searching';
 import { Rickandmorty } from './types/rickandmorty-types';
 import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary';
 import TestErrorButton from './Components/TestErrorButton/TestErrorButton';
 import { BASE_URL } from './constants';
+import { AppProps } from './types/common-types';
 
-interface Props {
-  children?: ReactNode;
-}
-
-const App: React.FC<Props> = () => {
+const App: React.FC<AppProps> = () => {
   const [data, setData] = useState<Rickandmorty[]>([]);
   const [isLoading, setisLoading] = useState<boolean>(false);
   // const [nextUrl, setnextUrl] = useState<string>('');
@@ -57,9 +55,15 @@ const App: React.FC<Props> = () => {
           <ErrorBoundary>
             <Searching data={data} searchData={searchData} />
           </ErrorBoundary>
-          <ErrorBoundary>
+
+          <Routes>
+            <Route path="/" element={<CharacterList data={data} isLoading={isLoading} />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+
+          {/* <ErrorBoundary>
             <CharacterList data={data} isLoading={isLoading} />
-          </ErrorBoundary>
+          </ErrorBoundary> */}
         </ErrorBoundary>
       </div>
     </>
