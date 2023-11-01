@@ -13,6 +13,10 @@
 }
 
 .pagination-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: inherit;
   width: 1%;
   padding: 1vw;
   border-radius: 3%;

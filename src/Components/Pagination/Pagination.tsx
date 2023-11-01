@@ -3,9 +3,8 @@ import { BASE_URL } from '../../constants';
 import './style.scss';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import axios from 'axios';
-// import { PaginationProps } from '../../types/common-types';
+import { Link } from 'react-router-dom';
 
-// const Pagination: React.FC<PaginationProps> = (props) => {
 const Pagination: React.FC = () => {
   const [data, setData] = useState<Rickandmorty[]>([]);
 
@@ -25,9 +24,11 @@ const Pagination: React.FC = () => {
       <h2>Pagination</h2>
       <div className="pagination-buttons">
         {data.map((_, i) => (
-          <div key={i} className="pagination-button">
-            <p>{i}</p>
-          </div>
+          <Link key={i + 1} to={`/search/${i + 1}`} className="pagination-button">
+            <div key={i + 1} id={`${i + 1}`}>
+              {i + 1}
+            </div>
+          </Link>
         ))}
       </div>
     </>

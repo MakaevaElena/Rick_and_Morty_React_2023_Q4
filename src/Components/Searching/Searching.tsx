@@ -3,6 +3,7 @@ import './style.scss';
 import axios from 'axios';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import { BASE_URL } from '../../constants';
+// import { Link } from 'react-router-dom';
 
 interface Props {
   data: Rickandmorty[];
@@ -32,6 +33,7 @@ const Searching: React.FC<Props> = (props) => {
   function handleSearchClick() {
     fetchData().catch(() => props.searchData([]));
     localStorage.setItem('searchValue', value);
+    // location.assign(`/characters/`);
   }
 
   function handleChange(evt: React.FormEvent<HTMLInputElement>) {
@@ -74,7 +76,9 @@ const Searching: React.FC<Props> = (props) => {
             value={value}
             onChange={handleChange}
           />
-          <div className="search-button" onClick={handleSearchClick} ref={searchButtonRef}></div>
+          <div className="search-button" onClick={handleSearchClick} ref={searchButtonRef}>
+            {/* <Link to={`/characters/page=${1}`}></Link> */}
+          </div>
         </form>
       </section>
     </>

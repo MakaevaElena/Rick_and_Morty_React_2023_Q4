@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
 import './App.scss';
 import axios from 'axios';
-import PageNotFound from './Components/PageNotFound/PageNotFound';
 import CharacterList from './Components/CharacterList/CharacterList';
 import Searching from './Components/Searching/Searching';
 import { Rickandmorty } from './types/rickandmorty-types';
@@ -10,12 +8,13 @@ import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary';
 import TestErrorButton from './Components/TestErrorButton/TestErrorButton';
 import { BASE_URL } from './constants';
 import { AppProps } from './types/common-types';
+import { useParams } from 'react-router-dom';
 
 const App: React.FC<AppProps> = () => {
+  const { page } = useParams<{ page: string }>();
+
   const [data, setData] = useState<Rickandmorty[]>([]);
   const [isLoading, setisLoading] = useState<boolean>(false);
-  // const [nextUrl, setnextUrl] = useState<string>('');
-  // const [prevUrl, setprevUrl] = useState<string>('');
 
   useEffect(() => {
     fetchData().then((data: Rickandmorty[]) => {
@@ -23,18 +22,24 @@ const App: React.FC<AppProps> = () => {
     });
   }, []);
 
-  async function fetchData() {
+  useEffect(() => {
+    if (page)
+      fetchData(+page).then((data: Rickandmorty[]) => {
+        setData(data);
+      });
+  }, [page]);
+
+  async function fetchData(page?: number) {
     let url = '';
     const value = localStorage.getItem('searchValue');
     setisLoading(true);
 
     value && value.length > 0
       ? (url = `${BASE_URL}/character/?name=${value}`)
-      : (url = `${BASE_URL}/character`);
+      : (url = `${BASE_URL}/character/?page=${page}`);
     try {
       const response = await axios.get(url);
-      // this.setState({ nextUrl: response.data.next });
-      // this.setState({ prevUrl: response.data.previous });
+
       setisLoading(false);
       return response.data.results;
     } catch {
@@ -52,18 +57,10 @@ const App: React.FC<AppProps> = () => {
       <div className="container">
         <ErrorBoundary>
           <TestErrorButton />
-          <ErrorBoundary>
-            <Searching data={data} searchData={searchData} />
-          </ErrorBoundary>
 
-          <Routes>
-            <Route path="/" element={<CharacterList data={data} isLoading={isLoading} />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
+          <Searching data={data} searchData={searchData} />
 
-          {/* <ErrorBoundary>
-            <CharacterList data={data} isLoading={isLoading} />
-          </ErrorBoundary> */}
+          <CharacterList data={data} isLoading={isLoading} />
         </ErrorBoundary>
       </div>
     </>
