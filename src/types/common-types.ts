@@ -42,8 +42,7 @@ export interface ErrorBoundaryState {
 }
 
 export interface SearchingProps {
-  data: Rickandmorty[];
-  searchData: (data: Rickandmorty[]) => void;
+  getSearchData: (data: Rickandmorty[]) => void;
 }
 
 export interface SearchingState {

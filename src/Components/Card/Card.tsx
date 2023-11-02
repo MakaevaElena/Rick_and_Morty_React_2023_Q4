@@ -3,35 +3,16 @@ import React, { useEffect, useState } from 'react';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import './style.scss';
 import Loader from '../Loader/Loader';
-import { BASE_URL } from '../../constants';
+import { BASE_URL, DEFAULT_DETAILS } from '../../constants';
+import { Link, useParams } from 'react-router-dom';
 
 interface Props {
   RickandmortyData: Rickandmorty;
 }
 
-const defaultDetails = {
-  id: 1,
-  name: '',
-  status: '',
-  species: '',
-  type: '',
-  gender: '',
-  origin: {
-    name: '',
-    url: '',
-  },
-  location: {
-    name: '',
-    url: '',
-  },
-  image: '',
-  episode: ['', ''],
-  url: '',
-  created: '',
-};
-
 const Card: React.FC<Props> = (props) => {
-  const [data, setData] = useState(defaultDetails);
+  const { page } = useParams<{ page: string }>();
+  const [data, setData] = useState(DEFAULT_DETAILS);
   const [isLoading, setisLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -50,13 +31,15 @@ const Card: React.FC<Props> = (props) => {
   ) : (
     <>
       <div className="card">
-        <h3>{props.RickandmortyData.name}</h3>
-        <img className="character-img" src={data.image ? data.image : ''} alt="" />
-        <div className="stats">
-          <li> species: {data.species}</li>
-          <li> gender: {data.gender}</li>
-          <li> location: {data.location.name}</li>
-        </div>
+        <Link to={`/search/${page}/${data.id}`}>
+          <h3>{props.RickandmortyData.name}</h3>
+          <img className="character-img" src={data.image ? data.image : ''} alt="" />
+          <div className="stats">
+            <li> species: {data.species}</li>
+            <li> gender: {data.gender}</li>
+            <li> location: {data.location.name}</li>
+          </div>
+        </Link>
       </div>
     </>
   );

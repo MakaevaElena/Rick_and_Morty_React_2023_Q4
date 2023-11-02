@@ -3,14 +3,19 @@ import { BASE_URL } from '../../constants';
 import './style.scss';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import Loader from '../Loader/Loader';
 
 const Pagination: React.FC = () => {
+  const { page } = useParams<{ page: string }>();
   const [data, setData] = useState<Rickandmorty[]>([]);
+  const [isLoading, setisLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setisLoading(true);
     fetchData().then((data: Rickandmorty[]) => {
       setData(data);
+      setisLoading(false);
     });
   }, []);
 
@@ -19,12 +24,25 @@ const Pagination: React.FC = () => {
     return response.data.results;
   }
 
-  return (
+  function getClassName(i: number) {
+    if (page && +page === i + 1) {
+      return 'chosen_button';
+    }
+    return '';
+  }
+
+  return isLoading ? (
+    <Loader />
+  ) : (
     <>
       <h2>Pagination</h2>
       <div className="pagination-buttons">
         {data.map((_, i) => (
-          <Link key={i + 1} to={`/search/${i + 1}`} className="pagination-button">
+          <Link
+            key={i + 1}
+            to={`/search/${i + 1}`}
+            className={`pagination-button ${getClassName(i)}`}
+          >
             <div key={i + 1} id={`${i + 1}`}>
               {i + 1}
             </div>

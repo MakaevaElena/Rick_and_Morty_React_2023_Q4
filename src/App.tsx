@@ -8,10 +8,14 @@ import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary';
 import TestErrorButton from './Components/TestErrorButton/TestErrorButton';
 import { BASE_URL } from './constants';
 import { AppProps } from './types/common-types';
-import { useParams } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
+import PageNotFound from './Components/PageNotFound/PageNotFound';
+import Info from './Components/Info/Info';
 
 const App: React.FC<AppProps> = () => {
+  //todo page undefined
   const { page } = useParams<{ page: string }>();
+  console.log('page', page);
 
   const [data, setData] = useState<Rickandmorty[]>([]);
   const [isLoading, setisLoading] = useState<boolean>(false);
@@ -20,35 +24,28 @@ const App: React.FC<AppProps> = () => {
     fetchData().then((data: Rickandmorty[]) => {
       setData(data);
     });
-  }, []);
 
-  useEffect(() => {
-    if (page)
-      fetchData(+page).then((data: Rickandmorty[]) => {
-        setData(data);
-      });
+    async function fetchData() {
+      let url = '';
+      const value = localStorage.getItem('searchValue');
+      setisLoading(true);
+
+      value && value.length > 0
+        ? (url = `${BASE_URL}/character/?name=${value}`)
+        : (url = `${BASE_URL}/character/?page=${page}`);
+      try {
+        const response = await axios.get(url);
+
+        setisLoading(false);
+        return response.data.results;
+      } catch {
+        setisLoading(false);
+        return [];
+      }
+    }
   }, [page]);
 
-  async function fetchData(page?: number) {
-    let url = '';
-    const value = localStorage.getItem('searchValue');
-    setisLoading(true);
-
-    value && value.length > 0
-      ? (url = `${BASE_URL}/character/?name=${value}`)
-      : (url = `${BASE_URL}/character/?page=${page}`);
-    try {
-      const response = await axios.get(url);
-
-      setisLoading(false);
-      return response.data.results;
-    } catch {
-      setisLoading(false);
-      return [];
-    }
-  }
-
-  const searchData = (searchingData: Rickandmorty[]) => {
+  const getSearchData = (searchingData: Rickandmorty[]) => {
     setData(searchingData);
   };
 
@@ -57,10 +54,22 @@ const App: React.FC<AppProps> = () => {
       <div className="container">
         <ErrorBoundary>
           <TestErrorButton />
+          <Searching getSearchData={getSearchData} />
 
-          <Searching data={data} searchData={searchData} />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<CharacterList data={data} isLoading={isLoading} />} />
 
-          <CharacterList data={data} isLoading={isLoading} />
+              <Route
+                path="/search/:page"
+                element={<CharacterList data={data} isLoading={isLoading} />}
+              >
+                <Route path="/search/:page/:id" element={<Info />} />
+              </Route>
+
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </BrowserRouter>
         </ErrorBoundary>
       </div>
     </>

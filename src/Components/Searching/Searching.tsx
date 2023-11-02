@@ -3,14 +3,9 @@ import './style.scss';
 import axios from 'axios';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import { BASE_URL } from '../../constants';
-// import { Link } from 'react-router-dom';
+import { SearchingProps } from '../../types/common-types';
 
-interface Props {
-  data: Rickandmorty[];
-  searchData: (data: Rickandmorty[]) => void;
-}
-
-const Searching: React.FC<Props> = (props) => {
+const Searching: React.FC<SearchingProps> = (props) => {
   const [value, setValue] = useState('');
 
   const inputRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -27,13 +22,12 @@ const Searching: React.FC<Props> = (props) => {
     const response = await axios.get(`${BASE_URL}/character/?name=${value}`);
     const arr: Rickandmorty[] = [];
     arr.push(...response.data.results);
-    props.searchData(arr);
+    props.getSearchData(arr);
   }
 
   function handleSearchClick() {
-    fetchData().catch(() => props.searchData([]));
+    fetchData().catch(() => props.getSearchData([]));
     localStorage.setItem('searchValue', value);
-    // location.assign(`/characters/`);
   }
 
   function handleChange(evt: React.FormEvent<HTMLInputElement>) {
@@ -76,9 +70,7 @@ const Searching: React.FC<Props> = (props) => {
             value={value}
             onChange={handleChange}
           />
-          <div className="search-button" onClick={handleSearchClick} ref={searchButtonRef}>
-            {/* <Link to={`/characters/page=${1}`}></Link> */}
-          </div>
+          <div className="search-button" onClick={handleSearchClick} ref={searchButtonRef}></div>
         </form>
       </section>
     </>
