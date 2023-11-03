@@ -8,17 +8,27 @@ import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary';
 import TestErrorButton from './Components/TestErrorButton/TestErrorButton';
 import { BASE_URL } from './constants';
 import { AppProps } from './types/common-types';
-// import { BrowserRouter, Route, RouteObject, Routes, useRoutes } from 'react-router-dom';
-import { RouteObject, useParams, useRoutes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+// import { RouteObject, useParams, useRoutes } from 'react-router-dom';
 import PageNotFound from './Components/PageNotFound/PageNotFound';
 import Info from './Components/Info/Info';
+import { createContext } from 'react';
+
+interface IContext {
+  page: string;
+  setPage: (c: string) => void;
+}
+
+export const Context = createContext<IContext>({
+  page: '',
+  setPage: () => {},
+});
 
 const App: React.FC<AppProps> = () => {
-  const { page } = useParams<{ page: string }>();
-  console.log('page', page);
-
   const [data, setData] = useState<Rickandmorty[]>([]);
   const [isLoading, setisLoading] = useState<boolean>(false);
+  const [page, setPage] = useState('');
+  console.log(page);
 
   const getSearchData = (searchingData: Rickandmorty[]) => {
     setData(searchingData);
@@ -36,8 +46,8 @@ const App: React.FC<AppProps> = () => {
 
       value && value.length > 0
         ? (url = `${BASE_URL}/character/?name=${value}`)
-        : // : (url = `${BASE_URL}/character/?page=${page}`);
-          (url = `${BASE_URL}/character`);
+        : (url = `${BASE_URL}/character/?page=${page}`);
+      // url = `${BASE_URL}/character`;
       try {
         const response = await axios.get(url);
 
@@ -50,60 +60,62 @@ const App: React.FC<AppProps> = () => {
     }
   }, [page]);
 
-  const routes: RouteObject[] = [
-    {
-      path: '/',
-      element: <CharacterList data={data} isLoading={isLoading} />,
-    },
-    {
-      path: '/search/:page',
-      element: <CharacterList data={data} isLoading={isLoading} />,
-      children: [{ path: '/search/:page/:id', element: <Info /> }],
-    },
-    { path: '*', element: <PageNotFound /> },
-  ];
+  //   const routes: RouteObject[] = [
+  //     {
+  //       path: '/',
+  //       element: <CharacterList data={data} isLoading={isLoading} />,
+  //     },
+  //     {
+  //       path: '/search/:page',
+  //       element: <CharacterList data={data} isLoading={isLoading} />,
+  //       children: [{ path: '/search/:page/:id', element: <Info /> }],
+  //     },
+  //     { path: '*', element: <PageNotFound /> },
+  //   ];
 
-  const element = useRoutes(routes);
+  //   const element = useRoutes(routes);
+
+  //   return (
+  //     <>
+  //       <div className="container">
+  //         <ErrorBoundary>
+  //           <TestErrorButton />
+
+  //           <Searching getSearchData={getSearchData} />
+  //           {element}
+  //         </ErrorBoundary>
+  //       </div>
+  //     </>
+  //   );
+  // };
 
   return (
     <>
       <div className="container">
         <ErrorBoundary>
           <TestErrorButton />
+          <Context.Provider value={{ page, setPage }}>
+            <Searching getSearchData={getSearchData} />
 
-          <Searching getSearchData={getSearchData} />
-          {element}
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<CharacterList data={data} isLoading={isLoading} />} />
+
+                <Route
+                  path="/search/:page"
+                  element={<CharacterList data={data} isLoading={isLoading} />}
+                >
+                  <Route path="/search/:page/:id" element={<Info />} />
+                </Route>
+
+                <Route path="*" element={<PageNotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </Context.Provider>
         </ErrorBoundary>
       </div>
     </>
   );
 };
-
-//   return (
-//     <>
-//       <div className="container">
-//         <ErrorBoundary>
-//           <TestErrorButton />
-//           <Searching getSearchData={getSearchData} />
-
-//           <BrowserRouter>
-//             <Routes>
-//               <Route path="/" element={<CharacterList data={data} isLoading={isLoading} />} />
-
-//               <Route
-//                 path="/search/:page"
-//                 element={<CharacterList data={data} isLoading={isLoading} />}
-//               >
-//                 <Route path="/search/:page/:id" element={<Info />} />
-//               </Route>
-
-//               <Route path="*" element={<PageNotFound />} />
-//             </Routes>
-//           </BrowserRouter>
-//         </ErrorBoundary>
-//       </div>
-//     </>
-//   );
-// };
 
 export default App;

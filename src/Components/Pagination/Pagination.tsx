@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { BASE_URL } from '../../constants';
 import './style.scss';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import Loader from '../Loader/Loader';
+import { Context } from '../../App';
 
 const Pagination: React.FC = () => {
   const { page } = useParams<{ page: string }>();
   const [data, setData] = useState<Rickandmorty[]>([]);
   const [isLoading, setisLoading] = useState<boolean>(false);
+
+  const { setPage } = useContext(Context);
 
   useEffect(() => {
     setisLoading(true);
@@ -23,6 +26,11 @@ const Pagination: React.FC = () => {
     const response = await axios.get(`${BASE_URL}/character`);
     return response.data.results;
   }
+
+  //https://dev.to/madv/usecontext-with-typescript-23ln
+  useEffect(() => {
+    if (page) setPage(page);
+  }, [page, setPage]);
 
   function getClassName(i: number) {
     if (page && +page === i + 1) {

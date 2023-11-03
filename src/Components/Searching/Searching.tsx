@@ -4,11 +4,15 @@ import axios from 'axios';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import { BASE_URL } from '../../constants';
 import { SearchingProps } from '../../types/common-types';
+// import { Context } from '../../App';
 // import { useParams } from 'react-router-dom';
 
 const Searching: React.FC<SearchingProps> = (props) => {
   // const { page } = useParams<{ page: string }>();
   // console.log('page', page);
+
+  // const { page } = useContext(Context);
+  // console.log(page);
   const [value, setValue] = useState('');
 
   const inputRef: React.RefObject<HTMLInputElement> = React.createRef();

@@ -8,7 +8,6 @@ import { CharacterListProps } from '../../types/common-types';
 import Pagination from '../Pagination/Pagination';
 
 const CharacterList: React.FC<CharacterListProps> = (props) => {
-
   return props.isLoading ? (
     <Loader />
   ) : (
