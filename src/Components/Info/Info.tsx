@@ -23,8 +23,6 @@ const Info: React.FC = () => {
     fetchRickandmortyDetails().then((details: Rickandmorty) => setData(details));
   }, [id]);
 
-  
-
   return isLoading ? (
     <Loader />
   ) : (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import './style.scss';
 import Card from '../Card/Card';
 // import { Rickandmorty } from '../../types/rickandmorty-types';
@@ -8,8 +8,6 @@ import { CharacterListProps } from '../../types/common-types';
 import Pagination from '../Pagination/Pagination';
 
 const CharacterList: React.FC<CharacterListProps> = (props) => {
-  const { page } = useParams<{ page: string }>();
-  console.log('page', page);
 
   return props.isLoading ? (
     <Loader />
