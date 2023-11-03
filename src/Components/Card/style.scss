@@ -1,6 +1,6 @@
 .card {
   width: 10%;
-  padding: 2vw;
+  padding: 2vh 2vw;
   border-radius: 3%;
   background-color: #accea3;
   cursor: pointer;
@@ -21,7 +21,7 @@
   transition: 0.2s;
 
   h3 {
-    font-size: 1.2vw;
+    font-size: 1.1vw;
     margin: 0;
   }
 }
@@ -32,11 +32,12 @@
 }
 
 .stats {
-  font-size: 0.8vw;
+  font-size: 1vw;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  text-align: start;
 }
 
 .stat {

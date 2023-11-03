@@ -15,6 +15,8 @@ const Card: React.FC<Props> = (props) => {
   const [data, setData] = useState(DEFAULT_DETAILS);
   const [isLoading, setisLoading] = useState<boolean>(false);
 
+  const newPage = page ? page : 1;
+
   useEffect(() => {
     async function fetchRickandmortyDetails(): Promise<Rickandmorty> {
       setisLoading(true);
@@ -31,13 +33,13 @@ const Card: React.FC<Props> = (props) => {
   ) : (
     <>
       <div className="card">
-        <Link to={`/search/${page}/${data.id}`}>
+        <Link to={`/search/${newPage}/${data.id}`}>
           <h3>{props.RickandmortyData.name}</h3>
           <img className="character-img" src={data.image ? data.image : ''} alt="" />
           <div className="stats">
             <li> species: {data.species}</li>
             <li> gender: {data.gender}</li>
-            <li> location: {data.location.name}</li>
+            {/* <li> location: {data.location.name}</li> */}
           </div>
         </Link>
       </div>

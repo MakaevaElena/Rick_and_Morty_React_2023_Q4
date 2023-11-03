@@ -8,11 +8,11 @@ import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary';
 import TestErrorButton from './Components/TestErrorButton/TestErrorButton';
 import { BASE_URL } from './constants';
 import { AppProps } from './types/common-types';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-// import { RouteObject, useParams, useRoutes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import PageNotFound from './Components/PageNotFound/PageNotFound';
 import Info from './Components/Info/Info';
 import { createContext } from 'react';
+// import BodyContent from './Components/BodyContent';
 
 interface IContext {
   page: string;
@@ -28,7 +28,6 @@ const App: React.FC<AppProps> = () => {
   const [data, setData] = useState<Rickandmorty[]>([]);
   const [isLoading, setisLoading] = useState<boolean>(false);
   const [page, setPage] = useState('');
-  console.log(page);
 
   const getSearchData = (searchingData: Rickandmorty[]) => {
     setData(searchingData);
@@ -60,35 +59,6 @@ const App: React.FC<AppProps> = () => {
     }
   }, [page]);
 
-  //   const routes: RouteObject[] = [
-  //     {
-  //       path: '/',
-  //       element: <CharacterList data={data} isLoading={isLoading} />,
-  //     },
-  //     {
-  //       path: '/search/:page',
-  //       element: <CharacterList data={data} isLoading={isLoading} />,
-  //       children: [{ path: '/search/:page/:id', element: <Info /> }],
-  //     },
-  //     { path: '*', element: <PageNotFound /> },
-  //   ];
-
-  //   const element = useRoutes(routes);
-
-  //   return (
-  //     <>
-  //       <div className="container">
-  //         <ErrorBoundary>
-  //           <TestErrorButton />
-
-  //           <Searching getSearchData={getSearchData} />
-  //           {element}
-  //         </ErrorBoundary>
-  //       </div>
-  //     </>
-  //   );
-  // };
-
   return (
     <>
       <div className="container">
@@ -97,20 +67,20 @@ const App: React.FC<AppProps> = () => {
           <Context.Provider value={{ page, setPage }}>
             <Searching getSearchData={getSearchData} />
 
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<CharacterList data={data} isLoading={isLoading} />} />
+            {/* <BrowserRouter> */}
+            <Routes>
+              <Route path="/" element={<CharacterList data={data} isLoading={isLoading} />} />
 
-                <Route
-                  path="/search/:page"
-                  element={<CharacterList data={data} isLoading={isLoading} />}
-                >
-                  <Route path="/search/:page/:id" element={<Info />} />
-                </Route>
+              <Route
+                path="/search/:page"
+                element={<CharacterList data={data} isLoading={isLoading} />}
+              >
+                <Route path="/search/:page/:id" element={<Info />} />
+              </Route>
 
-                <Route path="*" element={<PageNotFound />} />
-              </Routes>
-            </BrowserRouter>
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+            {/* </BrowserRouter> */}
           </Context.Provider>
         </ErrorBoundary>
       </div>
