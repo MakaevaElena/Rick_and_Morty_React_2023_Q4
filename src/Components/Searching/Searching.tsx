@@ -34,7 +34,7 @@ const Searching: React.FC<SearchingProps> = (props) => {
   function handleSearchClick() {
     fetchData().catch(() => props.getSearchData([]));
     localStorage.setItem('searchValue', value);
-    navigate('/search/1');
+    navigate('/search/?page=1');
   }
 
   function handleChange(evt: React.FormEvent<HTMLInputElement>) {

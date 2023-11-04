@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Rickandmorty } from './rickandmorty-types';
 
-export interface CharacterListProps {
+export interface MainProps {
   data: Rickandmorty[];
   isLoading: boolean;
 }

@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import './style.scss';
 import Loader from '../Loader/Loader';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { BASE_URL, DEFAULT_DETAILS } from '../../constants';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 
 const Info: React.FC = () => {
   const navigate = useNavigate();
-  const { id } = useParams<{ id: string }>();
-  // console.log('id', id);
+  // const { id } = useParams<{ id: string }>();
+  const [pageQuery] = useSearchParams();
+  const id = pageQuery.get('id');
+
   const [isLoading, setisLoading] = useState<boolean>(false);
   const [data, setData] = useState(DEFAULT_DETAILS);
 
@@ -25,14 +27,14 @@ const Info: React.FC = () => {
   }, [id]);
 
   const handlerCloseButton = () => {
-    navigate('/search/1');
+    navigate('/search/?page=1');
   };
 
   return isLoading ? (
     <Loader />
   ) : (
-    <>
-      <div className="card info">
+    <div className="info">
+      <div className="card">
         <button onClick={handlerCloseButton}>X</button>
         <h2>Info about: </h2>
         <h3>{data.name}</h3>
@@ -46,7 +48,7 @@ const Info: React.FC = () => {
           <li> created: {data.created}</li>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

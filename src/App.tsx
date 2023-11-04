@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.scss';
 import axios from 'axios';
-import CharacterList from './Components/CharacterList/CharacterList';
+import Main from './Components/Main/Main';
 import Searching from './Components/Searching/Searching';
 import { Rickandmorty } from './types/rickandmorty-types';
 import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary';
@@ -12,7 +12,6 @@ import { Route, Routes } from 'react-router-dom';
 import PageNotFound from './Components/PageNotFound/PageNotFound';
 import Info from './Components/Info/Info';
 import { createContext } from 'react';
-// import BodyContent from './Components/BodyContent';
 
 interface IContext {
   page: string;
@@ -28,6 +27,10 @@ const App: React.FC<AppProps> = () => {
   const [data, setData] = useState<Rickandmorty[]>([]);
   const [isLoading, setisLoading] = useState<boolean>(false);
   const [page, setPage] = useState('');
+
+  // const [pageQuery] = useSearchParams();
+  // const queryPage = pageQuery.get('page');
+  // const queryId = pageQuery.get('id');
 
   const getSearchData = (searchingData: Rickandmorty[]) => {
     setData(searchingData);
@@ -66,21 +69,17 @@ const App: React.FC<AppProps> = () => {
           <TestErrorButton />
           <Context.Provider value={{ page, setPage }}>
             <Searching getSearchData={getSearchData} />
-
-            {/* <BrowserRouter> */}
             <Routes>
-              <Route path="/" element={<CharacterList data={data} isLoading={isLoading} />} />
+              <Route path="/" element={<Main data={data} isLoading={isLoading} />} />
 
-              <Route
-                path="/search/:page"
-                element={<CharacterList data={data} isLoading={isLoading} />}
-              >
-                <Route path="/search/:page/:id" element={<Info />} />
+              {/* <Route path="/search/:page" element={<Main data={data} isLoading={isLoading} />}> */}
+              <Route path={`/search/`} element={<Main data={data} isLoading={isLoading} />}>
+                {/* <Route path="/search/:page/:id" element={<Info />} /> */}
+                <Route path={`/search/details/`} element={<Info />} />
               </Route>
 
               <Route path="*" element={<PageNotFound />} />
             </Routes>
-            {/* </BrowserRouter> */}
           </Context.Provider>
         </ErrorBoundary>
       </div>

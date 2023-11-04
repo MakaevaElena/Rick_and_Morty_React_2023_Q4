@@ -4,16 +4,19 @@ import { Rickandmorty } from '../../types/rickandmorty-types';
 import './style.scss';
 import Loader from '../Loader/Loader';
 import { BASE_URL, DEFAULT_DETAILS } from '../../constants';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 interface Props {
   RickandmortyData: Rickandmorty;
 }
 
 const Card: React.FC<Props> = (props) => {
-  const { page } = useParams<{ page: string }>();
+  // const { page } = useParams<{ page: string }>();
   const [data, setData] = useState(DEFAULT_DETAILS);
   const [isLoading, setisLoading] = useState<boolean>(false);
+
+  const [pageQuery] = useSearchParams();
+  const page = pageQuery.get('page');
 
   const newPage = page ? page : 1;
 
@@ -33,13 +36,13 @@ const Card: React.FC<Props> = (props) => {
   ) : (
     <>
       <div className="card">
-        <Link to={`/search/${newPage}/${data.id}`}>
+        {/* <Link to={`/search/${newPage}/${data.id}`}> */}
+        <Link to={`/search/details/?page=${newPage}&id=${data.id}`}>
           <h3>{props.RickandmortyData.name}</h3>
           <img className="character-img" src={data.image ? data.image : ''} alt="" />
           <div className="stats">
             <li> species: {data.species}</li>
             <li> gender: {data.gender}</li>
-            {/* <li> location: {data.location.name}</li> */}
           </div>
         </Link>
       </div>
