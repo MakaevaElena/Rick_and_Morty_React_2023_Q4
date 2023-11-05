@@ -1,4 +1,3 @@
-import React from 'react';
 import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
 import './style.scss';
 import Card from '../Card/Card';
@@ -7,16 +6,14 @@ import { MainProps } from '../../types/common-types';
 import Pagination from '../Pagination/Pagination';
 
 const Main: React.FC<MainProps> = (props) => {
-  // const { page } = useParams();
-
   const [pageQuery] = useSearchParams();
   const page = pageQuery.get('page');
-
   const navigate = useNavigate();
+  const count = pageQuery.get('count');
 
   const handlerCloseInfo = (event: React.MouseEvent<HTMLElement>) => {
     if (event.target instanceof HTMLElement && event.target.classList.contains('character-list'))
-      navigate(`/?page=${page}`);
+      navigate(`/search/?page=${page}&count=${count}`);
   };
 
   return props.isLoading ? (

@@ -8,9 +8,10 @@ import { Rickandmorty } from '../../types/rickandmorty-types';
 
 const Info: React.FC = () => {
   const navigate = useNavigate();
-  // const { id } = useParams<{ id: string }>();
   const [pageQuery] = useSearchParams();
   const id = pageQuery.get('id');
+  const currentPage = pageQuery.get('page');
+  const count = pageQuery.get('count');
 
   const [isLoading, setisLoading] = useState<boolean>(false);
   const [data, setData] = useState(DEFAULT_DETAILS);
@@ -27,7 +28,7 @@ const Info: React.FC = () => {
   }, [id]);
 
   const handlerCloseButton = () => {
-    navigate('/search/?page=1');
+    navigate(`/search/?page=${currentPage}&count=${count}`);
   };
 
   return isLoading ? (

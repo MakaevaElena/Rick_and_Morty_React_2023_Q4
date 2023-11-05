@@ -11,12 +11,12 @@ interface Props {
 }
 
 const Card: React.FC<Props> = (props) => {
-  // const { page } = useParams<{ page: string }>();
   const [data, setData] = useState(DEFAULT_DETAILS);
   const [isLoading, setisLoading] = useState<boolean>(false);
 
   const [pageQuery] = useSearchParams();
   const page = pageQuery.get('page');
+  const count = pageQuery.get('count') || 20;
 
   const newPage = page ? page : 1;
 
@@ -36,8 +36,7 @@ const Card: React.FC<Props> = (props) => {
   ) : (
     <>
       <div className="card">
-        {/* <Link to={`/search/${newPage}/${data.id}`}> */}
-        <Link to={`/search/details/?page=${newPage}&id=${data.id}`}>
+        <Link to={`/search/details/?page=${newPage}&count=${count}&id=${data.id}`}>
           <h3>{props.RickandmortyData.name}</h3>
           <img className="character-img" src={data.image ? data.image : ''} alt="" />
           <div className="stats">

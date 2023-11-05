@@ -3,39 +3,40 @@ import { BASE_URL } from '../../constants';
 import './style.scss';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import axios from 'axios';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Loader from '../Loader/Loader';
 import { Context } from '../../App';
 
 const Pagination: React.FC = () => {
-  // const { page } = useParams<{ page: string }>();
+  const navigate = useNavigate();
+  const { setPage } = useContext(Context);
+  const { setCount } = useContext(Context);
+
+  const [pageQuery] = useSearchParams();
+  const page = pageQuery.get('page') || '1';
+  const count = pageQuery.get('count');
 
   const [data, setData] = useState<Rickandmorty[]>([]);
   const [isLoading, setisLoading] = useState<boolean>(false);
-  const [count, setCount] = useState<number>(20);
-
-  const { setPage } = useContext(Context);
-
-  const [pageQuery] = useSearchParams();
-  const page = pageQuery.get('page');
+  const [selectedValue, setSelectedValue] = useState<string>('20');
 
   useEffect(() => {
+    if (count) setSelectedValue(count);
     setisLoading(true);
     fetchData().then((data: Rickandmorty[]) => {
       setData(data);
       setisLoading(false);
     });
-  }, []);
+  }, [count]);
 
   async function fetchData() {
     const response = await axios.get(`${BASE_URL}/character`);
     return response.data.results;
   }
 
-  //https://dev.to/madv/usecontext-with-typescript-23ln
   useEffect(() => {
     if (page) setPage(page);
-  }, [page, setPage, count]);
+  }, [page, setPage]);
 
   function getClassName(i: number) {
     if (page && +page === i + 1) {
@@ -44,14 +45,11 @@ const Pagination: React.FC = () => {
     return '';
   }
 
-  const handleChangeCount = (event: React.MouseEvent<HTMLSelectElement>) => {
-    if (event.target instanceof HTMLSelectElement) setCount(+event.target.value);
-  };
-
-  const handleSubmitCount = (event: React.FormEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
-    setData(data.slice(0, count));
+  const handleChangeCount = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    if (event.target instanceof HTMLSelectElement) {
+      setCount(event.target.value);
+      navigate(`/search/?page=${page}&count=${event.target.value}`);
+    }
   };
 
   return isLoading ? (
@@ -59,21 +57,18 @@ const Pagination: React.FC = () => {
   ) : (
     <div className="pagination">
       <h2>Pagination</h2>
-      <label>
-        <select onChange={() => handleChangeCount}>
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
-        </select>
-      </label>
-      <input type="submit" value="Submit" onClick={() => handleSubmitCount} />
+      <select value={selectedValue} className="change-count-select" onChange={handleChangeCount}>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+      </select>
 
       <div className="pagination-buttons">
         {data.map((_, i) => (
           <Link
             key={i + 1}
-            // to={`/search/${i + 1}`}
-            to={`/search/?page=${i + 1}`}
+            to={`/search/?page=${i + 1}&count=${count}`}
             className={`pagination-button ${getClassName(i)}`}
           >
             <div key={i + 1} id={`${i + 1}`}>

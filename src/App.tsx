@@ -16,21 +16,20 @@ import { createContext } from 'react';
 interface IContext {
   page: string;
   setPage: (c: string) => void;
+  setCount: (c: string) => void;
 }
 
 export const Context = createContext<IContext>({
   page: '',
   setPage: () => {},
+  setCount: () => {},
 });
 
 const App: React.FC<AppProps> = () => {
   const [data, setData] = useState<Rickandmorty[]>([]);
   const [isLoading, setisLoading] = useState<boolean>(false);
   const [page, setPage] = useState('');
-
-  // const [pageQuery] = useSearchParams();
-  // const queryPage = pageQuery.get('page');
-  // const queryId = pageQuery.get('id');
+  const [count, setCount] = useState('20');
 
   const getSearchData = (searchingData: Rickandmorty[]) => {
     setData(searchingData);
@@ -38,7 +37,7 @@ const App: React.FC<AppProps> = () => {
 
   useEffect(() => {
     fetchData().then((data: Rickandmorty[]) => {
-      setData(data);
+      setData(data.slice(0, +count));
     });
 
     async function fetchData() {
@@ -49,7 +48,6 @@ const App: React.FC<AppProps> = () => {
       value && value.length > 0
         ? (url = `${BASE_URL}/character/?name=${value}`)
         : (url = `${BASE_URL}/character/?page=${page}`);
-      // url = `${BASE_URL}/character`;
       try {
         const response = await axios.get(url);
 
@@ -60,24 +58,20 @@ const App: React.FC<AppProps> = () => {
         return [];
       }
     }
-  }, [page]);
+  }, [count, page]);
 
   return (
     <>
       <div className="container">
         <ErrorBoundary>
           <TestErrorButton />
-          <Context.Provider value={{ page, setPage }}>
+          <Context.Provider value={{ page, setPage, setCount }}>
             <Searching getSearchData={getSearchData} />
             <Routes>
               <Route path="/" element={<Main data={data} isLoading={isLoading} />} />
-
-              {/* <Route path="/search/:page" element={<Main data={data} isLoading={isLoading} />}> */}
               <Route path={`/search/`} element={<Main data={data} isLoading={isLoading} />}>
-                {/* <Route path="/search/:page/:id" element={<Info />} /> */}
                 <Route path={`/search/details/`} element={<Info />} />
               </Route>
-
               <Route path="*" element={<PageNotFound />} />
             </Routes>
           </Context.Provider>
