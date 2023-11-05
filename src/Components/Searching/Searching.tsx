@@ -3,8 +3,8 @@ import './style.scss';
 import axios from 'axios';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import { BASE_URL, DEFAULT_COUNT } from '../../constants';
-import { SearchingProps } from '../../types/common-types';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { SearchingProps } from './types';
 
 const Searching: React.FC<SearchingProps> = (props) => {
   const navigate = useNavigate();

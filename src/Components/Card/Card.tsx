@@ -5,7 +5,7 @@ import './style.scss';
 import Loader from '../Loader/Loader';
 import { BASE_URL, DEFAULT_COUNT, DEFAULT_DETAILS, DEFAULT_PAGE } from '../../constants';
 import { Link, useSearchParams } from 'react-router-dom';
-import { CardProps } from '../../types/common-types';
+import { CardProps } from './types';
 
 const Card: React.FC<CardProps> = (props) => {
   const [data, setData] = useState(DEFAULT_DETAILS);
@@ -31,18 +31,16 @@ const Card: React.FC<CardProps> = (props) => {
   return isLoading ? (
     <Loader />
   ) : (
-    <>
-      <div className="card">
-        <Link to={`/search/details/?page=${newPage}&count=${count}&id=${data.id}`}>
-          <h3>{props.RickandmortyData.name}</h3>
-          <img className="character-img" src={data.image ? data.image : ''} alt="" />
-          <div className="stats">
-            <li> species: {data.species}</li>
-            <li> gender: {data.gender}</li>
-          </div>
-        </Link>
-      </div>
-    </>
+    <div className="card">
+      <Link to={`/search/details/?page=${newPage}&count=${count}&id=${data.id}`}>
+        <h3>{props.RickandmortyData.name}</h3>
+        <img className="character-img" src={data.image ? data.image : ''} alt="" />
+        <div className="stats">
+          <li> species: {data.species}</li>
+          <li> gender: {data.gender}</li>
+        </div>
+      </Link>
+    </div>
   );
 };
 

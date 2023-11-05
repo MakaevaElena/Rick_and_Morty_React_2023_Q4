@@ -5,7 +5,7 @@ import { Rickandmorty } from '../../types/rickandmorty-types';
 import axios from 'axios';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Loader from '../Loader/Loader';
-import { Context } from '../../App';
+import { Context } from '../App/App';
 
 const Pagination: React.FC = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const Pagination: React.FC = () => {
 
   const [pageQuery] = useSearchParams();
   const page = pageQuery.get('page') || DEFAULT_PAGE;
-  const count = pageQuery.get('count');
+  const count = pageQuery.get('count') || DEFAULT_COUNT;
 
   const [data, setData] = useState<Rickandmorty[]>([]);
   const [isLoading, setisLoading] = useState<boolean>(false);
@@ -48,7 +48,7 @@ const Pagination: React.FC = () => {
   const handleChangeCount = (event: React.ChangeEvent<HTMLSelectElement>) => {
     if (event.target instanceof HTMLSelectElement) {
       setCount(event.target.value);
-      navigate(`/search/?page=${page}&count=${event.target.value}`);
+      navigate(`/search/?page=${DEFAULT_PAGE}&count=${event.target.value}`);
     }
   };
 

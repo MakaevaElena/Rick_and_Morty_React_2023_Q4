@@ -27,12 +27,16 @@ export default class ErrorBoundary extends React.Component<Props, State> {
     console.error('ErrorBoundary Uncaught error:', error, errorInfo);
   }
 
+  private reload() {
+    window.location.reload();
+  }
+
   public render() {
     if (this.state.hasError) {
       return (
         <>
           <h1>Sorry.. there was an error</h1>
-          <button className="reload-button" onClick={() => window.location.reload()}>
+          <button className="reload-button" onClick={this.reload}>
             Reload
           </button>
         </>

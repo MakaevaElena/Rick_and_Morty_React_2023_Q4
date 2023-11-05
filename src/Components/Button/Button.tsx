@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './style.scss';
 
-const TestErrorButton: React.FC = () => {
+const Button: React.FC = () => {
   const [hasError, setHasError] = useState<boolean>(false);
 
   function handleClick() {
@@ -15,12 +15,10 @@ const TestErrorButton: React.FC = () => {
   }, [hasError]);
 
   return (
-    <>
-      <button className="error-button" onClick={handleClick}>
-        TestErrorButton
-      </button>
-    </>
+    <button className="button" onClick={handleClick}>
+      TestErrorButton
+    </button>
   );
 };
 
-export default TestErrorButton;
+export default Button;
