@@ -1,6 +1,16 @@
 import { ReactNode } from 'react';
 import { Rickandmorty } from './rickandmorty-types';
 
+export interface CardProps {
+  RickandmortyData: Rickandmorty;
+}
+
+export interface IContext {
+  page: number;
+  setPage: (c: number) => void;
+  setCount: (c: string) => void;
+}
+
 export interface MainProps {
   data: Rickandmorty[];
   isLoading: boolean;

@@ -3,22 +3,19 @@ import React, { useEffect, useState } from 'react';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import './style.scss';
 import Loader from '../Loader/Loader';
-import { BASE_URL, DEFAULT_DETAILS } from '../../constants';
+import { BASE_URL, DEFAULT_COUNT, DEFAULT_DETAILS, DEFAULT_PAGE } from '../../constants';
 import { Link, useSearchParams } from 'react-router-dom';
+import { CardProps } from '../../types/common-types';
 
-interface Props {
-  RickandmortyData: Rickandmorty;
-}
-
-const Card: React.FC<Props> = (props) => {
+const Card: React.FC<CardProps> = (props) => {
   const [data, setData] = useState(DEFAULT_DETAILS);
   const [isLoading, setisLoading] = useState<boolean>(false);
 
   const [pageQuery] = useSearchParams();
   const page = pageQuery.get('page');
-  const count = pageQuery.get('count') || 20;
+  const count = pageQuery.get('count') || DEFAULT_COUNT;
 
-  const newPage = page ? page : 1;
+  const newPage = page ? page : DEFAULT_PAGE;
 
   useEffect(() => {
     async function fetchRickandmortyDetails(): Promise<Rickandmorty> {

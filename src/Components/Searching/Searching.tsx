@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './style.scss';
 import axios from 'axios';
 import { Rickandmorty } from '../../types/rickandmorty-types';
-import { BASE_URL } from '../../constants';
+import { BASE_URL, DEFAULT_COUNT } from '../../constants';
 import { SearchingProps } from '../../types/common-types';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ const Searching: React.FC<SearchingProps> = (props) => {
   const navigate = useNavigate();
   const [value, setValue] = useState('');
   const [pageQuery] = useSearchParams();
-  const count = pageQuery.get('count') || 20;
+  const count = pageQuery.get('count') || DEFAULT_COUNT;
 
   const inputRef: React.RefObject<HTMLInputElement> = React.createRef();
   const searchButtonRef: React.RefObject<HTMLDivElement> = React.createRef();

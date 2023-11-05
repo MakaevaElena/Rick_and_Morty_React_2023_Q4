@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { BASE_URL } from '../../constants';
+import { BASE_URL, DEFAULT_COUNT, DEFAULT_PAGE } from '../../constants';
 import './style.scss';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import axios from 'axios';
@@ -13,12 +13,12 @@ const Pagination: React.FC = () => {
   const { setCount } = useContext(Context);
 
   const [pageQuery] = useSearchParams();
-  const page = pageQuery.get('page') || '1';
+  const page = pageQuery.get('page') || DEFAULT_PAGE;
   const count = pageQuery.get('count');
 
   const [data, setData] = useState<Rickandmorty[]>([]);
   const [isLoading, setisLoading] = useState<boolean>(false);
-  const [selectedValue, setSelectedValue] = useState<string>('20');
+  const [selectedValue, setSelectedValue] = useState<string>(DEFAULT_COUNT);
 
   useEffect(() => {
     if (count) setSelectedValue(count);
@@ -35,7 +35,7 @@ const Pagination: React.FC = () => {
   }
 
   useEffect(() => {
-    if (page) setPage(page);
+    if (page) setPage(+page);
   }, [page, setPage]);
 
   function getClassName(i: number) {

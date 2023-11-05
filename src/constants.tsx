@@ -20,3 +20,6 @@ export const DEFAULT_DETAILS = {
   url: '',
   created: '',
 };
+
+export const DEFAULT_COUNT = '20';
+export const DEFAULT_PAGE = 1;
