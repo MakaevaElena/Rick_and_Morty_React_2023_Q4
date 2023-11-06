@@ -5,7 +5,7 @@ import Loader from '../Loader/Loader';
 import Pagination from '../Pagination/Pagination';
 import { MainProps } from './types';
 
-const Main: React.FC<MainProps> = ({ isLoading, data }) => {
+const CharacterList: React.FC<MainProps> = ({ isLoading, data }) => {
   const [pageQuery] = useSearchParams();
   const page = pageQuery.get('page');
   const navigate = useNavigate();
@@ -37,4 +37,4 @@ const Main: React.FC<MainProps> = ({ isLoading, data }) => {
   );
 };
 
-export default Main;
+export default CharacterList;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.scss';
 import axios from 'axios';
-import Main from '../Main/Main';
+import CharacterList from '../Character-list/Character-list';
 import Searching from '../Searching/Searching';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import Button from '../Button/Button';
@@ -59,8 +59,8 @@ const App: React.FC<AppProps> = () => {
       <Context.Provider value={{ page, setPage, setCount }}>
         <Searching getSearchData={getSearchData} />
         <Routes>
-          <Route path="/*" element={<Main data={data} isLoading={isLoading} />} />
-          <Route path={`/search/`} element={<Main data={data} isLoading={isLoading} />}>
+          <Route path="/*" element={<CharacterList data={data} isLoading={isLoading} />} />
+          <Route path={`/search/`} element={<CharacterList data={data} isLoading={isLoading} />}>
             <Route path={`/search/details/`} element={<Info />} />
           </Route>
           <Route path="*" element={<PageNotFound />} />
