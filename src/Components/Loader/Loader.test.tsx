@@ -1,11 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import { expect, it } from 'vitest';
+import { expect, test } from 'vitest';
 import '@testing-library/jest-dom';
 
 import Loader from './Loader';
-
-it('Renders the Spinner component', () => {
-  render(<Loader />);
-  const spinnerContainer = screen.getByTestId('loader');
-  expect(spinnerContainer).toBeInTheDocument();
+describe('Test for Loader component', () => {
+  test('Render Loader component', () => {
+    render(<Loader />);
+    const loaderContainer = screen.getByTestId('loader');
+    expect(loaderContainer).toBeInTheDocument();
+  });
 });

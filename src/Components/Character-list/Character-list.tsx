@@ -22,7 +22,11 @@ const CharacterList: React.FC<MainProps> = ({ isLoading, data }) => {
     <>
       <h2>Character List {data.length}</h2>
       <div className="main-container">
-        <section className="character-list" onClick={(event) => handlerCloseInfo(event)}>
+        <section
+          className="character-list"
+          data-testid="character-list"
+          onClick={(event) => handlerCloseInfo(event)}
+        >
           {data.length > 0 ? (
             data.map((character) => <Card key={character.id} RickandmortyData={character} />)
           ) : (
