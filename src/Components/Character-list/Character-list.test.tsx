@@ -1,5 +1,6 @@
 import CharacterList from './Character-list';
 import { render, screen } from '@testing-library/react';
+// import { describe, expect, it } from 'vitest';
 // require('@testing-library/jest-dom');
 // require('@testing-library/jest-dom/extend-expect');
 
@@ -27,10 +28,14 @@ const DEFAULT_DETAILS = {
 };
 
 describe('Tests for the Card List component', () => {
-  test('Verify that the component renders the specified number of cards', () => {
+  it('Verify that the component renders the specified number of cards', () => {
     render(<CharacterList data={[DEFAULT_DETAILS]} isLoading={false} />);
-    const element = screen.getByText(/Character List/);
+    // const element = screen.getByText(/Character List/i);
+    const element = screen.getByRole('heading', {
+      level: 2,
+    });
+    expect(element).toHaveTextContent('Character List');
     // expect(element).toBeInTheDocument();
-    expect(element).toBeInstanceOf(HTMLElement);
+    // expect(element).toBeInstanceOf(HTMLElement);
   });
 });
