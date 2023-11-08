@@ -54,7 +54,7 @@
     "vitest": "^0.34.6"
   },
   "lint-staged": {
-    "*.{tsx,ts,scss,module.scss}": "prettier --write",
-    "*.{tsx,ts}": "eslint --fix"
+    "*.{tsx,ts,scss,module.scss}": "prettier --write src",
+    "*.{tsx,ts}": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   }
 }
