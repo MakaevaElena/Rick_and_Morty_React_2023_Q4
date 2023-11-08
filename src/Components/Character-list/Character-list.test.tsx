@@ -11,12 +11,12 @@ import { Rickandmorty } from '../../types/rickandmorty-types';
 
 //https://www.appsloveworld.com/reactjs/100/3/property-tobeinthedocument-does-not-exist-on-type-matchersany
 
-const mockPage: number = 1;
-const mockSetPage: (c: number) => void = () => {};
-const mockSetCount: (c: string) => void = () => {};
-const mockSearchValue: string = '';
-const mockSetSearchValue: (c: string) => void = () => {};
-const mockData: Rickandmorty[] = [
+const mockPage = 1;
+const mockSetPage = () => {};
+const mockSetCount = () => {};
+const mockSearchValue = '';
+const mockSetSearchValue = () => {};
+const mockData = [
   {
     id: 1,
     name: 'Rick',
@@ -58,8 +58,8 @@ const mockData: Rickandmorty[] = [
     created: '',
   },
 ];
-const mockSetData: (c: Rickandmorty[]) => void = () => {};
-const mockIsLoading: boolean = false;
+const mockSetData = () => {};
+const mockIsLoading = false;
 
 describe('Tests for the Card List component', () => {
   test('Verify that the component renders the tytle', () => {
