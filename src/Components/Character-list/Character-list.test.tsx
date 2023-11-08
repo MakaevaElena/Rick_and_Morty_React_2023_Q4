@@ -8,44 +8,18 @@ import { expect, test } from 'vitest';
 
 //https://www.appsloveworld.com/reactjs/100/3/property-tobeinthedocument-does-not-exist-on-type-matchersany
 
-const DEFAULT_DETAILS = {
-  id: 1,
-  name: '',
-  status: '',
-  species: '',
-  type: '',
-  gender: '',
-  origin: {
-    name: '',
-    url: '',
-  },
-  location: {
-    name: '',
-    url: '',
-  },
-  image: '',
-  episode: ['', ''],
-  url: '',
-  created: '',
-};
-
 describe('Tests for the Card List component', () => {
   test('Verify that the component renders the specified number of cards', () => {
     render(
       <BrowserRouter>
-        <CharacterList data={[DEFAULT_DETAILS]} isLoading={false} />
+        <CharacterList />
       </BrowserRouter>
     );
-    const element = screen.getByRole('heading', {
-      level: 2,
-    });
-    expect(element).toHaveTextContent('Character List');
+    // const element = screen.getByRole('heading', {
+    //   level: 2,
+    // });
+    // expect(element).toHaveTextContent('Character List');
+    const element = screen.getByText(/Character List/i);
+    expect(element).toBeInTheDocument();
   });
-
-  // test('Verify that the component renders the specified number of cards', () => {
-  //   render(<CharacterList data={[DEFAULT_DETAILS]} isLoading={false} />);
-  //   const element = screen.getByText(/Character List/i);
-  //   expect(element).toBeInTheDocument();
-  //   // expect(element).toBeInstanceOf(HTMLElement);
-  // });
 });

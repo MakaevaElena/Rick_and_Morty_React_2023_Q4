@@ -10,11 +10,17 @@
     "preview": "vite preview",
     "fix": "prettier --write src",
     "format:fix": "prettier --write src",
-    "pre-commit": "npm run lint & npm run fix & npm run test",
     "prepare": "husky install",
     "test-jest": "jest --coverage --silent",
     "test-vitest": "vitest --coverage --silent",
-    "test": "npm run lint & npm run fix"
+    "pre-commit": "npm run lint & npm run fix",
+    "test": "npm run lint & npm run fix & npm run test-vitest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pre-commit",
+      "pre-push": "test"
+    }
   },
   "dependencies": {
     "axios": "^1.5.1",

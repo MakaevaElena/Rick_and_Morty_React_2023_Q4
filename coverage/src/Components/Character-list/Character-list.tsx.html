@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.36% </span>
+                <span class="strong">89.36% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>38/44</span>
+                <span class='fraction'>42/47</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>1/3</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.36% </span>
+                <span class="strong">89.36% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>38/44</span>
+                <span class='fraction'>42/47</span>
             </div>
         
             
@@ -107,26 +107,15 @@
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
-<a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -140,6 +129,23 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -156,10 +162,13 @@ import './style.scss';
 import Card from '../Card/Card';
 import Loader from '../Loader/Loader';
 import Pagination from '../Pagination/Pagination';
-import { MainProps } from './types';
+import { useContext } from 'react';
+import Context from '../../context/context';
 &nbsp;
-const CharacterList: React.FC&lt;MainProps&gt; = ({ isLoading, data }) =&gt; {
+// const CharacterList: React.FC&lt;MainProps&gt; = ({ isLoading, data }) =&gt; {
+const CharacterList: React.FC = () =&gt; {
   const [pageQuery] = useSearchParams();
+  const { data, isLoading } = useContext(Context);
   const page = pageQuery.get('page');
   const navigate = useNavigate();
   const count = pageQuery.get('count');
@@ -180,10 +189,10 @@ const CharacterList: React.FC&lt;MainProps&gt; = ({ isLoading, data }) =&gt; {
           data-testid="character-list"
           onClick={<span class="fstat-no" title="function not covered" >(event) =&gt; handlerCloseInfo(event)}</span>
         &gt;
-          {data.length &gt; 0 ? (
-            data.map((character) =&gt; &lt;Card key={character.id} RickandmortyData={character} /&gt;<span class="branch-0 cbranch-no" title="branch not covered" >)</span>
-<span class="cstat-no" title="statement not covered" >          ) : (</span>
-<span class="cstat-no" title="statement not covered" >            &lt;h2&gt;Character not found&lt;/h2&gt;</span>
+          {data.length &gt; <span class="branch-0 cbranch-no" title="branch not covered" >0 ? (</span>
+<span class="cstat-no" title="statement not covered" >            data.map((character) =&gt; &lt;Card key={character.id} RickandmortyData={character} /&gt;)</span>
+          ) : (
+            &lt;h2&gt;Character not found&lt;/h2&gt;
           )}
         &lt;/section&gt;
         &lt;Outlet /&gt;
@@ -202,7 +211,7 @@ export default CharacterList;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-07T10:41:48.952Z
+                at 2023-11-08T09:38:01.668Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
