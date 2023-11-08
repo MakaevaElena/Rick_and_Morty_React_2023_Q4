@@ -31,7 +31,7 @@ const Card: React.FC<CardProps> = (props) => {
   return isLoading ? (
     <Loader />
   ) : (
-    <div className="card">
+    <div className="card" data-testid="card">
       <Link to={`/search/details/?page=${newPage}&count=${count}&id=${data.id}`}>
         <h3>{props.RickandmortyData.name}</h3>
         <img className="character-img" src={data.image ? data.image : ''} alt="" />

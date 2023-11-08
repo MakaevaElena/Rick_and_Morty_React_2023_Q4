@@ -6,7 +6,6 @@ import Pagination from '../Pagination/Pagination';
 import { useContext } from 'react';
 import Context from '../../context/context';
 
-// const CharacterList: React.FC<MainProps> = ({ isLoading, data }) => {
 const CharacterList: React.FC = () => {
   const [pageQuery] = useSearchParams();
   const { data, isLoading } = useContext(Context);
