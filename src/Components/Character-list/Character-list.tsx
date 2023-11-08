@@ -3,10 +3,13 @@ import './style.scss';
 import Card from '../Card/Card';
 import Loader from '../Loader/Loader';
 import Pagination from '../Pagination/Pagination';
-import { MainProps } from './types';
+import { useContext } from 'react';
+import Context from '../../context/context';
 
-const CharacterList: React.FC<MainProps> = ({ isLoading, data }) => {
+// const CharacterList: React.FC<MainProps> = ({ isLoading, data }) => {
+const CharacterList: React.FC = () => {
   const [pageQuery] = useSearchParams();
+  const { data, isLoading } = useContext(Context);
   const page = pageQuery.get('page');
   const navigate = useNavigate();
   const count = pageQuery.get('count');

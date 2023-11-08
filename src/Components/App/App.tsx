@@ -9,24 +9,20 @@ import { BASE_URL, DEFAULT_COUNT, DEFAULT_PAGE } from '../../constants';
 import { Route, Routes } from 'react-router-dom';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Info from '../Info/Info';
-import { createContext } from 'react';
-import { AppProps, IContext } from './types';
-
-export const Context = createContext<IContext>({
-  page: DEFAULT_PAGE,
-  setPage: () => {},
-  setCount: () => {},
-});
+import { AppProps } from './types';
+import TestComponent from './TestComponent';
+import Context from '../../context/context';
 
 const App: React.FC<AppProps> = () => {
   const [data, setData] = useState<Rickandmorty[]>([]);
   const [isLoading, setisLoading] = useState<boolean>(false);
   const [page, setPage] = useState(DEFAULT_PAGE);
   const [count, setCount] = useState(DEFAULT_COUNT);
+  const [searchValue, setSearchValue] = useState('');
 
-  const getSearchData = (searchingData: Rickandmorty[]) => {
-    setData(searchingData.slice(0, +count));
-  };
+  // const getSearchData = (searchingData: Rickandmorty[]) => {
+  //   setData(searchingData.slice(0, +count));
+  // };
 
   useEffect(() => {
     fetchData().then((data: Rickandmorty[]) => {
@@ -35,6 +31,7 @@ const App: React.FC<AppProps> = () => {
 
     async function fetchData() {
       const value = localStorage.getItem('searchValue');
+
       setisLoading(true);
 
       const url =
@@ -51,16 +48,21 @@ const App: React.FC<AppProps> = () => {
         return [];
       }
     }
-  }, [count, page]);
+  }, [count, page, searchValue]);
 
   return (
     <div className="container">
       <Button />
-      <Context.Provider value={{ page, setPage, setCount }}>
-        <Searching getSearchData={getSearchData} />
+      <TestComponent />
+
+      <Context.Provider
+        value={{ page, setPage, setCount, searchValue, setSearchValue, data, setData, isLoading }}
+      >
+        <Searching />
+        <h3>SearchValue from Context: {searchValue || 'NO'}</h3>
         <Routes>
-          <Route path="/*" element={<CharacterList data={data} isLoading={isLoading} />} />
-          <Route path={`/search/`} element={<CharacterList data={data} isLoading={isLoading} />}>
+          <Route path="/" element={<CharacterList />} />
+          <Route path={`/search/`} element={<CharacterList />}>
             <Route path={`/search/details/`} element={<Info />} />
           </Route>
           <Route path="*" element={<PageNotFound />} />
@@ -71,3 +73,11 @@ const App: React.FC<AppProps> = () => {
 };
 
 export default App;
+
+// export function WrappedApp() {
+//   return (
+//     <HashRouter>
+//       <App />
+//     </HashRouter>
+//   );
+// }

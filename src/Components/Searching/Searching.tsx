@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './style.scss';
 import axios from 'axios';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import { BASE_URL, DEFAULT_COUNT } from '../../constants';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { SearchingProps } from './types';
+// import { SearchingProps } from './types';
+import Context from '../../context/context';
 
-const Searching: React.FC<SearchingProps> = (props) => {
+// const Searching: React.FC<SearchingProps> = (props) => {
+const Searching: React.FC = () => {
   const navigate = useNavigate();
   const [value, setValue] = useState('');
   const [pageQuery] = useSearchParams();
   const count = pageQuery.get('count') || DEFAULT_COUNT;
+  const { searchValue, setSearchValue } = useContext(Context);
+  const { setData } = useContext(Context);
 
   const inputRef: React.RefObject<HTMLInputElement> = React.createRef();
   const searchButtonRef: React.RefObject<HTMLDivElement> = React.createRef();
@@ -20,18 +24,21 @@ const Searching: React.FC<SearchingProps> = (props) => {
     if (value) {
       setValue(value);
     }
-  }, []);
+  }, [searchValue]);
 
   async function fetchData() {
     const response = await axios.get(`${BASE_URL}/character/?name=${value}`);
     const arr: Rickandmorty[] = [];
     arr.push(...response.data.results);
-    props.getSearchData(arr);
+    // props.getSearchData(arr);
+    setData(arr);
   }
 
   function handleSearchClick() {
-    fetchData().catch(() => props.getSearchData([]));
+    // fetchData().catch(() => props.getSearchData([]));
+    fetchData().catch(() => setData([]));
     localStorage.setItem('searchValue', value);
+    setSearchValue(value);
     navigate(`/search/?page=1&count=${count}`);
   }
 

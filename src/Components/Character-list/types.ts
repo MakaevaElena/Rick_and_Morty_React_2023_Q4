@@ -1,6 +1,6 @@
-import { Rickandmorty } from '../../types/rickandmorty-types';
+// import { Rickandmorty } from '../../types/rickandmorty-types';
 
-export interface MainProps {
-  data: Rickandmorty[];
-  isLoading: boolean;
-}
+// export interface MainProps {
+//   data: Rickandmorty[];
+//   isLoading: boolean;
+// }

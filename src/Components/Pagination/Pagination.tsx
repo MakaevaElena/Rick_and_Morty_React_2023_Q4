@@ -5,7 +5,7 @@ import { Rickandmorty } from '../../types/rickandmorty-types';
 import axios from 'axios';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Loader from '../Loader/Loader';
-import { Context } from '../App/App';
+import Context from '../../context/context';
 
 const Pagination: React.FC = () => {
   const navigate = useNavigate();
