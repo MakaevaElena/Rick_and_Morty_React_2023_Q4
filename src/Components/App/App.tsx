@@ -59,7 +59,7 @@ const App: React.FC<AppProps> = () => {
         value={{ page, setPage, setCount, searchValue, setSearchValue, data, setData, isLoading }}
       >
         <Searching />
-        <h3>SearchValue from Context: {searchValue || 'NO'}</h3>
+        <h3>SearchValue from Context: {searchValue || 'Empty'}</h3>
         <Routes>
           <Route path="/" element={<CharacterList />} />
           <Route path={`/search/`} element={<CharacterList />}>
