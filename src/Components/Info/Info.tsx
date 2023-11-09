@@ -5,6 +5,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { BASE_URL, DEFAULT_DETAILS } from '../../constants';
 import { Rickandmorty } from '../../types/rickandmorty-types';
+import Button from '../Button/Button';
 
 const Info: React.FC = () => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const Info: React.FC = () => {
   ) : (
     <div className="info">
       <div className="card">
-        <button onClick={handlerCloseButton}>X</button>
+        <Button children="Close" onClick={handlerCloseButton} />
         <h2>Info about: </h2>
         <h3>{data.name}</h3>
         <img className="character-img" src={data.image ? data.image : ''} alt="" />

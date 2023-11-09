@@ -1,4 +1,5 @@
 import React, { ErrorInfo, ReactNode } from 'react';
+import Button from '../Button/Button';
 
 interface Props {
   children?: ReactNode;
@@ -36,9 +37,7 @@ export default class ErrorBoundary extends React.Component<Props, State> {
       return (
         <>
           <h1>Sorry.. there was an error</h1>
-          <button className="reload-button" onClick={this.reload}>
-            Reload
-          </button>
+          <Button children="Reload" onClick={this.reload} />
         </>
       );
     }

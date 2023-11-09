@@ -4,7 +4,6 @@ import axios from 'axios';
 import CharacterList from '../Character-list/Character-list';
 import Searching from '../Searching/Searching';
 import { Rickandmorty } from '../../types/rickandmorty-types';
-import Button from '../Button/Button';
 import { BASE_URL, DEFAULT_COUNT, DEFAULT_PAGE } from '../../constants';
 import { Route, Routes } from 'react-router-dom';
 import PageNotFound from '../PageNotFound/PageNotFound';
@@ -12,6 +11,7 @@ import Info from '../Info/Info';
 import { AppProps } from './types';
 import TestComponent from './TestComponent';
 import Context from '../../context/context';
+import ErrorButton from '../ErrorButton/ErrorButton';
 
 const App: React.FC<AppProps> = () => {
   const [data, setData] = useState<Rickandmorty[]>([]);
@@ -52,7 +52,7 @@ const App: React.FC<AppProps> = () => {
 
   return (
     <div className="container">
-      <Button />
+      <ErrorButton />
       <TestComponent />
 
       <Context.Provider
