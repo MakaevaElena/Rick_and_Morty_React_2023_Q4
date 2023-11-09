@@ -1,7 +1,3 @@
-// describe('Tests for the Card component', () => {
-//   test.todo('Ensure that the card component renders the relevant card data');
-// });
-
 import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Card from './Card';

@@ -6,7 +6,7 @@ import Loader from './Loader';
 describe('Test for Loader component', () => {
   test('Render Loader component', () => {
     render(<Loader />);
-    const loaderContainer = screen.getByTestId('loader');
-    expect(loaderContainer).toBeInTheDocument();
+    const loader = screen.getByTestId('loader');
+    expect(loader).toBeInTheDocument();
   });
 });

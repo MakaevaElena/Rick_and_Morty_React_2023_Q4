@@ -15,12 +15,6 @@ import {
   mockIsLoading,
 } from '../../mocks';
 
-// import { describe, expect, it } from 'vitest';
-// require('@testing-library/jest-dom');
-// require('@testing-library/jest-dom/extend-expect');
-
-//https://www.appsloveworld.com/reactjs/100/3/property-tobeinthedocument-does-not-exist-on-type-matchersany
-
 describe('Tests for the Card List component', () => {
   test('Verify that the component renders the tytle', () => {
     render(

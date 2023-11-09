@@ -4,10 +4,8 @@ import axios from 'axios';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import { BASE_URL, DEFAULT_COUNT } from '../../constants';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-// import { SearchingProps } from './types';
 import Context from '../../context/context';
 
-// const Searching: React.FC<SearchingProps> = (props) => {
 const Searching: React.FC = () => {
   const navigate = useNavigate();
   const [value, setValue] = useState('');
@@ -30,12 +28,10 @@ const Searching: React.FC = () => {
     const response = await axios.get(`${BASE_URL}/character/?name=${value}`);
     const arr: Rickandmorty[] = [];
     arr.push(...response.data.results);
-    // props.getSearchData(arr);
     setData(arr);
   }
 
   function handleSearchClick() {
-    // fetchData().catch(() => props.getSearchData([]));
     fetchData().catch(() => setData([]));
     localStorage.setItem('searchValue', value);
     setSearchValue(value);
@@ -82,7 +78,7 @@ const Searching: React.FC = () => {
             value={value}
             onChange={handleChange}
           />
-          <div className="search-button" onClick={handleSearchClick} ref={searchButtonRef}></div>
+          <div data-testid="search-button" className="search-button" onClick={handleSearchClick} ref={searchButtonRef}></div>
         </form>
       </section>
     </>

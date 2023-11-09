@@ -35,12 +35,12 @@ const Info: React.FC = () => {
   return isLoading ? (
     <Loader />
   ) : (
-    <div className="info">
+    <div className="info" data-testid="info">
       <div className="card">
         <Button children="Close" onClick={handlerCloseButton} />
         <h2>Info about: </h2>
         <h3>{data.name}</h3>
-        <img className="character-img" src={data.image ? data.image : ''} alt="" />
+        <img className="character-img" src={data.image ? data.image : ''} alt="info-img" />
         <div className="stats">
           <li> species: {data.species}</li>
           <li> gender: {data.gender}</li>
