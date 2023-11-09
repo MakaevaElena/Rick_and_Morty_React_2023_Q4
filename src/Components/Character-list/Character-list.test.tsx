@@ -4,62 +4,22 @@ import { BrowserRouter } from 'react-router-dom';
 import { expect, test } from 'vitest';
 import Context from '../../context/context';
 import { Rickandmorty } from '../../types/rickandmorty-types';
+import {
+  mockPage,
+  mockSetPage,
+  mockSetCount,
+  mockSearchValue,
+  mockSetSearchValue,
+  mockData,
+  mockSetData,
+  mockIsLoading,
+} from '../../mocks';
 
 // import { describe, expect, it } from 'vitest';
 // require('@testing-library/jest-dom');
 // require('@testing-library/jest-dom/extend-expect');
 
 //https://www.appsloveworld.com/reactjs/100/3/property-tobeinthedocument-does-not-exist-on-type-matchersany
-
-const mockPage = 1;
-const mockSetPage = () => {};
-const mockSetCount = () => {};
-const mockSearchValue = '';
-const mockSetSearchValue = () => {};
-const mockData = [
-  {
-    id: 1,
-    name: 'Rick',
-    status: 'Alive',
-    species: 'Earth',
-    type: '',
-    gender: 'male',
-    origin: {
-      name: '',
-      url: '',
-    },
-    location: {
-      name: '',
-      url: '',
-    },
-    image: '',
-    episode: ['', ''],
-    url: '',
-    created: '',
-  },
-  {
-    id: 2,
-    name: 'Morty',
-    status: 'Alive',
-    species: 'Earth',
-    type: '',
-    gender: 'male',
-    origin: {
-      name: '',
-      url: '',
-    },
-    location: {
-      name: '',
-      url: '',
-    },
-    image: '',
-    episode: ['', ''],
-    url: '',
-    created: '',
-  },
-];
-const mockSetData = () => {};
-const mockIsLoading = false;
 
 describe('Tests for the Card List component', () => {
   test('Verify that the component renders the tytle', () => {
@@ -99,6 +59,7 @@ describe('Tests for the Card List component', () => {
       const cards = screen.getAllByTestId('card');
       expect(cards).toHaveLength(2);
     });
+    // screen.debug;
   });
 
   test('Check that an appropriate message is displayed if no cards are present', () => {

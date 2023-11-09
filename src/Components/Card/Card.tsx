@@ -22,6 +22,7 @@ const Card: React.FC<CardProps> = (props) => {
       setisLoading(true);
       const response = await axios.get(`${BASE_URL}/character/${props.RickandmortyData.id}`);
       setisLoading(false);
+      console.log(props.RickandmortyData.id);
       return response.data;
     }
 
@@ -33,8 +34,8 @@ const Card: React.FC<CardProps> = (props) => {
   ) : (
     <div className="card" data-testid="card">
       <Link to={`/search/details/?page=${newPage}&count=${count}&id=${data.id}`}>
-        <h3>{props.RickandmortyData.name}</h3>
-        <img className="character-img" src={data.image ? data.image : ''} alt="" />
+        <h3>{data.name}</h3>
+        <img className="character-img" src={data.image ? data.image : ''} alt="character-img" />
         <div className="stats">
           <li> species: {data.species}</li>
           <li> gender: {data.gender}</li>
