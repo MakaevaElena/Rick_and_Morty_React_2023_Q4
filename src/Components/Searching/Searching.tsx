@@ -78,7 +78,12 @@ const Searching: React.FC = () => {
             value={value}
             onChange={handleChange}
           />
-          <div data-testid="search-button" className="search-button" onClick={handleSearchClick} ref={searchButtonRef}></div>
+          <div
+            data-testid="search-button"
+            className="search-button"
+            onClick={handleSearchClick}
+            ref={searchButtonRef}
+          ></div>
         </form>
       </section>
     </>

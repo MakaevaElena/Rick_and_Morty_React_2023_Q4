@@ -67,6 +67,7 @@ const Pagination: React.FC = () => {
       <div className="pagination-buttons">
         {data.map((_, i) => (
           <Link
+            data-testid={i}
             key={i + 1}
             to={`/search/?page=${i + 1}&count=${count}`}
             className={`pagination-button ${getClassName(i)}`}
