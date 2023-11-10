@@ -12,7 +12,7 @@ import {
   mockData,
   mockSetData,
   mockIsLoading,
-} from '../../mocks';
+} from '../../mocks/mocks';
 import Context from '../../context/context';
 
 let mockSearchParam = `/search/?page=${1}&count=${20}`;

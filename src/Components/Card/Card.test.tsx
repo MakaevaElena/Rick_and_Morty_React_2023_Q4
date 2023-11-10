@@ -12,21 +12,21 @@ import {
   mockSetData,
   mockIsLoading,
   mockCharacter,
-} from '../../mocks';
+} from '../../mocks/mocks';
 import CharacterList from '../Character-list/Character-list';
 import Info from '../Info/Info';
 import PageNotFound from '../PageNotFound/PageNotFound';
 // import { vi } from 'vitest';
 // import axios from 'axios';
-// import { Rickandmorty } from '../../types/rickandmorty-types';
 
-// vi.mock('axios');
-
-// async function fetchRickandmortyDetails(): Promise<Rickandmorty> {
-//   const response = await axios.get(`https://rickandmortyapi.com/api/character/1`);
-//   const res: Rickandmorty = response.data;
-//   return res;
-// }
+// vi.mock('axios', () => ({
+//   fetchRickandmortyDetails: vi
+//     .fn()
+//     .mockImplementation(
+//       () => new Promise((resolve) => setTimeout(() => resolve(mockData[0]), 100))
+//     ),
+//   fetchData: vi.fn().mockResolvedValue(mockData),
+// }));
 
 describe('Tests for the Card component', () => {
   it('Ensure that the card component renders the relevant card data', async () => {

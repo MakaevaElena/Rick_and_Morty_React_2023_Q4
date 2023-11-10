@@ -14,7 +14,7 @@ const ErrorButton: React.FC = () => {
     }
   }, [hasError]);
 
-  return <Button children="TestErrorButton" onClick={handleClick} />;
+  return <Button dataTestid="error-button" children="TestErrorButton" onClick={handleClick} />;
 };
 
 export default ErrorButton;

@@ -13,7 +13,7 @@ import {
   mockData,
   mockSetData,
   mockIsLoading,
-} from '../../mocks';
+} from '../../mocks/mocks';
 
 describe('Tests for the Card List component', () => {
   test('Verify that the component renders the tytle', () => {

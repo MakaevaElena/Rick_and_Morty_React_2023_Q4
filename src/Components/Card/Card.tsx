@@ -22,7 +22,6 @@ const Card: React.FC<CardProps> = (props) => {
       setisLoading(true);
       const response = await axios.get(`${BASE_URL}/character/${props.RickandmortyData.id}`);
       setisLoading(false);
-      console.log(props.RickandmortyData.id);
       return response.data;
     }
 

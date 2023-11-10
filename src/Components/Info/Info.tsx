@@ -40,14 +40,19 @@ const Info: React.FC = () => {
         <Button data-testid="close-button" children="Close" onClick={handlerCloseButton} />
         <h2>Info about: </h2>
         <h3>{data.name}</h3>
-        <img className="character-img" src={data.image ? data.image : ''} alt="info-img" />
+        <img
+          data-testid="info-img"
+          className="character-img"
+          src={data.image ? data.image : ''}
+          alt="info-img"
+        />
         <div className="stats">
-          <li> species: {data.species}</li>
-          <li> gender: {data.gender}</li>
-          <li> status: {data.status}</li>
-          <li> location: {data.location.name}</li>
-          <li> type: {data.type}</li>
-          <li> created: {data.created}</li>
+          <li data-testid="species"> species: {data.species}</li>
+          <li data-testid="gender"> gender: {data.gender}</li>
+          <li data-testid="status"> status: {data.status}</li>
+          <li data-testid="location"> location: {data.location.name}</li>
+          <li data-testid="type"> type: {data.type}</li>
+          <li data-testid="created"> created: {data.created}</li>
         </div>
       </div>
     </div>
