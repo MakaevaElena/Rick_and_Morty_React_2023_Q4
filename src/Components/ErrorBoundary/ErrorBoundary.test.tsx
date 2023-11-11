@@ -1,19 +1,20 @@
 import { describe, expect, vi } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import ErrorBoundary from './ErrorBoundary';
-import App from '../App/App';
+import ErrorButton from '../ErrorButton/ErrorButton';
 
-// const mockHandleClick = vi.fn();
-
-describe('Tests for Button component', () => {
-  test('async component should throw', async () => {
+describe('Tests for Error Button', () => {
+  test('Error button click should throw error', async () => {
     vi.spyOn(console, 'error').mockImplementation(() => null);
 
     render(
       <ErrorBoundary>
-        <App />
+        <ErrorButton />
       </ErrorBoundary>
     );
+
+    const errorButton = screen.getAllByText('TestErrorButton')[0];
+    fireEvent.click(errorButton);
 
     await waitFor(() => {
       expect(screen.getByText('Sorry.. there was an error')).toBeVisible();
