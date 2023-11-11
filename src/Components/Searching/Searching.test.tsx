@@ -2,6 +2,18 @@ import { describe, expect, it } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Searching from './Searching';
 import { BrowserRouter } from 'react-router-dom';
+import {
+  mockPage,
+  mockSetPage,
+  mockSetCount,
+  mockSearchValue,
+  mockSetSearchValue,
+  mockData,
+  mockSetData,
+  mockIsLoading,
+} from '../../mocks/mocks';
+import CharacterList from '../Character-list/Character-list';
+import Context from '../../context/context';
 
 describe('Tests for the Search component', () => {
   it('Render Search Input component', () => {
@@ -43,5 +55,30 @@ describe('Tests for the Search component', () => {
       expect(inputField.value).toBe(mockSearchValue);
       // expect(mockSetSearchValue).toHaveBeenCalledWith(mockSearchValue);
     });
+  });
+  it('Check that the Loader render', () => {
+    render(
+      <Context.Provider
+        value={{
+          page: mockPage,
+          setPage: mockSetPage,
+          setCount: mockSetCount,
+          searchValue: mockSearchValue,
+          setSearchValue: mockSetSearchValue,
+          data: mockData,
+          setData: mockSetData,
+          isLoading: mockIsLoading,
+        }}
+      >
+        <BrowserRouter>
+          <Searching />
+          <CharacterList />
+        </BrowserRouter>
+      </Context.Provider>
+    );
+    const searchButton = screen.getByTestId('search-button');
+    fireEvent.click(searchButton);
+    const loader = screen.getAllByTestId('loader')[0];
+    expect(loader).toBeInTheDocument;
   });
 });
