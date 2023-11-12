@@ -13,17 +13,6 @@ import {
   mockIsLoading,
 } from '../../mocks/mocks';
 
-import { vi } from 'vitest';
-
-vi.mock('services/apiService', () => ({
-  fetchRickandmortyDetails: vi
-    .fn()
-    .mockImplementation(
-      () => new Promise((resolve) => setTimeout(() => resolve(mockData[0]), 100))
-    ),
-  fetchData: vi.fn().mockResolvedValue(mockData),
-}));
-
 describe('Tests for the Detailed Card component', () => {
   it('Check that a loading indicator is displayed while fetching data', async () => {
     render(
