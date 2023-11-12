@@ -15,23 +15,23 @@ import {
 import CharacterList from '../Character-list/Character-list';
 import Context from '../../context/context';
 
+const TestComponent = () => {
+  return (
+    <BrowserRouter>
+      <Searching />
+    </BrowserRouter>
+  );
+};
+
 describe('Tests for the Search component', () => {
   it('Render Search Input component', () => {
-    render(
-      <BrowserRouter>
-        <Searching />
-      </BrowserRouter>
-    );
+    render(<TestComponent />);
     const inputField = screen.getByPlaceholderText('search...');
     expect(inputField).toBeInTheDocument;
   });
 
   it('Verify that clicking the Search button saves the entered value to the local storage', () => {
-    render(
-      <BrowserRouter>
-        <Searching />
-      </BrowserRouter>
-    );
+    render(<TestComponent />);
     const inputField = screen.getByPlaceholderText('search...');
     const searchButton = screen.getByTestId('search-button');
 
@@ -42,18 +42,11 @@ describe('Tests for the Search component', () => {
 
   it('Check that the component retrieves the value from the local storage upon mounting', () => {
     const mockSearchValue = 'Rick';
-    // const mockSetSearchValue = vi.fn();
-
-    render(
-      <BrowserRouter>
-        <Searching />
-      </BrowserRouter>
-    );
+    render(<TestComponent />);
     const inputField = screen.getByPlaceholderText('search...') as HTMLInputElement;
 
     waitFor(() => {
       expect(inputField.value).toBe(mockSearchValue);
-      // expect(mockSetSearchValue).toHaveBeenCalledWith(mockSearchValue);
     });
   });
   it('Check that the Loader render', () => {

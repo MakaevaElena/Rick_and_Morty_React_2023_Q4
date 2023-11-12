@@ -15,6 +15,27 @@ import {
   mockIsLoading,
 } from '../../mocks/mocks';
 
+const TestComponent = () => {
+  return (
+    <Context.Provider
+      value={{
+        page: mockPage,
+        setPage: mockSetPage,
+        setCount: mockSetCount,
+        searchValue: mockSearchValue,
+        setSearchValue: mockSetSearchValue,
+        data: mockData,
+        setData: mockSetData,
+        isLoading: mockIsLoading,
+      }}
+    >
+      <BrowserRouter>
+        <CharacterList />
+      </BrowserRouter>
+    </Context.Provider>
+  );
+};
+
 describe('Tests for the Card List component', () => {
   test('Verify that the component renders the tytle', () => {
     render(
@@ -22,38 +43,16 @@ describe('Tests for the Card List component', () => {
         <CharacterList />
       </BrowserRouter>
     );
-    // const element = screen.getByRole('heading', {
-    //   level: 2,
-    // });
-    // expect(element).toHaveTextContent('Character List');
     const element = screen.getByText(/Character List/i);
     expect(element).toBeInTheDocument();
   });
 
   test('Verify that the component renders the specified number of cards', async () => {
-    render(
-      <Context.Provider
-        value={{
-          page: mockPage,
-          setPage: mockSetPage,
-          setCount: mockSetCount,
-          searchValue: mockSearchValue,
-          setSearchValue: mockSetSearchValue,
-          data: mockData,
-          setData: mockSetData,
-          isLoading: mockIsLoading,
-        }}
-      >
-        <BrowserRouter>
-          <CharacterList />
-        </BrowserRouter>
-      </Context.Provider>
-    );
+    render(<TestComponent />);
     await waitFor(() => {
       const cards = screen.getAllByTestId('card');
       expect(cards).toHaveLength(2);
     });
-    // screen.debug;
   });
 
   test('Check that an appropriate message is displayed if no cards are present', () => {

@@ -9,7 +9,6 @@ import { Route, Routes } from 'react-router-dom';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Info from '../Info/Info';
 import { AppProps } from './types';
-import TestComponent from './TestComponent';
 import Context from '../../context/context';
 import ErrorButton from '../ErrorButton/ErrorButton';
 
@@ -19,10 +18,6 @@ const App: React.FC<AppProps> = () => {
   const [page, setPage] = useState(DEFAULT_PAGE);
   const [count, setCount] = useState(DEFAULT_COUNT);
   const [searchValue, setSearchValue] = useState('');
-
-  // const getSearchData = (searchingData: Rickandmorty[]) => {
-  //   setData(searchingData.slice(0, +count));
-  // };
 
   useEffect(() => {
     fetchData().then((data: Rickandmorty[]) => {
@@ -53,8 +48,6 @@ const App: React.FC<AppProps> = () => {
   return (
     <div className="container">
       <ErrorButton />
-      <TestComponent />
-
       <Context.Provider
         value={{ page, setPage, setCount, searchValue, setSearchValue, data, setData, isLoading }}
       >
@@ -73,11 +66,3 @@ const App: React.FC<AppProps> = () => {
 };
 
 export default App;
-
-// export function WrappedApp() {
-//   return (
-//     <HashRouter>
-//       <App />
-//     </HashRouter>
-//   );
-// }
