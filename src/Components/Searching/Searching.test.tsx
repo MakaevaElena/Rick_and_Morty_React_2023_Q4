@@ -6,19 +6,23 @@ import {
   mockPage,
   mockSetPage,
   mockSetCount,
-  mockSearchValue,
-  mockSetSearchValue,
+  // mockSearchValue,
+  // mockSetSearchValue,
   mockData,
   mockSetData,
   mockIsLoading,
 } from '../../mocks/mocks';
 import CharacterList from '../Character-list/Character-list';
 import Context from '../../context/context';
+import { Provider } from 'react-redux';
+import { store } from '../../store/store';
 
 const TestComponent = () => {
   return (
     <BrowserRouter>
-      <Searching />
+      <Provider store={store}>
+        <Searching />
+      </Provider>
     </BrowserRouter>
   );
 };
@@ -56,15 +60,17 @@ describe('Tests for the Search component', () => {
           page: mockPage,
           setPage: mockSetPage,
           setCount: mockSetCount,
-          searchValue: mockSearchValue,
-          setSearchValue: mockSetSearchValue,
+          // searchValue: mockSearchValue,
+          // setSearchValue: mockSetSearchValue,
           data: mockData,
           setData: mockSetData,
           isLoading: mockIsLoading,
         }}
       >
         <BrowserRouter>
-          <Searching />
+          <Provider store={store}>
+            <Searching />
+          </Provider>
           <CharacterList />
         </BrowserRouter>
       </Context.Provider>

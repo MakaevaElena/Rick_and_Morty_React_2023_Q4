@@ -11,13 +11,22 @@ import Info from '../Info/Info';
 import { AppProps } from './types';
 import Context from '../../context/context';
 import ErrorButton from '../ErrorButton/ErrorButton';
+import { useAppSelector } from '../../store/slices/hooks';
+
+// import { DataState } from '../../store/slices/types';
 
 const App: React.FC<AppProps> = () => {
   const [data, setData] = useState<Rickandmorty[]>([]);
   const [isLoading, setisLoading] = useState<boolean>(false);
   const [page, setPage] = useState(DEFAULT_PAGE);
   const [count, setCount] = useState(DEFAULT_COUNT);
-  const [searchValue, setSearchValue] = useState('');
+  // const [searchValue, setSearchValue] = useState('');
+
+  const searchValue = useAppSelector((state) => {
+    // console.log('state', state);
+    return state.data.searchValue;
+  });
+  // console.log('searchValue', searchValue);
 
   useEffect(() => {
     fetchData().then((data: Rickandmorty[]) => {
@@ -49,7 +58,8 @@ const App: React.FC<AppProps> = () => {
     <div className="container">
       <ErrorButton />
       <Context.Provider
-        value={{ page, setPage, setCount, searchValue, setSearchValue, data, setData, isLoading }}
+        // value={{ page, setPage, setCount, searchValue, setSearchValue, data, setData, isLoading }}
+        value={{ page, setPage, setCount, data, setData, isLoading }}
       >
         <Searching />
         <h3>SearchValue from Context: {searchValue || 'Empty'}</h3>

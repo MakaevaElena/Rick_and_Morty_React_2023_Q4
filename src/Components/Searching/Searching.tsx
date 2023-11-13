@@ -5,13 +5,16 @@ import { Rickandmorty } from '../../types/rickandmorty-types';
 import { BASE_URL, DEFAULT_COUNT } from '../../constants';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Context from '../../context/context';
+import { useDispatch } from 'react-redux';
+import { setSearchValue } from '../../store/slices/dataSlice';
 
 const Searching: React.FC = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [value, setValue] = useState('');
   const [pageQuery] = useSearchParams();
   const count = pageQuery.get('count') || DEFAULT_COUNT;
-  const { searchValue, setSearchValue } = useContext(Context);
+  // const { searchValue, setSearchValue } = useContext(Context);
   const { setData } = useContext(Context);
 
   const inputRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -22,7 +25,7 @@ const Searching: React.FC = () => {
     if (value) {
       setValue(value);
     }
-  }, [searchValue]);
+  }, []);
 
   async function fetchData() {
     const response = await axios.get(`${BASE_URL}/character/?name=${value}`);
@@ -34,7 +37,8 @@ const Searching: React.FC = () => {
   function handleSearchClick() {
     fetchData().catch(() => setData([]));
     localStorage.setItem('searchValue', value);
-    setSearchValue(value);
+    // setSearchValue(value);
+    dispatch(setSearchValue(value));
     navigate(`/search/?page=1&count=${count}`);
   }
 
