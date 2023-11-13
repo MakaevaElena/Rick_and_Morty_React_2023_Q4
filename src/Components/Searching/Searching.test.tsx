@@ -3,9 +3,9 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Searching from './Searching';
 import { BrowserRouter } from 'react-router-dom';
 import {
-  mockPage,
-  mockSetPage,
-  mockSetCount,
+  // mockPage,
+  // mockSetPage,
+  // mockSetCount,
   // mockSearchValue,
   // mockSetSearchValue,
   mockData,
@@ -57,11 +57,6 @@ describe('Tests for the Search component', () => {
     render(
       <Context.Provider
         value={{
-          page: mockPage,
-          setPage: mockSetPage,
-          setCount: mockSetCount,
-          // searchValue: mockSearchValue,
-          // setSearchValue: mockSetSearchValue,
           data: mockData,
           setData: mockSetData,
           isLoading: mockIsLoading,
@@ -70,8 +65,8 @@ describe('Tests for the Search component', () => {
         <BrowserRouter>
           <Provider store={store}>
             <Searching />
+            <CharacterList />
           </Provider>
-          <CharacterList />
         </BrowserRouter>
       </Context.Provider>
     );

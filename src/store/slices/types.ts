@@ -4,6 +4,6 @@ export type DataState = {
   data: Rickandmorty[];
   isLoading: boolean;
   page: number;
-  count: string;
+  countPerPage: string;
   searchValue: string;
 };

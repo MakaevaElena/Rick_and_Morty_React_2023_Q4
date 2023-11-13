@@ -1,33 +1,36 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BASE_URL, DEFAULT_COUNT, DEFAULT_PAGE } from '../../constants';
 import './style.scss';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import axios from 'axios';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Loader from '../Loader/Loader';
-import Context from '../../context/context';
+// import Context from '../../context/context';
+import { useDispatch } from 'react-redux';
+import { setCount, setPage } from '../../store/slices/dataSlice';
 
 const Pagination: React.FC = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { setPage } = useContext(Context);
-  const { setCount } = useContext(Context);
+  // const { setPage } = useContext(Context);
+  // const { setCount } = useContext(Context);
 
   const [pageQuery] = useSearchParams();
   const page = pageQuery.get('page') || DEFAULT_PAGE;
-  const count = pageQuery.get('count') || DEFAULT_COUNT;
+  const countPerPage = pageQuery.get('count') || DEFAULT_COUNT;
 
   const [data, setData] = useState<Rickandmorty[]>([]);
   const [isLoading, setisLoading] = useState<boolean>(false);
   const [selectedValue, setSelectedValue] = useState<string>(DEFAULT_COUNT);
 
   useEffect(() => {
-    if (count) setSelectedValue(count);
+    if (countPerPage) setSelectedValue(countPerPage);
     setisLoading(true);
     fetchData().then((data: Rickandmorty[]) => {
       setData(data);
       setisLoading(false);
     });
-  }, [count]);
+  }, [countPerPage]);
 
   async function fetchData() {
     const response = await axios.get(`${BASE_URL}/character`);
@@ -35,8 +38,9 @@ const Pagination: React.FC = () => {
   }
 
   useEffect(() => {
-    if (page) setPage(+page);
-  }, [page, setPage]);
+    // if (page) setPage(+page);
+    if (page) dispatch(setPage(+page));
+  }, [dispatch, page]);
 
   function getClassName(i: number) {
     if (page && +page === i + 1) {
@@ -47,7 +51,8 @@ const Pagination: React.FC = () => {
 
   const handleChangeCount = (event: React.ChangeEvent<HTMLSelectElement>) => {
     if (event.target instanceof HTMLSelectElement) {
-      setCount(event.target.value);
+      // setCount(event.target.value);
+      dispatch(setCount(event.target.value));
       navigate(`/search/?page=${DEFAULT_PAGE}&count=${event.target.value}`);
     }
   };
@@ -69,7 +74,7 @@ const Pagination: React.FC = () => {
           <Link
             data-testid={i}
             key={i + 1}
-            to={`/search/?page=${i + 1}&count=${count}`}
+            to={`/search/?page=${i + 1}&count=${countPerPage}`}
             className={`pagination-button ${getClassName(i)}`}
           >
             <div key={i + 1} id={`${i + 1}`}>

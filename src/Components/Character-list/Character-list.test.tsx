@@ -5,32 +5,31 @@ import { expect, test } from 'vitest';
 import Context from '../../context/context';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import {
-  mockPage,
-  mockSetPage,
-  mockSetCount,
-  mockSearchValue,
-  mockSetSearchValue,
+  // mockPage,
+  // mockSetPage,
+  // mockSetCount,
+  // mockSearchValue,
+  // mockSetSearchValue,
   mockData,
   mockSetData,
   mockIsLoading,
 } from '../../mocks/mocks';
+import { Provider } from 'react-redux';
+import { store } from '../../store/store';
 
 const TestComponent = () => {
   return (
     <Context.Provider
       value={{
-        page: mockPage,
-        setPage: mockSetPage,
-        setCount: mockSetCount,
-        searchValue: mockSearchValue,
-        setSearchValue: mockSetSearchValue,
         data: mockData,
         setData: mockSetData,
         isLoading: mockIsLoading,
       }}
     >
       <BrowserRouter>
-        <CharacterList />
+        <Provider store={store}>
+          <CharacterList />
+        </Provider>
       </BrowserRouter>
     </Context.Provider>
   );
@@ -40,7 +39,9 @@ describe('Tests for the Card List component', () => {
   test('Verify that the component renders the tytle', () => {
     render(
       <BrowserRouter>
-        <CharacterList />
+        <Provider store={store}>
+          <CharacterList />
+        </Provider>
       </BrowserRouter>
     );
     const element = screen.getByText(/Character List/i);
@@ -61,17 +62,14 @@ describe('Tests for the Card List component', () => {
       <BrowserRouter>
         <Context.Provider
           value={{
-            page: mockPage,
-            setPage: mockSetPage,
-            setCount: mockSetCount,
-            searchValue: mockSearchValue,
-            setSearchValue: mockSetSearchValue,
             data: mockData,
             setData: mockSetData,
             isLoading: mockIsLoading,
           }}
         >
-          <CharacterList />
+          <Provider store={store}>
+            <CharacterList />
+          </Provider>
         </Context.Provider>
       </BrowserRouter>
     );

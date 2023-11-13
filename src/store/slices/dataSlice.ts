@@ -6,7 +6,7 @@ const initialState: DataState = {
   data: [],
   isLoading: false,
   page: DEFAULT_PAGE,
-  count: DEFAULT_COUNT,
+  countPerPage: DEFAULT_COUNT,
   searchValue: '',
 };
 
@@ -24,7 +24,7 @@ const dataSlice = createSlice({
     },
 
     setCount: (state, action) => {
-      state.count = action.payload;
+      state.countPerPage = action.payload;
     },
 
     setSearchValue: (state, action) => {

@@ -3,17 +3,10 @@ import { act, fireEvent, render, renderHook, screen } from '@testing-library/rea
 import { BrowserRouter } from 'react-router-dom';
 import { useState } from 'react';
 import CharacterList from '../Character-list/Character-list';
-import {
-  mockPage,
-  mockSetPage,
-  mockSetCount,
-  mockSearchValue,
-  mockSetSearchValue,
-  mockData,
-  mockSetData,
-  mockIsLoading,
-} from '../../mocks/mocks';
+import { mockData, mockSetData, mockIsLoading } from '../../mocks/mocks';
 import Context from '../../context/context';
+import { Provider } from 'react-redux';
+import { store } from '../../store/store';
 
 let mockSearchParam = `/search/?page=${1}&count=${20}`;
 describe('Pagination component', () => {
@@ -43,18 +36,15 @@ describe('Pagination component', () => {
     render(
       <Context.Provider
         value={{
-          page: mockPage,
-          setPage: mockSetPage,
-          setCount: mockSetCount,
-          searchValue: mockSearchValue,
-          setSearchValue: mockSetSearchValue,
           data: mockData,
           setData: mockSetData,
           isLoading: mockIsLoading,
         }}
       >
         <BrowserRouter>
-          <CharacterList />
+          <Provider store={store}>
+            <CharacterList />
+          </Provider>
         </BrowserRouter>
       </Context.Provider>
     );

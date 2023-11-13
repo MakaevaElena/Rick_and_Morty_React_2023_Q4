@@ -2,38 +2,27 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Card from './Card';
 import Context from '../../context/context';
-import {
-  mockPage,
-  mockSetPage,
-  mockSetCount,
-  mockSearchValue,
-  mockSetSearchValue,
-  mockData,
-  mockSetData,
-  mockIsLoading,
-  mockCharacter,
-} from '../../mocks/mocks';
+import { mockData, mockSetData, mockIsLoading, mockCharacter } from '../../mocks/mocks';
 import CharacterList from '../Character-list/Character-list';
 import Info from '../Info/Info';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import { Provider } from 'react-redux';
+import { store } from '../../store/store';
 
 describe('Tests for the Card component', () => {
   it('Ensure that the card component renders the relevant card data', async () => {
     render(
       <Context.Provider
         value={{
-          page: mockPage,
-          setPage: mockSetPage,
-          setCount: mockSetCount,
-          searchValue: mockSearchValue,
-          setSearchValue: mockSetSearchValue,
           data: mockData,
           setData: mockSetData,
           isLoading: mockIsLoading,
         }}
       >
         <BrowserRouter>
-          <Card key={mockCharacter.id} RickandmortyData={mockCharacter} />
+          <Provider store={store}>
+            <Card key={mockCharacter.id} RickandmortyData={mockCharacter} />
+          </Provider>
         </BrowserRouter>
       </Context.Provider>
     );
@@ -56,24 +45,21 @@ describe('Tests for the Card component', () => {
     render(
       <Context.Provider
         value={{
-          page: mockPage,
-          setPage: mockSetPage,
-          setCount: mockSetCount,
-          searchValue: mockSearchValue,
-          setSearchValue: mockSetSearchValue,
           data: mockData,
           setData: mockSetData,
           isLoading: mockIsLoading,
         }}
       >
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<CharacterList />} />
-            <Route path={`/search/`} element={<CharacterList />}>
-              <Route path={`/search/details/`} element={<Info />} />
-            </Route>
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
+          <Provider store={store}>
+            <Routes>
+              <Route path="/" element={<CharacterList />} />
+              <Route path={`/search/`} element={<CharacterList />}>
+                <Route path={`/search/details/`} element={<Info />} />
+              </Route>
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </Provider>
         </BrowserRouter>
       </Context.Provider>
     );
