@@ -10,7 +10,7 @@ import {
   // mockSetSearchValue,
   mockData,
   mockSetData,
-  mockIsLoading,
+  // mockIsLoading,
 } from '../../mocks/mocks';
 import CharacterList from '../Character-list/Character-list';
 import Context from '../../context/context';
@@ -59,7 +59,7 @@ describe('Tests for the Search component', () => {
         value={{
           data: mockData,
           setData: mockSetData,
-          isLoading: mockIsLoading,
+          // isLoading: mockIsLoading,
         }}
       >
         <BrowserRouter>

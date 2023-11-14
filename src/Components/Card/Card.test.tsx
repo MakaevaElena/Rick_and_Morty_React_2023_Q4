@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Card from './Card';
 import Context from '../../context/context';
-import { mockData, mockSetData, mockIsLoading, mockCharacter } from '../../mocks/mocks';
+import { mockData, mockSetData, mockCharacter } from '../../mocks/mocks';
 import CharacterList from '../Character-list/Character-list';
 import Info from '../Info/Info';
 import PageNotFound from '../PageNotFound/PageNotFound';
@@ -16,7 +16,7 @@ describe('Tests for the Card component', () => {
         value={{
           data: mockData,
           setData: mockSetData,
-          isLoading: mockIsLoading,
+          // isLoading: mockIsLoading,
         }}
       >
         <BrowserRouter>
@@ -47,7 +47,7 @@ describe('Tests for the Card component', () => {
         value={{
           data: mockData,
           setData: mockSetData,
-          isLoading: mockIsLoading,
+          // isLoading: mockIsLoading,
         }}
       >
         <BrowserRouter>

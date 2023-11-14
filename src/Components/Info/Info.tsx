@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import './style.scss';
 import Loader from '../Loader/Loader';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import axios from 'axios';
-import { BASE_URL, DEFAULT_DETAILS } from '../../constants';
+import { DEFAULT_DETAILS } from '../../constants';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import Button from '../Button/Button';
+import { fetchRickandmortyDetails } from '../../api/api';
 
 const Info: React.FC = () => {
   const navigate = useNavigate();
@@ -18,14 +18,18 @@ const Info: React.FC = () => {
   const [data, setData] = useState(DEFAULT_DETAILS);
 
   useEffect(() => {
-    async function fetchRickandmortyDetails(): Promise<Rickandmorty> {
-      setisLoading(true);
-      const response = await axios.get(`${BASE_URL}/character/${id}`);
-      setisLoading(false);
-      return response.data;
+    setisLoading(true);
+    if (id) {
+      fetchRickandmortyDetails(+id).then((details: Rickandmorty) => {
+        setisLoading(false);
+        setData(details);
+      });
+    } else {
+      fetchRickandmortyDetails(0).then((details: Rickandmorty) => {
+        setisLoading(false);
+        setData(details);
+      });
     }
-
-    fetchRickandmortyDetails().then((details: Rickandmorty) => setData(details));
   }, [id]);
 
   const handlerCloseButton = () => {

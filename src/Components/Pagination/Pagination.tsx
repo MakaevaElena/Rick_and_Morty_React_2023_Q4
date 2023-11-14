@@ -1,44 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { BASE_URL, DEFAULT_COUNT, DEFAULT_PAGE } from '../../constants';
+import { DEFAULT_COUNT, DEFAULT_PAGE } from '../../constants';
 import './style.scss';
 import { Rickandmorty } from '../../types/rickandmorty-types';
-import axios from 'axios';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Loader from '../Loader/Loader';
 // import Context from '../../context/context';
 import { useDispatch } from 'react-redux';
 import { setCount, setPage } from '../../store/slices/dataSlice';
+import { fetchAllData } from '../../api/api';
+// import { useAppSelector } from '../../store/slices/hooks';
 
 const Pagination: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const { setPage } = useContext(Context);
-  // const { setCount } = useContext(Context);
 
   const [pageQuery] = useSearchParams();
   const page = pageQuery.get('page') || DEFAULT_PAGE;
   const countPerPage = pageQuery.get('count') || DEFAULT_COUNT;
 
   const [data, setData] = useState<Rickandmorty[]>([]);
-  const [isLoading, setisLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectedValue, setSelectedValue] = useState<string>(DEFAULT_COUNT);
+
+  // const isLoading = useAppSelector((state) => state.data.isLoading);
 
   useEffect(() => {
     if (countPerPage) setSelectedValue(countPerPage);
-    setisLoading(true);
-    fetchData().then((data: Rickandmorty[]) => {
+    setIsLoading(true);
+    // dispatch(setIsLoading(true));
+    fetchAllData().then((data: Rickandmorty[]) => {
       setData(data);
-      setisLoading(false);
+      setIsLoading(false);
+      // dispatch(setIsLoading(false));
     });
-  }, [countPerPage]);
-
-  async function fetchData() {
-    const response = await axios.get(`${BASE_URL}/character`);
-    return response.data.results;
-  }
+  }, [countPerPage, dispatch]);
 
   useEffect(() => {
-    // if (page) setPage(+page);
     if (page) dispatch(setPage(+page));
   }, [dispatch, page]);
 

@@ -5,13 +5,16 @@ import Loader from '../Loader/Loader';
 import Pagination from '../Pagination/Pagination';
 import { useContext } from 'react';
 import Context from '../../context/context';
+import { useAppSelector } from '../../store/slices/hooks';
 
 const CharacterList: React.FC = () => {
   const [pageQuery] = useSearchParams();
-  const { data, isLoading } = useContext(Context);
+  const { data } = useContext(Context);
   const page = pageQuery.get('page');
   const navigate = useNavigate();
   const count = pageQuery.get('count');
+
+  const isLoading = useAppSelector((state) => state.data.isLoading);
 
   const handlerCloseInfo = (event: React.MouseEvent<HTMLElement>) => {
     if (event.target instanceof HTMLElement && event.target.classList.contains('character-list'))

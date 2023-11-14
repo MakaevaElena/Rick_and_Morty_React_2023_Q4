@@ -2,18 +2,11 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Info from './Info';
 import Context from '../../context/context';
-import {
-  mockPage,
-  mockSetPage,
-  mockSetCount,
-  mockSearchValue,
-  mockSetSearchValue,
-  mockData,
-  mockSetData,
-  mockIsLoading,
-} from '../../mocks/mocks';
+import { mockData, mockSetData } from '../../mocks/mocks';
 
 import { vi } from 'vitest';
+import { Provider } from 'react-redux';
+import { store } from '../../store/store';
 
 vi.mock('services/apiService', () => ({
   fetchRickandmortyDetails: vi
@@ -29,18 +22,15 @@ describe('Tests for the Detailed Card component', () => {
     render(
       <Context.Provider
         value={{
-          page: mockPage,
-          setPage: mockSetPage,
-          setCount: mockSetCount,
-          searchValue: mockSearchValue,
-          setSearchValue: mockSetSearchValue,
           data: mockData,
           setData: mockSetData,
-          isLoading: mockIsLoading,
+          // isLoading: mockIsLoading,
         }}
       >
         <BrowserRouter>
-          <Info />
+          <Provider store={store}>
+            <Info />
+          </Provider>
         </BrowserRouter>
       </Context.Provider>
     );

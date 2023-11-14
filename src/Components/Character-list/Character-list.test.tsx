@@ -12,7 +12,7 @@ import {
   // mockSetSearchValue,
   mockData,
   mockSetData,
-  mockIsLoading,
+  // mockIsLoading,
 } from '../../mocks/mocks';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
@@ -23,7 +23,7 @@ const TestComponent = () => {
       value={{
         data: mockData,
         setData: mockSetData,
-        isLoading: mockIsLoading,
+        // isLoading: mockIsLoading,
       }}
     >
       <BrowserRouter>
@@ -64,7 +64,7 @@ describe('Tests for the Card List component', () => {
           value={{
             data: mockData,
             setData: mockSetData,
-            isLoading: mockIsLoading,
+            // isLoading: mockIsLoading,
           }}
         >
           <Provider store={store}>

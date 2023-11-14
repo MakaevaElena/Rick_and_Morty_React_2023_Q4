@@ -6,4 +6,5 @@ export type DataState = {
   page: number;
   countPerPage: string;
   searchValue: string;
+  viewMode: boolean;
 };

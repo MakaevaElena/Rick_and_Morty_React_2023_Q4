@@ -10,7 +10,7 @@ const Context = createContext<IContext>({
   // setSearchValue: () => {},
   data: [],
   setData: () => {},
-  isLoading: false,
+  // isLoading: false,
 });
 
 export default Context;

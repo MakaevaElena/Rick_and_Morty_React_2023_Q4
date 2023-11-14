@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './style.scss';
-import axios from 'axios';
-import { Rickandmorty } from '../../types/rickandmorty-types';
-import { BASE_URL, DEFAULT_COUNT } from '../../constants';
+// import axios from 'axios';
+// import { Rickandmorty } from '../../types/rickandmorty-types';
+import { DEFAULT_COUNT } from '../../constants';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Context from '../../context/context';
 import { useDispatch } from 'react-redux';
 import { setSearchValue } from '../../store/slices/dataSlice';
+import { fetchDataByValue } from '../../api/api';
 
 const Searching: React.FC = () => {
   const dispatch = useDispatch();
@@ -27,15 +28,15 @@ const Searching: React.FC = () => {
     }
   }, []);
 
-  async function fetchData() {
-    const response = await axios.get(`${BASE_URL}/character/?name=${value}`);
-    const arr: Rickandmorty[] = [];
-    arr.push(...response.data.results);
-    setData(arr);
-  }
+  // async function fetchData() {
+  //   const response = await axios.get(`${BASE_URL}/character/?name=${value}`);
+  //   const arr: Rickandmorty[] = [];
+  //   arr.push(...response.data.results);
+  //   setData(arr);
+  // }
 
   function handleSearchClick() {
-    fetchData().catch(() => setData([]));
+    fetchDataByValue(value).catch(() => setData([]));
     localStorage.setItem('searchValue', value);
     // setSearchValue(value);
     dispatch(setSearchValue(value));

@@ -8,12 +8,19 @@ const initialState: DataState = {
   page: DEFAULT_PAGE,
   countPerPage: DEFAULT_COUNT,
   searchValue: '',
+  viewMode: false,
 };
 
 const dataSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload;
+    },
+    setViewMode: (state, action) => {
+      state.viewMode = action.payload;
+    },
     fetchData: (state, action) => {
       state.data = action.payload;
       state.isLoading = true;
@@ -34,6 +41,7 @@ const dataSlice = createSlice({
   },
 });
 
-export const { fetchData, setPage, setCount, setSearchValue } = dataSlice.actions;
+export const { setIsLoading, setViewMode, fetchData, setPage, setCount, setSearchValue } =
+  dataSlice.actions;
 
 export default dataSlice.reducer;

@@ -3,7 +3,7 @@ import { act, fireEvent, render, renderHook, screen } from '@testing-library/rea
 import { BrowserRouter } from 'react-router-dom';
 import { useState } from 'react';
 import CharacterList from '../Character-list/Character-list';
-import { mockData, mockSetData, mockIsLoading } from '../../mocks/mocks';
+import { mockData, mockSetData } from '../../mocks/mocks';
 import Context from '../../context/context';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
@@ -38,7 +38,7 @@ describe('Pagination component', () => {
         value={{
           data: mockData,
           setData: mockSetData,
-          isLoading: mockIsLoading,
+          // isLoading: mockIsLoading,
         }}
       >
         <BrowserRouter>

@@ -13,5 +13,5 @@ export interface IContext {
   // setSearchValue: (c: string) => void;
   data: Rickandmorty[];
   setData: (c: Rickandmorty[]) => void;
-  isLoading: boolean;
+  // isLoading: boolean;
 }

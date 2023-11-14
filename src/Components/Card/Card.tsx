@@ -1,15 +1,16 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import './style.scss';
 import Loader from '../Loader/Loader';
-import { BASE_URL, DEFAULT_COUNT, DEFAULT_DETAILS, DEFAULT_PAGE } from '../../constants';
+import { DEFAULT_COUNT, DEFAULT_DETAILS, DEFAULT_PAGE } from '../../constants';
 import { Link, useSearchParams } from 'react-router-dom';
 import { CardProps } from './types';
+import { fetchRickandmortyDetails } from '../../api/api';
+import { useAppSelector } from '../../store/slices/hooks';
 
 const Card: React.FC<CardProps> = (props) => {
   const [data, setData] = useState(DEFAULT_DETAILS);
-  const [isLoading, setisLoading] = useState<boolean>(false);
+  const isLoading = useAppSelector((state) => state.data.isLoading);
 
   const [pageQuery] = useSearchParams();
   const page = pageQuery.get('page');
@@ -18,14 +19,9 @@ const Card: React.FC<CardProps> = (props) => {
   const newPage = page ? page : DEFAULT_PAGE;
 
   useEffect(() => {
-    async function fetchRickandmortyDetails(): Promise<Rickandmorty> {
-      setisLoading(true);
-      const response = await axios.get(`${BASE_URL}/character/${props.RickandmortyData.id}`);
-      setisLoading(false);
-      return response.data;
-    }
-
-    fetchRickandmortyDetails().then((details: Rickandmorty) => setData(details));
+    fetchRickandmortyDetails(props.RickandmortyData.id).then((details: Rickandmorty) => {
+      setData(details);
+    });
   }, [props.RickandmortyData.id]);
 
   return isLoading ? (
