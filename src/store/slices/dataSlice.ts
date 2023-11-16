@@ -23,7 +23,7 @@ const dataSlice = createSlice({
     },
     setDetailesIsLoading: (state, action) => {
       state.detailesIsLoading = action.payload;
-      console.log(state.detailesIsLoading);
+      // console.log(state.detailesIsLoading);
     },
     setCardIsLoading: (state, action) => {
       state.cardIsLoading = action.payload;
@@ -32,7 +32,7 @@ const dataSlice = createSlice({
       state.viewMode = action.payload;
       // console.log(state.viewMode);
     },
-    fetchData: (state, action) => {
+    setData: (state, action) => {
       state.data = action.payload;
       state.cardIsLoading = true;
     },
@@ -57,7 +57,7 @@ export const {
   setDetailesIsLoading,
   setCardIsLoading,
   setViewMode,
-  fetchData,
+  setData,
   setPage,
   setCount,
   setSearchValue,

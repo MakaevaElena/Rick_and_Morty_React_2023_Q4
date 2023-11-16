@@ -1,4 +1,4 @@
-export interface Rickandmorty {
+export type Rickandmorty = {
   id: number;
   name: string;
   status: string;
@@ -17,4 +17,14 @@ export interface Rickandmorty {
   episode: Array<string>;
   url: string;
   created: string;
+};
+
+export interface IRickandmortyAPI {
+  info: {
+    count: 826;
+    pages: 42;
+    next: 'https://rickandmortyapi.com/api/character/?page=2';
+    prev: null;
+  };
+  results: Rickandmorty[];
 }

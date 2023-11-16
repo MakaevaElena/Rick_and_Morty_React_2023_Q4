@@ -1,13 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.scss';
 // import axios from 'axios';
 // import { Rickandmorty } from '../../types/rickandmorty-types';
 import { DEFAULT_COUNT } from '../../constants';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import Context from '../../context/context';
+// import Context from '../../context/context';
 import { useDispatch } from 'react-redux';
 import { setSearchValue } from '../../store/slices/dataSlice';
-import { fetchDataByValue } from '../../api/api';
+// import { fetchDataByValue } from '../../api/api';
 
 const Searching: React.FC = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const Searching: React.FC = () => {
   const [pageQuery] = useSearchParams();
   const count = pageQuery.get('count') || DEFAULT_COUNT;
   // const { searchValue, setSearchValue } = useContext(Context);
-  const { setData } = useContext(Context);
+  // const { setData } = useContext(Context);
 
   const inputRef: React.RefObject<HTMLInputElement> = React.createRef();
   const searchButtonRef: React.RefObject<HTMLDivElement> = React.createRef();
@@ -36,7 +36,7 @@ const Searching: React.FC = () => {
   // }
 
   function handleSearchClick() {
-    fetchDataByValue(value).catch(() => setData([]));
+    // fetchDataByValue(value).catch(() => setData([]));
     localStorage.setItem('searchValue', value);
     // setSearchValue(value);
     dispatch(setSearchValue(value));

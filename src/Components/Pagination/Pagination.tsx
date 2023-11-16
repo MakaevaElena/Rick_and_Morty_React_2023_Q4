@@ -1,43 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import { DEFAULT_COUNT, DEFAULT_PAGE } from '../../constants';
 import './style.scss';
-import { Rickandmorty } from '../../types/rickandmorty-types';
+// import { Rickandmorty } from '../../types/rickandmorty-types';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Loader from '../Loader/Loader';
 // import Context from '../../context/context';
 import { useDispatch } from 'react-redux';
 import { setCount, setPage } from '../../store/slices/dataSlice';
-import { fetchAllData } from '../../api/api';
+import { useFetchDataByPageQuery } from '../../api/rtkq-api';
+import { useAppSelector } from '../../store/slices/hooks';
+// import { fetchAllData } from '../../api/api';
 // import { useAppSelector } from '../../store/slices/hooks';
 
 const Pagination: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // todo pagination
   const [pageQuery] = useSearchParams();
-  const page = pageQuery.get('page') || DEFAULT_PAGE;
+  // const page = pageQuery.get('page') || DEFAULT_PAGE;
+  const page = useAppSelector((state) => state.data.page);
   const countPerPage = pageQuery.get('count') || DEFAULT_COUNT;
 
-  const [data, setData] = useState<Rickandmorty[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { data, isLoading } = useFetchDataByPageQuery(+page);
+  // const [data, setData] = useState<Rickandmorty[]>([]);
+  // const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectedValue, setSelectedValue] = useState<string>(DEFAULT_COUNT);
 
   // const isLoading = useAppSelector((state) => state.data.isLoading);
 
-  useEffect(() => {
-    if (countPerPage) setSelectedValue(countPerPage);
-    setIsLoading(true);
-    // dispatch(setIsLoading(true));
-    fetchAllData().then((data: Rickandmorty[]) => {
-      setData(data);
-      setIsLoading(false);
-      // dispatch(setIsLoading(false));
-    });
-  }, [countPerPage, dispatch]);
+  // useEffect(() => {
+  //   if (countPerPage) setSelectedValue(countPerPage);
+  //   setIsLoading(true);
+  //   // dispatch(setIsLoading(true));
+  //   fetchAllData().then((data: Rickandmorty[]) => {
+  //     setData(data);
+  //     setIsLoading(false);
+  //     // dispatch(setIsLoading(false));
+  //   });
+  // }, [countPerPage, dispatch]);
 
   useEffect(() => {
     if (page) dispatch(setPage(+page));
-  }, [dispatch, page]);
+    setSelectedValue(countPerPage);
+  }, [countPerPage, dispatch, page]);
 
   function getClassName(i: number) {
     if (page && +page === i + 1) {
@@ -67,7 +73,7 @@ const Pagination: React.FC = () => {
       </select>
 
       <div className="pagination-buttons">
-        {data.map((_, i) => (
+        {data?.results.map((_, i) => (
           <Link
             data-testid={i}
             key={i + 1}
