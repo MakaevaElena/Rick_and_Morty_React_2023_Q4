@@ -4,7 +4,9 @@ import { DataState } from './types';
 
 const initialState: DataState = {
   data: [],
-  isLoading: false,
+  cardIsLoading: false,
+  mainIsLoading: false,
+  detailesIsLoading: false,
   page: DEFAULT_PAGE,
   countPerPage: DEFAULT_COUNT,
   searchValue: '',
@@ -15,8 +17,16 @@ const dataSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    setIsLoading: (state, action) => {
-      state.isLoading = action.payload;
+    setMainIsLoading: (state, action) => {
+      state.mainIsLoading = action.payload;
+      // console.log(state.mainIsLoading);
+    },
+    setDetailesIsLoading: (state, action) => {
+      state.detailesIsLoading = action.payload;
+      console.log(state.detailesIsLoading);
+    },
+    setCardIsLoading: (state, action) => {
+      state.cardIsLoading = action.payload;
     },
     setViewMode: (state, action) => {
       state.viewMode = action.payload;
@@ -24,7 +34,7 @@ const dataSlice = createSlice({
     },
     fetchData: (state, action) => {
       state.data = action.payload;
-      state.isLoading = true;
+      state.cardIsLoading = true;
     },
 
     setPage: (state, action) => {
@@ -42,7 +52,15 @@ const dataSlice = createSlice({
   },
 });
 
-export const { setIsLoading, setViewMode, fetchData, setPage, setCount, setSearchValue } =
-  dataSlice.actions;
+export const {
+  setMainIsLoading,
+  setDetailesIsLoading,
+  setCardIsLoading,
+  setViewMode,
+  fetchData,
+  setPage,
+  setCount,
+  setSearchValue,
+} = dataSlice.actions;
 
 export default dataSlice.reducer;

@@ -17,9 +17,8 @@ const CharacterList: React.FC = () => {
   const navigate = useNavigate();
   const count = pageQuery.get('count');
 
-  const isLoading = useAppSelector((state) => state.data.isLoading);
+  const mainIsLoading = useAppSelector((state) => state.data.mainIsLoading);
   const isDetailsOpen = window.location.pathname.includes('details');
-  console.log(isDetailsOpen);
 
   const handlerCloseInfo = (event: React.MouseEvent<HTMLElement>) => {
     if (event.target instanceof HTMLElement && event.target.classList.contains('character-list'))
@@ -30,7 +29,7 @@ const CharacterList: React.FC = () => {
     dispatch(setViewMode(isDetailsOpen));
   }, [dispatch, isDetailsOpen]);
 
-  return isLoading ? (
+  return mainIsLoading ? (
     <Loader />
   ) : (
     <>

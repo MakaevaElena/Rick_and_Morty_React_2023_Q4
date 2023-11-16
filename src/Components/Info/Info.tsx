@@ -6,37 +6,45 @@ import { DEFAULT_DETAILS } from '../../constants';
 import { Rickandmorty } from '../../types/rickandmorty-types';
 import Button from '../Button/Button';
 import { fetchRickandmortyDetails } from '../../api/api';
+import { useDispatch } from 'react-redux';
+import { setDetailesIsLoading } from '../../store/slices/dataSlice';
+import { useAppSelector } from '../../store/slices/hooks';
 
 const Info: React.FC = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [pageQuery] = useSearchParams();
   const id = pageQuery.get('id');
   const currentPage = pageQuery.get('page');
   const count = pageQuery.get('count');
 
-  const [isLoading, setisLoading] = useState<boolean>(false);
+  // const [isLoading, setisLoading] = useState<boolean>(false);
   const [data, setData] = useState(DEFAULT_DETAILS);
+  const detailesIsLoading = useAppSelector((state) => state.data.detailesIsLoading);
 
   useEffect(() => {
-    setisLoading(true);
+    // setisLoading(true);
+    dispatch(setDetailesIsLoading(true));
     if (id) {
       fetchRickandmortyDetails(+id).then((details: Rickandmorty) => {
-        setisLoading(false);
+        // setisLoading(false);
+        dispatch(setDetailesIsLoading(false));
         setData(details);
       });
     } else {
       fetchRickandmortyDetails(0).then((details: Rickandmorty) => {
-        setisLoading(false);
+        // setisLoading(false);
+        dispatch(setDetailesIsLoading(false));
         setData(details);
       });
     }
-  }, [id]);
+  }, [dispatch, id]);
 
   const handlerCloseButton = () => {
     navigate(`/search/?page=${currentPage}&count=${count}`);
   };
 
-  return isLoading ? (
+  return detailesIsLoading ? (
     <Loader />
   ) : (
     <div className="info" data-testid="info">

@@ -2,7 +2,9 @@ import { Rickandmorty } from '../../types/rickandmorty-types';
 
 export type DataState = {
   data: Rickandmorty[];
-  isLoading: boolean;
+  cardIsLoading: boolean;
+  mainIsLoading: boolean;
+  detailesIsLoading: boolean;
   page: number;
   countPerPage: string;
   searchValue: string;

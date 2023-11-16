@@ -13,6 +13,7 @@ import { useAppSelector } from '../../store/slices/hooks';
 import { useDispatch } from 'react-redux';
 // import { setIsLoading } from '../../store/slices/dataSlice';
 import { fetchDataByPage, fetchDataByValue } from '../../api/api';
+import { setMainIsLoading } from '../../store/slices/dataSlice';
 // import { DataState } from '../../store/slices/types';
 
 const App: React.FC<AppProps> = () => {
@@ -29,13 +30,16 @@ const App: React.FC<AppProps> = () => {
   const value = localStorage.getItem('searchValue');
 
   useEffect(() => {
+    dispatch(setMainIsLoading(true));
     if (value && value.length > 0) {
       fetchDataByValue(value).then((data: Rickandmorty[]) => {
         setData(data.slice(0, +countPerPage));
+        dispatch(setMainIsLoading(false));
       });
     } else {
       fetchDataByPage(page).then((data: Rickandmorty[]) => {
         setData(data.slice(0, +countPerPage));
+        dispatch(setMainIsLoading(false));
       });
     }
   }, [countPerPage, dispatch, page, value]);

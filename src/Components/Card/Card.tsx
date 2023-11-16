@@ -7,10 +7,13 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { CardProps } from './types';
 import { fetchRickandmortyDetails } from '../../api/api';
 import { useAppSelector } from '../../store/slices/hooks';
+import { useDispatch } from 'react-redux';
+import { setCardIsLoading } from '../../store/slices/dataSlice';
 
 const Card: React.FC<CardProps> = (props) => {
+  const dispatch = useDispatch();
   const [data, setData] = useState(DEFAULT_DETAILS);
-  const isLoading = useAppSelector((state) => state.data.isLoading);
+  const cardIsLoading = useAppSelector((state) => state.data.cardIsLoading);
   // const viewMode = useAppSelector((state) => state.data.viewMode);
 
   const [pageQuery] = useSearchParams();
@@ -20,12 +23,14 @@ const Card: React.FC<CardProps> = (props) => {
   const newPage = page ? page : DEFAULT_PAGE;
 
   useEffect(() => {
+    dispatch(setCardIsLoading(true));
     fetchRickandmortyDetails(props.RickandmortyData.id).then((details: Rickandmorty) => {
       setData(details);
+      dispatch(setCardIsLoading(false));
     });
-  }, [props.RickandmortyData.id]);
+  }, [dispatch, props.RickandmortyData.id]);
 
-  return isLoading ? (
+  return cardIsLoading ? (
     <Loader />
   ) : (
     <div className="card">
