@@ -13,7 +13,6 @@ import { useAppSelector } from '../../store/slices/hooks';
 import { useDispatch } from 'react-redux';
 // import { setIsLoading } from '../../store/slices/dataSlice';
 import { fetchDataByPage, fetchDataByValue } from '../../api/api';
-
 // import { DataState } from '../../store/slices/types';
 
 const App: React.FC<AppProps> = () => {
@@ -25,6 +24,7 @@ const App: React.FC<AppProps> = () => {
   const searchValue = useAppSelector((state) => state.data.searchValue);
   const page = useAppSelector((state) => state.data.page);
   const countPerPage = useAppSelector((state) => state.data.countPerPage);
+  // const viewMode = useAppSelector((state) => state.data.viewMode);
 
   const value = localStorage.getItem('searchValue');
 

@@ -1,7 +1,7 @@
 .button {
   width: 10vw;
   height: 3em;
-  min-width: 200px;
+  width: 200px;
   border: 2px solid #7bab91;
   border-radius: 3%;
   outline: none;
@@ -17,4 +17,8 @@
 
 .button:active {
   border: none;
+}
+
+.close-button {
+  width: min-content;
 }

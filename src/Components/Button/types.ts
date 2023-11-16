@@ -1,7 +1,5 @@
-import { CSSProperties } from 'react';
-
 export type ButtonProps = {
-  style?: CSSProperties;
+  style?: string;
   children?: string;
   onClick?: (e: React.MouseEvent<HTMLElement>) => void;
   dataTestid?: string;

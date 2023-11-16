@@ -3,11 +3,6 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Searching from './Searching';
 import { BrowserRouter } from 'react-router-dom';
 import {
-  // mockPage,
-  // mockSetPage,
-  // mockSetCount,
-  // mockSearchValue,
-  // mockSetSearchValue,
   mockData,
   mockSetData,
   // mockIsLoading,

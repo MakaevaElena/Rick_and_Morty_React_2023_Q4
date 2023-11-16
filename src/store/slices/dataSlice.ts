@@ -20,6 +20,7 @@ const dataSlice = createSlice({
     },
     setViewMode: (state, action) => {
       state.viewMode = action.payload;
+      // console.log(state.viewMode);
     },
     fetchData: (state, action) => {
       state.data = action.payload;

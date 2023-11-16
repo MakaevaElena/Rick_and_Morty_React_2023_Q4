@@ -3,11 +3,14 @@ import './style.scss';
 import Card from '../Card/Card';
 import Loader from '../Loader/Loader';
 import Pagination from '../Pagination/Pagination';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Context from '../../context/context';
 import { useAppSelector } from '../../store/slices/hooks';
+import { useDispatch } from 'react-redux';
+import { setViewMode } from '../../store/slices/dataSlice';
 
 const CharacterList: React.FC = () => {
+  const dispatch = useDispatch();
   const [pageQuery] = useSearchParams();
   const { data } = useContext(Context);
   const page = pageQuery.get('page');
@@ -15,11 +18,17 @@ const CharacterList: React.FC = () => {
   const count = pageQuery.get('count');
 
   const isLoading = useAppSelector((state) => state.data.isLoading);
+  const isDetailsOpen = window.location.pathname.includes('details');
+  console.log(isDetailsOpen);
 
   const handlerCloseInfo = (event: React.MouseEvent<HTMLElement>) => {
     if (event.target instanceof HTMLElement && event.target.classList.contains('character-list'))
       navigate(`/search/?page=${page}&count=${count}`);
   };
+
+  useEffect(() => {
+    dispatch(setViewMode(isDetailsOpen));
+  }, [dispatch, isDetailsOpen]);
 
   return isLoading ? (
     <Loader />

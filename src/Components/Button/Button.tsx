@@ -3,7 +3,7 @@ import './style.scss';
 
 const Button: React.FC<ButtonProps> = (props) => {
   return (
-    <button className="button" onClick={props.onClick}>
+    <button className={`button ${props.style}`} onClick={props.onClick}>
       {props.children}
     </button>
   );

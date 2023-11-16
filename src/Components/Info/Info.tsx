@@ -41,7 +41,12 @@ const Info: React.FC = () => {
   ) : (
     <div className="info" data-testid="info">
       <div className="card">
-        <Button data-testid="close-button" children="Close" onClick={handlerCloseButton} />
+        <Button
+          style="close-button"
+          data-testid="close-button"
+          children="X"
+          onClick={handlerCloseButton}
+        />
         <h2>Info about: </h2>
         <h3>{data.name}</h3>
         <img

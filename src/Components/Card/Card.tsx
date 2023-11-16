@@ -11,6 +11,7 @@ import { useAppSelector } from '../../store/slices/hooks';
 const Card: React.FC<CardProps> = (props) => {
   const [data, setData] = useState(DEFAULT_DETAILS);
   const isLoading = useAppSelector((state) => state.data.isLoading);
+  // const viewMode = useAppSelector((state) => state.data.viewMode);
 
   const [pageQuery] = useSearchParams();
   const page = pageQuery.get('page');
