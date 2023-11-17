@@ -11,26 +11,25 @@ import { useFetchDataByValueQuery } from '../../api/rtkq-api';
 
 const CharacterList: React.FC = () => {
   const dispatch = useDispatch();
+  const isDetailsOpen = window.location.pathname.includes('details');
   const [pageQuery] = useSearchParams();
-
   // const page = pageQuery.get('page');
   const page = useAppSelector((state) => state.data.page);
   const navigate = useNavigate();
   const count = pageQuery.get('count');
 
   const countPerPage = useAppSelector((state) => state.data.countPerPage);
-  // const searchValue = useAppSelector((state) => state.data.searchValue);
-  const searchValue = localStorage.getItem('searchValue') || '';
-  // const { data } = useFetchAllDataQuery(undefined, { skip: Boolean(searchValue) === true });
-  // const { data } = useFetchDataByValueQuery(searchValue, { skip: Boolean(searchValue) === false });
+  const searchValue = useAppSelector((state) => state.data.searchValue);
+  // const searchValue = localStorage.getItem('searchValue') || '';
 
   const query = { type: 'searchValue', value: searchValue };
   // query = { type: 'changePage', value: page.toString() };
-  const { data, isLoading } = useFetchDataByValueQuery(query);
-  console.log(data);
+  const { data, isLoading, error } = useFetchDataByValueQuery(query);
 
   // const mainIsLoading = useAppSelector((state) => state.data.mainIsLoading);
-  const isDetailsOpen = window.location.pathname.includes('details');
+
+  const results = data ? data.results : [];
+  // console.log(results.length);
 
   const handlerCloseInfo = (event: React.MouseEvent<HTMLElement>) => {
     if (event.target instanceof HTMLElement && event.target.classList.contains('character-list'))
@@ -38,7 +37,6 @@ const CharacterList: React.FC = () => {
   };
 
   useEffect(() => {
-    // dispatch(setData(data?.results.slice(0, +countPerPage)));
     dispatch(setViewMode(isDetailsOpen));
     dispatch(setDetailesIsLoading(isLoading));
   }, [dispatch, isDetailsOpen, isLoading, data, countPerPage]);
@@ -47,14 +45,14 @@ const CharacterList: React.FC = () => {
     <Loader />
   ) : (
     <>
-      <h2>Character List {data?.results.length}</h2>
+      <h2>Character List {results.length}</h2>
       <div className="main-container">
         <section
           className="character-list"
           data-testid="character-list"
           onClick={(event) => handlerCloseInfo(event)}
         >
-          {data && data?.results.length > 0 ? (
+          {!error && results.length > 0 ? (
             data?.results.map((character) => (
               <Card key={character.id} RickandmortyData={character} />
             ))
