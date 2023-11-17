@@ -9,4 +9,8 @@ export type DataState = {
   countPerPage: string;
   searchValue: string;
   viewMode: boolean;
+  query: {
+    type: string;
+    value: string;
+  };
 };

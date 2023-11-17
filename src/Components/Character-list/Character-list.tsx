@@ -11,35 +11,34 @@ import { useFetchDataByValueQuery } from '../../api/rtkq-api';
 
 const CharacterList: React.FC = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isDetailsOpen = window.location.pathname.includes('details');
   const [pageQuery] = useSearchParams();
-  // const page = pageQuery.get('page');
-  const page = useAppSelector((state) => state.data.page);
-  const navigate = useNavigate();
   const count = pageQuery.get('count');
-
+  const page = useAppSelector((state) => state.data.page);
   const countPerPage = useAppSelector((state) => state.data.countPerPage);
-  const searchValue = useAppSelector((state) => state.data.searchValue);
-  // const searchValue = localStorage.getItem('searchValue') || '';
 
-  const query = { type: 'searchValue', value: searchValue };
-  // query = { type: 'changePage', value: page.toString() };
+  const query = useAppSelector((state) => state.data.query);
   const { data, isLoading, error } = useFetchDataByValueQuery(query);
 
   // const mainIsLoading = useAppSelector((state) => state.data.mainIsLoading);
 
   const results = data ? data.results : [];
-  // console.log(results.length);
+  results.slice(0, +countPerPage);
 
   const handlerCloseInfo = (event: React.MouseEvent<HTMLElement>) => {
     if (event.target instanceof HTMLElement && event.target.classList.contains('character-list'))
       navigate(`/search/?page=${page}&count=${count}`);
   };
 
+  // useEffect(() => {
+  //   query = { type: 'changePage', value: page.toString() };
+  // }, []);
+
   useEffect(() => {
     dispatch(setViewMode(isDetailsOpen));
     dispatch(setDetailesIsLoading(isLoading));
-  }, [dispatch, isDetailsOpen, isLoading, data, countPerPage]);
+  }, [dispatch, isDetailsOpen, isLoading, data, countPerPage, query]);
 
   return isLoading ? (
     <Loader />
@@ -53,9 +52,9 @@ const CharacterList: React.FC = () => {
           onClick={(event) => handlerCloseInfo(event)}
         >
           {!error && results.length > 0 ? (
-            data?.results.map((character) => (
-              <Card key={character.id} RickandmortyData={character} />
-            ))
+            results
+              .slice(0, +countPerPage)
+              .map((character) => <Card key={character.id} RickandmortyData={character} />)
           ) : (
             <h2>Character not found</h2>
           )}

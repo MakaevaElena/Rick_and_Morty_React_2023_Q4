@@ -11,43 +11,45 @@ const initialState: DataState = {
   countPerPage: DEFAULT_COUNT,
   searchValue: '',
   viewMode: false,
+  query: {
+    type: '',
+    value: '',
+  },
 };
 
 const dataSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
+    setQuery: (state, action) => {
+      state.query = action.payload;
+    },
     setMainIsLoading: (state, action) => {
       state.mainIsLoading = action.payload;
-      // console.log(state.mainIsLoading);
     },
     setDetailesIsLoading: (state, action) => {
       state.detailesIsLoading = action.payload;
-      // console.log(state.detailesIsLoading);
     },
     setCardIsLoading: (state, action) => {
       state.cardIsLoading = action.payload;
     },
     setViewMode: (state, action) => {
       state.viewMode = action.payload;
-      // console.log(state.viewMode);
     },
     setData: (state, action) => {
       state.data = action.payload;
-      // state.cardIsLoading = true;
     },
 
     setPage: (state, action) => {
       state.page = action.payload;
     },
 
-    setCount: (state, action) => {
+    setCountPerPage: (state, action) => {
       state.countPerPage = action.payload;
     },
 
     setSearchValue: (state, action) => {
       state.searchValue = action.payload;
-      // console.log('state.searchValue', state.searchValue);
     },
   },
 });
@@ -59,8 +61,9 @@ export const {
   setViewMode,
   setData,
   setPage,
-  setCount,
+  setCountPerPage,
   setSearchValue,
+  setQuery,
 } = dataSlice.actions;
 
 export default dataSlice.reducer;

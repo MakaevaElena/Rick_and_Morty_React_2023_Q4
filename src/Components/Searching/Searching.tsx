@@ -3,7 +3,7 @@ import './style.scss';
 import { DEFAULT_COUNT } from '../../constants';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setSearchValue } from '../../store/slices/dataSlice';
+import { setQuery, setSearchValue } from '../../store/slices/dataSlice';
 
 const Searching: React.FC = () => {
   const dispatch = useDispatch();
@@ -16,6 +16,7 @@ const Searching: React.FC = () => {
 
   useEffect(() => {
     const value = localStorage.getItem('searchValue');
+
     if (value) {
       setValue(value);
       dispatch(setSearchValue(value));
@@ -26,6 +27,8 @@ const Searching: React.FC = () => {
     localStorage.setItem('searchValue', value);
     dispatch(setSearchValue(value));
     navigate(`/search/?page=1&count=${count}`);
+    const query = { type: 'searchValue', value: value };
+    dispatch(setQuery(query));
   }
 
   function handleChange(evt: React.FormEvent<HTMLInputElement>) {

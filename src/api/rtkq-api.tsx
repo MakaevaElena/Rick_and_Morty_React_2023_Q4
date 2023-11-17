@@ -18,6 +18,8 @@ export const rtkqApi = createApi({
       query: (query) => {
         if (query.type === 'searchValue') {
           return `/character/?name=${query.value}`;
+        } else if (query.type === 'changePage') {
+          return `/character/?page=${query.value}`;
         } else return `/character/`;
       },
     }),
@@ -34,16 +36,6 @@ export const {
   useFetchDataByValueQuery,
   useFetchRickandmortyDetailsQuery,
 } = rtkqApi;
-
-// fetchDataByValue: builder.query<IRickandmortyAPI, { type: string; value: string }>({
-//   query: (value) => (value ? `/character/?name=${value}` : `/character/`),
-// }),
-
-// query: (query) => {
-//   if (query.type === 'searchValue') {
-//     return `/character/?name=${query.value}`;
-//   } else return `/character/`;
-// },
 
 //https://www.youtube.com/watch?v=uSwe-5dPrV8&t=974s
 //https://github.com/shopot/react-101/tree/rtk-query
