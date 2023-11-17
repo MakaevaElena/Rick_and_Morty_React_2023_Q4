@@ -44,3 +44,6 @@ export const {
 //     return `/character/?name=${query.value}`;
 //   } else return `/character/`;
 // },
+
+//https://www.youtube.com/watch?v=uSwe-5dPrV8&t=974s
+//https://github.com/shopot/react-101/tree/rtk-query

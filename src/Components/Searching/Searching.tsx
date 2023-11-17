@@ -38,7 +38,7 @@ const Searching: React.FC = () => {
   function handleSearchClick() {
     // fetchDataByValue(value).catch(() => setData([]));
     localStorage.setItem('searchValue', value);
-    // setSearchValue(value);
+    setSearchValue(value);
     dispatch(setSearchValue(value));
     navigate(`/search/?page=1&count=${count}`);
   }

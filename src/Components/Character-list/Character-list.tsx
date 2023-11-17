@@ -6,7 +6,7 @@ import Pagination from '../Pagination/Pagination';
 import { useEffect } from 'react';
 import { useAppSelector } from '../../store/slices/hooks';
 import { useDispatch } from 'react-redux';
-import { setViewMode } from '../../store/slices/dataSlice';
+import { setDetailesIsLoading, setViewMode } from '../../store/slices/dataSlice';
 import { useFetchDataByValueQuery } from '../../api/rtkq-api';
 
 const CharacterList: React.FC = () => {
@@ -18,6 +18,7 @@ const CharacterList: React.FC = () => {
   const navigate = useNavigate();
   const count = pageQuery.get('count');
 
+  const countPerPage = useAppSelector((state) => state.data.countPerPage);
   // const searchValue = useAppSelector((state) => state.data.searchValue);
   const searchValue = localStorage.getItem('searchValue') || '';
   // const { data } = useFetchAllDataQuery(undefined, { skip: Boolean(searchValue) === true });
@@ -25,9 +26,10 @@ const CharacterList: React.FC = () => {
 
   const query = { type: 'searchValue', value: searchValue };
   // query = { type: 'changePage', value: page.toString() };
-  const { data } = useFetchDataByValueQuery(query);
+  const { data, isLoading } = useFetchDataByValueQuery(query);
+  console.log(data);
 
-  const mainIsLoading = useAppSelector((state) => state.data.mainIsLoading);
+  // const mainIsLoading = useAppSelector((state) => state.data.mainIsLoading);
   const isDetailsOpen = window.location.pathname.includes('details');
 
   const handlerCloseInfo = (event: React.MouseEvent<HTMLElement>) => {
@@ -36,10 +38,12 @@ const CharacterList: React.FC = () => {
   };
 
   useEffect(() => {
+    // dispatch(setData(data?.results.slice(0, +countPerPage)));
     dispatch(setViewMode(isDetailsOpen));
-  }, [dispatch, isDetailsOpen]);
+    dispatch(setDetailesIsLoading(isLoading));
+  }, [dispatch, isDetailsOpen, isLoading, data, countPerPage]);
 
-  return mainIsLoading ? (
+  return isLoading ? (
     <Loader />
   ) : (
     <>

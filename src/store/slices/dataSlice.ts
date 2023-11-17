@@ -34,7 +34,7 @@ const dataSlice = createSlice({
     },
     setData: (state, action) => {
       state.data = action.payload;
-      state.cardIsLoading = true;
+      // state.cardIsLoading = true;
     },
 
     setPage: (state, action) => {
