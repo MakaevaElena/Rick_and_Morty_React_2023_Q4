@@ -76,9 +76,6 @@ describe('Tests for the Card component', () => {
       </BrowserRouter>
     );
 
-    // const info = screen.queryByTestId('info');
-    // expect(info).not.toBeInTheDocument();
-
     await waitFor(() => {
       const card = screen.getAllByTestId('card')[0];
       fireEvent.click(card);

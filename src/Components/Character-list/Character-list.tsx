@@ -17,12 +17,8 @@ const CharacterList: React.FC = () => {
   const count = pageQuery.get('count');
   const page = useAppSelector((state) => state.data.page);
   const countPerPage = useAppSelector((state) => state.data.countPerPage);
-
   const query = useAppSelector((state) => state.data.query);
   const { data, isLoading, error } = useFetchDataByValueQuery(query);
-
-  // const mainIsLoading = useAppSelector((state) => state.data.mainIsLoading);
-
   const results = data ? data.results : [];
   results.slice(0, +countPerPage);
 

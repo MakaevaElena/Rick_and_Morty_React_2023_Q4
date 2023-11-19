@@ -77,23 +77,4 @@ describe('Tests for the Detailed Card component', () => {
       expect(card).toBeInTheDocument();
     });
   });
-
-  // it('Check that a loading indicator is displayed while fetching data', async () => {
-  //   render(
-  //     <MemoryRouter>
-  //       <Provider store={store}>
-  //         <Card RickandmortyData={mockCharacter} />
-  //       </Provider>
-  //     </MemoryRouter>
-  //   );
-  //   await waitFor(() => {
-  //     const card = screen.getByTestId('card');
-  //     fireEvent.click(card);
-  //   });
-
-  //   await waitFor(() => {
-  //     const loader = screen.getByTestId('loader');
-  //     expect(loader).toBeInTheDocument();
-  //   });
-  // });
 });

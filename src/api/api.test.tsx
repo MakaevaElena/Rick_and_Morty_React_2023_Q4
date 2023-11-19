@@ -5,11 +5,9 @@ import { useFetchDataByPageQuery } from './rtkq-api';
 import { renderHook } from '@testing-library/react';
 import createFetchMock from 'vitest-fetch-mock';
 import { vi } from 'vitest';
-// import { DEFAULT_COUNT, DEFAULT_PAGE } from '../constants';
 
 const fetchMocker = createFetchMock(vi);
 fetchMocker.enableMocks();
-// fetchMock.enableMocks();
 
 const data = {};
 
@@ -22,10 +20,6 @@ beforeAll(() => {
   );
 });
 
-// beforeEach(() => {
-//   fetchMocker.doMock();
-// });
-
 function Wrapper(props: { children: ReactNode }) {
   return <Provider store={store}>{props.children}</Provider>;
 }
@@ -33,22 +27,5 @@ function Wrapper(props: { children: ReactNode }) {
 it('renders hook', () => {
   const { result } = renderHook(() => useFetchDataByPageQuery(3), { wrapper: Wrapper });
 
-  // expect(result.current).toMatchObject({
-  //   viewMode: false,
-  //   currentData: {},
-  //   data: {},
-  //   endpointName: 'fetchDataByPage',
-  //   isError: false,
-  //   isFetching: true,
-  //   isLoading: true,
-  //   isSuccess: false,
-  //   isUninitialized: false,
-  //   originalArgs: 3,
-  //   // refetch: [],
-  //   // requestId: 'GtbRBEvIOccx2qhTtShJs',
-  //   // startedTimeStamp: 1700409183652,
-  //   status: 'pending',
-  // }),
   expect(result.current).toBeTruthy();
-  // expect(fetchMocker).toHaveBeenCalled();
 });
