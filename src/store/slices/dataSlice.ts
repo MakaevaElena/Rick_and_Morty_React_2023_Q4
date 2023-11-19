@@ -4,7 +4,6 @@ import { DataState } from './types';
 
 const initialState: DataState = {
   data: [],
-  cardIsLoading: false,
   mainIsLoading: false,
   detailesIsLoading: false,
   page: DEFAULT_PAGE,
@@ -30,9 +29,6 @@ const dataSlice = createSlice({
     setDetailesIsLoading: (state, action) => {
       state.detailesIsLoading = action.payload;
     },
-    setCardIsLoading: (state, action) => {
-      state.cardIsLoading = action.payload;
-    },
     setViewMode: (state, action) => {
       state.viewMode = action.payload;
     },
@@ -57,7 +53,6 @@ const dataSlice = createSlice({
 export const {
   setMainIsLoading,
   setDetailesIsLoading,
-  setCardIsLoading,
   setViewMode,
   setData,
   setPage,
