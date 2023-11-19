@@ -1,8 +1,5 @@
 export const mockPage = 1;
-export const mockSetPage = () => {};
-export const mockSetCount = () => {};
 export const mockSearchValue = '';
-export const mockSetSearchValue = () => {};
 export const mockData = [
   {
     id: 1,
@@ -45,7 +42,7 @@ export const mockData = [
     created: '',
   },
 ];
-export const mockSetData = () => {};
+
 export const mockIsLoading = false;
 
 export const mockCharacter = {

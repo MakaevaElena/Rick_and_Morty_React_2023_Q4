@@ -52,7 +52,8 @@
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
-    "vitest": "^0.34.6"
+    "vitest": "^0.34.6",
+    "vitest-fetch-mock": "^0.2.2"
   },
   "lint-staged": {
     "*.{tsx,ts,scss,module.scss}": "prettier --write src",

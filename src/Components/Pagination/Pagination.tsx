@@ -45,7 +45,12 @@ const Pagination: React.FC = () => {
   ) : (
     <div className="pagination">
       <h2>Pagination</h2>
-      <select value={selectedValue} className="change-count-select" onChange={handleChangeCount}>
+      <select
+        value={selectedValue}
+        data-testid="select"
+        className="change-count-select"
+        onChange={handleChangeCount}
+      >
         <option value="5">5</option>
         <option value="10">10</option>
         <option value="15">15</option>
@@ -56,6 +61,7 @@ const Pagination: React.FC = () => {
         {data?.results.map((_, i) => (
           <Link
             data-testid={i}
+            aria-current="page"
             key={i + 1}
             to={`/search/?page=${i + 1}&count=${countPerPage}`}
             className={`pagination-button ${getClassName(i)}`}

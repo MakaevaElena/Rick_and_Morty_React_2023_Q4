@@ -34,7 +34,7 @@ const Info: React.FC = () => {
       <div className="card">
         <Button
           style="close-button"
-          data-testid="close-button"
+          dataTestid="close-button"
           children="X"
           onClick={handlerCloseButton}
         />
