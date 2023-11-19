@@ -6,7 +6,7 @@ import Pagination from '../Pagination/Pagination';
 import { useEffect } from 'react';
 import { useAppSelector } from '../../store/slices/hooks';
 import { useDispatch } from 'react-redux';
-import { setDetailesIsLoading, setViewMode } from '../../store/slices/dataSlice';
+import { setMainIsLoading, setViewMode } from '../../store/slices/dataSlice';
 import { useFetchDataByValueQuery } from '../../api/rtkq-api';
 
 const CharacterList: React.FC = () => {
@@ -33,7 +33,7 @@ const CharacterList: React.FC = () => {
 
   useEffect(() => {
     dispatch(setViewMode(isDetailsOpen));
-    dispatch(setDetailesIsLoading(isLoading));
+    dispatch(setMainIsLoading(isLoading));
   }, [dispatch, isDetailsOpen, isLoading, data, countPerPage, query]);
 
   return isLoading ? (

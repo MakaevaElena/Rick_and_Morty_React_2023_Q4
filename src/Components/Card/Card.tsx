@@ -1,22 +1,17 @@
 import React from 'react';
 import './style.scss';
-import Loader from '../Loader/Loader';
 import { DEFAULT_COUNT, DEFAULT_PAGE } from '../../constants';
 import { Link, useSearchParams } from 'react-router-dom';
 import { CardProps } from './types';
-import { useAppSelector } from '../../store/slices/hooks';
 
 const Card: React.FC<CardProps> = (props) => {
-  const cardIsLoading = useAppSelector((state) => state.data.cardIsLoading);
   const [pageQuery] = useSearchParams();
   const page = pageQuery.get('page');
   const count = pageQuery.get('count') || DEFAULT_COUNT;
 
   const newPage = page ? page : DEFAULT_PAGE;
 
-  return cardIsLoading ? (
-    <Loader />
-  ) : (
+  return (
     <div className="card">
       <Link
         data-testid="card"

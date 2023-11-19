@@ -5,7 +5,6 @@ import { Route, Routes } from 'react-router-dom';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Info from '../Info/Info';
 import { AppProps } from './types';
-// import ErrorButton from '../ErrorButton/ErrorButton';
 import { useAppSelector } from '../../store/slices/hooks';
 
 const App: React.FC<AppProps> = () => {
@@ -15,7 +14,6 @@ const App: React.FC<AppProps> = () => {
 
   return (
     <div className="container">
-      {/* <ErrorButton /> */}
       <Searching />
       <div className="info-from-store">
         <h4>SearchValue from Store: {searchValue || 'Empty'}</h4>

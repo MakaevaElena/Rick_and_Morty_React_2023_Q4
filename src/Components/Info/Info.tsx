@@ -3,14 +3,17 @@ import Loader from '../Loader/Loader';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Button from '../Button/Button';
 import { useFetchRickandmortyDetailsQuery } from '../../api/rtkq-api';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setDetailesIsLoading } from '../../store/slices/dataSlice';
 
 const Info: React.FC = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [pageQuery] = useSearchParams();
   const id = pageQuery.get('id') || 0;
   const currentPage = pageQuery.get('page');
   const count = pageQuery.get('count');
-  // const detailesIsLoading = useAppSelector((state) => state.data.detailesIsLoading);
 
   const { data, isLoading } = useFetchRickandmortyDetailsQuery(+id, {
     skip: Boolean(id) === false,
@@ -19,6 +22,10 @@ const Info: React.FC = () => {
   const handlerCloseButton = () => {
     navigate(`/search/?page=${currentPage}&count=${count}`);
   };
+
+  useEffect(() => {
+    dispatch(setDetailesIsLoading(isLoading));
+  }, [dispatch, isLoading]);
 
   return isLoading ? (
     <Loader />

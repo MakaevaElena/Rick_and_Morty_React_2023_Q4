@@ -4,14 +4,12 @@ import './style.scss';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Loader from '../Loader/Loader';
 import { useDispatch } from 'react-redux';
-import { setCountPerPage, setPage, setQuery } from '../../store/slices/dataSlice';
+import { setCountPerPage, setMainIsLoading, setPage, setQuery } from '../../store/slices/dataSlice';
 import { useFetchDataByPageQuery } from '../../api/rtkq-api';
 
 const Pagination: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // todo pagination
   const [pageQuery] = useSearchParams();
   const page = pageQuery.get('page') || DEFAULT_PAGE;
   const countPerPage = pageQuery.get('count') || DEFAULT_COUNT;
@@ -19,14 +17,13 @@ const Pagination: React.FC = () => {
   const { data, isLoading } = useFetchDataByPageQuery(+page);
   const [selectedValue, setSelectedValue] = useState<string>(DEFAULT_COUNT);
 
-  // const isLoading = useAppSelector((state) => state.data.isLoading);
-
   useEffect(() => {
     if (page) dispatch(setPage(+page));
     setSelectedValue(countPerPage);
     const query = { type: 'changePage', value: page };
     dispatch(setQuery(query));
-  }, [countPerPage, dispatch, page]);
+    dispatch(setMainIsLoading(isLoading));
+  }, [countPerPage, dispatch, isLoading, page]);
 
   function getClassName(i: number) {
     if (page && +page === i + 1) {
