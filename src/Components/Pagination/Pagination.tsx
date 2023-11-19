@@ -24,11 +24,6 @@ const Pagination: React.FC = () => {
     dispatch(setMainIsLoading(isLoading));
   }, [countPerPage, dispatch, isLoading, page]);
 
-  // useEffect(() => {
-  //   const query = { type: 'changePage', value: page };
-  //   dispatch(setQuery(query));
-  // }, [dispatch, page]);
-
   function getClassName(i: number) {
     if (page && +page === i + 1) {
       return 'chosen_button';
