@@ -1,0 +1,21 @@
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  column-gap: 2rem;
+}
+
+.character-list {
+  flex: 1 1 65%;
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+  column-gap: 0.5%;
+  flex-wrap: wrap;
+  row-gap: 1em;
+  padding: 1em;
+  background-color: #accea3;
+  border-radius: 5px;
+  box-shadow: 0px 5px 10px 2px #556b4f;
+  min-height: 40vh;
+}
