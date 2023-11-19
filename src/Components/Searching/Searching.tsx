@@ -60,7 +60,7 @@ const Searching: React.FC = () => {
 
   return (
     <>
-      <h2>Searching</h2>
+      <h2>Rick and Morty</h2>
       <section className="character-searching">
         <form>
           <input

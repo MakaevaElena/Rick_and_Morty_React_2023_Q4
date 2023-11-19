@@ -1,8 +1,8 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Info from './Info';
-import Context from '../../context/context';
-import { mockData, mockSetData } from '../../mocks/mocks';
+// import Context from '../../context/context';
+import { mockData } from '../../mocks/mocks';
 
 import { vi } from 'vitest';
 import { Provider } from 'react-redux';
@@ -20,19 +20,19 @@ vi.mock('services/apiService', () => ({
 describe('Tests for the Detailed Card component', () => {
   it('Check that a loading indicator is displayed while fetching data', async () => {
     render(
-      <Context.Provider
-        value={{
-          data: mockData,
-          setData: mockSetData,
-          // isLoading: mockIsLoading,
-        }}
-      >
-        <BrowserRouter>
-          <Provider store={store}>
-            <Info />
-          </Provider>
-        </BrowserRouter>
-      </Context.Provider>
+      // <Context.Provider
+      //   value={{
+      //     data: mockData,
+      //     setData: mockSetData,
+      //     // isLoading: mockIsLoading,
+      //   }}
+      // >
+      <BrowserRouter>
+        <Provider store={store}>
+          <Info />
+        </Provider>
+      </BrowserRouter>
+      // </Context.Provider>
     );
     await waitFor(() => {
       const loader = screen.getByTestId('loader');

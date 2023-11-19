@@ -3,8 +3,8 @@ import { act, fireEvent, render, renderHook, screen } from '@testing-library/rea
 import { BrowserRouter } from 'react-router-dom';
 import { useState } from 'react';
 import CharacterList from '../Character-list/Character-list';
-import { mockData, mockSetData } from '../../mocks/mocks';
-import Context from '../../context/context';
+// import { mockData, mockSetData } from '../../mocks/mocks';
+// import Context from '../../context/context';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
 
@@ -34,19 +34,19 @@ describe('Pagination component', () => {
     });
 
     render(
-      <Context.Provider
-        value={{
-          data: mockData,
-          setData: mockSetData,
-          // isLoading: mockIsLoading,
-        }}
-      >
-        <BrowserRouter>
-          <Provider store={store}>
-            <CharacterList />
-          </Provider>
-        </BrowserRouter>
-      </Context.Provider>
+      // <Context.Provider
+      //   value={{
+      //     data: mockData,
+      //     setData: mockSetData,
+      //     // isLoading: mockIsLoading,
+      //   }}
+      // >
+      <BrowserRouter>
+        <Provider store={store}>
+          <CharacterList />
+        </Provider>
+      </BrowserRouter>
+      // </Context.Provider>
     );
 
     const pageButton = screen.findByTestId('5');

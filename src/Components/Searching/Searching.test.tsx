@@ -2,13 +2,13 @@ import { describe, expect, it } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Searching from './Searching';
 import { BrowserRouter } from 'react-router-dom';
-import {
-  mockData,
-  mockSetData,
-  // mockIsLoading,
-} from '../../mocks/mocks';
+// import {
+//   mockData,
+//   mockSetData,
+//   // mockIsLoading,
+// } from '../../mocks/mocks';
 import CharacterList from '../Character-list/Character-list';
-import Context from '../../context/context';
+// import Context from '../../context/context';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
 
@@ -50,20 +50,20 @@ describe('Tests for the Search component', () => {
   });
   it('Check that the Loader render', () => {
     render(
-      <Context.Provider
-        value={{
-          data: mockData,
-          setData: mockSetData,
-          // isLoading: mockIsLoading,
-        }}
-      >
-        <BrowserRouter>
-          <Provider store={store}>
-            <Searching />
-            <CharacterList />
-          </Provider>
-        </BrowserRouter>
-      </Context.Provider>
+      // <Context.Provider
+      //   value={{
+      //     data: mockData,
+      //     setData: mockSetData,
+      //     // isLoading: mockIsLoading,
+      //   }}
+      // >
+      <BrowserRouter>
+        <Provider store={store}>
+          <Searching />
+          <CharacterList />
+        </Provider>
+      </BrowserRouter>
+      // </Context.Provider>
     );
     const searchButton = screen.getByTestId('search-button');
     fireEvent.click(searchButton);

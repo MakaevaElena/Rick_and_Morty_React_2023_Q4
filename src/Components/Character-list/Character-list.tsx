@@ -31,10 +31,6 @@ const CharacterList: React.FC = () => {
       navigate(`/search/?page=${page}&count=${count}`);
   };
 
-  // useEffect(() => {
-  //   query = { type: 'changePage', value: page.toString() };
-  // }, []);
-
   useEffect(() => {
     dispatch(setViewMode(isDetailsOpen));
     dispatch(setDetailesIsLoading(isLoading));
@@ -44,7 +40,6 @@ const CharacterList: React.FC = () => {
     <Loader />
   ) : (
     <>
-      <h2>Character List {results.length}</h2>
       <div className="main-container">
         <section
           className="character-list"

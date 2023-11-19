@@ -5,17 +5,23 @@ import { Route, Routes } from 'react-router-dom';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Info from '../Info/Info';
 import { AppProps } from './types';
-import ErrorButton from '../ErrorButton/ErrorButton';
+// import ErrorButton from '../ErrorButton/ErrorButton';
 import { useAppSelector } from '../../store/slices/hooks';
 
 const App: React.FC<AppProps> = () => {
   const searchValue = useAppSelector((state) => state.data.searchValue);
+  const countPerPage = useAppSelector((state) => state.data.countPerPage);
+  const viewMode = useAppSelector((state) => state.data.viewMode);
 
   return (
     <div className="container">
-      <ErrorButton />
+      {/* <ErrorButton /> */}
       <Searching />
-      <h3>SearchValue from Context: {searchValue || 'Empty'}</h3>
+      <div className="info-from-store">
+        <h4>SearchValue from Store: {searchValue || 'Empty'}</h4>
+        <h4>CountPerPage from Store: {countPerPage || 'Empty'}</h4>
+        <h4>ViewMode from Store: {`${viewMode}` || 'Empty'}</h4>
+      </div>
       <Routes>
         <Route path="/" element={<CharacterList />} />
         <Route path={`/search/`} element={<CharacterList />}>
