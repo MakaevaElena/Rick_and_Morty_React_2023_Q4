@@ -4,12 +4,14 @@ import { DEFAULT_COUNT } from '../../constants';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setQuery, setSearchValue } from '../../store/slices/dataSlice';
+import { useAppSelector } from '../../store/slices/hooks';
 
 const Searching: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [value, setValue] = useState('');
   const [pageQuery] = useSearchParams();
+  const query = useAppSelector((state) => state.data.query);
   const count = pageQuery.get('count') || DEFAULT_COUNT;
   const inputRef: React.RefObject<HTMLInputElement> = React.createRef();
   const searchButtonRef: React.RefObject<HTMLDivElement> = React.createRef();
@@ -21,7 +23,13 @@ const Searching: React.FC = () => {
       setValue(value);
       dispatch(setSearchValue(value));
     }
-  }, [dispatch]);
+
+    if (query.type === 'changePage') {
+      setValue('');
+      localStorage.setItem('searchValue', '');
+      dispatch(setSearchValue(''));
+    }
+  }, [dispatch, query.type]);
 
   function handleSearchClick() {
     localStorage.setItem('searchValue', value);

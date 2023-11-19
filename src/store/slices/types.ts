@@ -1,6 +1,7 @@
 import { Rickandmorty } from '../../types/rickandmorty-types';
 
 export type DataState = {
+  init: boolean;
   data: Rickandmorty[];
   mainIsLoading: boolean;
   detailesIsLoading: boolean;

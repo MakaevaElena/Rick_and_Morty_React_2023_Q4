@@ -3,6 +3,7 @@ import { DEFAULT_COUNT, DEFAULT_PAGE } from '../../constants';
 import { DataState } from './types';
 
 const initialState: DataState = {
+  init: true,
   data: [],
   mainIsLoading: false,
   detailesIsLoading: false,
@@ -11,8 +12,8 @@ const initialState: DataState = {
   searchValue: '',
   viewMode: false,
   query: {
-    type: '',
-    value: '',
+    type: 'searchValue',
+    value: localStorage.getItem('searchValue') || '',
   },
 };
 
@@ -20,6 +21,9 @@ const dataSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
+    setInit: (state, action) => {
+      state.init = action.payload;
+    },
     setQuery: (state, action) => {
       state.query = action.payload;
     },
@@ -51,6 +55,7 @@ const dataSlice = createSlice({
 });
 
 export const {
+  setInit,
   setMainIsLoading,
   setDetailesIsLoading,
   setViewMode,

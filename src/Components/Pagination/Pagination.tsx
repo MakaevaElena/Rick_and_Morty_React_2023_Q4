@@ -6,13 +6,14 @@ import Loader from '../Loader/Loader';
 import { useDispatch } from 'react-redux';
 import { setCountPerPage, setMainIsLoading, setPage, setQuery } from '../../store/slices/dataSlice';
 import { useFetchDataByPageQuery } from '../../api/rtkq-api';
+import { useAppSelector } from '../../store/slices/hooks';
 
 const Pagination: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [pageQuery] = useSearchParams();
   const page = pageQuery.get('page') || DEFAULT_PAGE;
-  const countPerPage = pageQuery.get('count') || DEFAULT_COUNT;
+  const countPerPage = useAppSelector((state) => state.data.countPerPage);
 
   const { data, isLoading } = useFetchDataByPageQuery(+page);
   const [selectedValue, setSelectedValue] = useState<string>(DEFAULT_COUNT);
@@ -20,10 +21,13 @@ const Pagination: React.FC = () => {
   useEffect(() => {
     if (page) dispatch(setPage(+page));
     setSelectedValue(countPerPage);
-    const query = { type: 'changePage', value: page };
-    dispatch(setQuery(query));
     dispatch(setMainIsLoading(isLoading));
   }, [countPerPage, dispatch, isLoading, page]);
+
+  // useEffect(() => {
+  //   const query = { type: 'changePage', value: page };
+  //   dispatch(setQuery(query));
+  // }, [dispatch, page]);
 
   function getClassName(i: number) {
     if (page && +page === i + 1) {
@@ -39,6 +43,12 @@ const Pagination: React.FC = () => {
       navigate(`/search/?page=${DEFAULT_PAGE}&count=${event.target.value}`);
     }
   };
+
+  function handleClickPage() {
+    const query = { type: 'changePage', value: page };
+    dispatch(setQuery(query));
+    dispatch(setPage(page));
+  }
 
   return isLoading ? (
     <Loader />
@@ -63,6 +73,7 @@ const Pagination: React.FC = () => {
             data-testid={i}
             aria-current="page"
             key={i + 1}
+            onClick={handleClickPage}
             to={`/search/?page=${i + 1}&count=${countPerPage}`}
             className={`pagination-button ${getClassName(i)}`}
           >
