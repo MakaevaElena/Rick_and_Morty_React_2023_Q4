@@ -1,132 +1,40 @@
-# Rick_and_Morty_React_2023_Q4
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-# Local Installation
+## Getting Started
 
-clone repository to your local machine
-run npm install
+First, run the development server:
 
-# Available Scripts
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-In the project directory, you can run:
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## npm run dev
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-Runs the app in the development mode.
-Open http://localhost:5173/ to view it in the browser.
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-## npm run lint
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-Launches Eslint for [ts,tsx] files
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## npm run format:fix
+## Learn More
 
-Runs prettier and shows warning in CLI
+To learn more about Next.js, take a look at the following resources:
 
-### Eslint and prettier configurations
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/module01/configs.md
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-Recommended libraries (versions can be different) \
-"@typescript-eslint/eslint-plugin": "^5.22.0", \
-"@typescript-eslint/parser": "^5.22.0", \
-"eslint": "^8.14.0", \
-"eslint-config-prettier": "^8.5.0", \
-"eslint-import-resolver-typescript": "^2.7.1", \
-"eslint-plugin-import": "^2.26.0", \
-"eslint-plugin-prettier": "^4.0.0", \
-"eslint-plugin-react": "^7.29.4", \
-"eslint-plugin-react-hooks": "^4.6.0", \
-"husky": "^7.0.4", \
-"lint-staged": "^12.4.1", \
-"prettier": "^2.6.2", \
-The configuration might be different based on what setup has been choosen (Vite or CRA), you can check the details. Here are some details about setting up Husky on the project. \
+## Deploy on Vercel
 
-Eslint configuration \
-Might be insignificantly changed \
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-{ \
-"parser": "@typescript-eslint/parser", \
-"extends": [ \
-"plugin:react/recommended", \
-"plugin:@typescript-eslint/recommended", \
-"prettier", \
-"plugin:react-hooks/recommended", \
-"plugin:prettier/recommended" \
-], \
-"env": { \
-"browser": true, \
-"es6": true, \
-"jest": true, \
-"node": true \
-}, \
-"root": true, \
-"parserOptions": { \
-"ecmaFeatures": { \
-"jsx": true \
-}, \
-"ecmaVersion": "latest", \
-"sourceType": "module" \
-},
-"plugins": [ \
-"@typescript-eslint", "react", "prettier", "react-hooks" \
-], \
-"rules": { \
-"react-hooks/rules-of-hooks": "error", \
-"react-hooks/exhaustive-deps": "warn", \
-"comma-dangle": ["error", "only-multiline"], \
-"react/prop-types": "off", \
-"react/display-name": "off", \
-"@typescript-eslint/explicit-function-return-type": "off", \
-"prettier/prettier": ["error", { "endOfLine": "auto" }], \
-"@typescript-eslint/interface-name-prefix": "off", \
-"@typescript-eslint/ban-ts-comment": "error", \
-"@typescript-eslint/no-non-null-assertion": "off", \
-"@typescript-eslint/explicit-module-boundary-types": "off", \
-"@typescript-eslint/no-empty-function": "off", \
-"@typescript-eslint/no-explicit-any": "error", \
-"@typescript-eslint/no-var-requires": "off", \
-"react/jsx-uses-react": "off", \
-"react/react-in-jsx-scope": "off" \
-}, \
-"settings": { \
-"react": { \
-"pragma": "React", \
-"version": "detect" \
-} \
-} \
-} \
-Prettier configuration \
-{ \
-"endOfLine": "auto", \
-"semi": true, \
-"singleQuote": true, \
-"tabWidth": 2, \
-"trailingComma": "es5", \
-"printWidth": 100, \
-"arrowParens": "always" \
-} \
-TSConfig \
-
-{ \
-"compilerOptions": { \
-"target": "ESNext", \
-"lib": ["DOM", "DOM.Iterable", "ESNext"], \
-"allowJs": false, \
-"skipLibCheck": true, \
-"esModuleInterop": true, \
-"allowSyntheticDefaultImports": true, \
-"strict": true, \
-"forceConsistentCasingInFileNames": true, \
-"noFallthroughCasesInSwitch": true, \
-"module": "ESNext", \
-"moduleResolution": "Node", \
-"resolveJsonModule": true, \
-"isolatedModules": true, \
-"noImplicitAny": true, \
-"noEmit": true, \
-"jsx": "react-jsx" \
-}, \
-"include": ["src"], \
-"references": [{ "path": "./tsconfig.node.json" }] \
-} \
-Note: If you use CRA you should remove "references": [{ "path": "./tsconfig.node.json" }] from the config above \
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
