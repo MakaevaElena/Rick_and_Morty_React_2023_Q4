@@ -7,10 +7,12 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setDetailesIsLoading } from '../../store/slices/dataSlice';
 import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 const Info: React.FC = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const router = useRouter();
   // const [pageQuery] = useSearchParams();
   const searchParams = useSearchParams();
   const id = searchParams.get('id') || 0;
@@ -22,7 +24,8 @@ const Info: React.FC = () => {
   });
 
   const handlerCloseButton = () => {
-    navigate(`/search/?page=${currentPage}&count=${count}`);
+    // navigate(`/search/?page=${currentPage}&count=${count}`);
+    router.push(`/search/?page=${currentPage}&count=${count}`);
   };
 
   useEffect(() => {

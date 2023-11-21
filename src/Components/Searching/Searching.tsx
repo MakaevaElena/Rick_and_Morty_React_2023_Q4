@@ -72,7 +72,7 @@ const Searching: React.FC = () => {
     <>
       <h2>Rick and Morty</h2>
       <section className={styles['character-searching']}>
-        <form id="form">
+        <form className={styles['form']}>
           <input
             ref={inputRef}
             className={styles['search-input']}

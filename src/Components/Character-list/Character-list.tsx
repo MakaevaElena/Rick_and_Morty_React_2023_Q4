@@ -9,8 +9,9 @@ import { useDispatch } from 'react-redux';
 import { setInit, setMainIsLoading, setViewMode } from '../../store/slices/dataSlice';
 import { useFetchDataByValueQuery } from '../../api/rtkq-api';
 import { useSearchParams } from 'next/navigation';
+import { CharacterListProps } from './types';
 
-const CharacterList: React.FC = () => {
+const CharacterList: React.FC<CharacterListProps> = ({ children }) => {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
   // if (typeof window !== 'undefined')
@@ -63,7 +64,8 @@ const CharacterList: React.FC = () => {
             <h2>Character not found</h2>
           )}
         </section>
-        <Outlet />
+        {/* <Outlet /> */}
+        {children}
       </div>
 
       <Pagination />
