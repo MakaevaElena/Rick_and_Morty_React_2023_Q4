@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
-// import './style.scss';
 import styles from './Searching.module.scss';
 import { DEFAULT_COUNT } from '../../constants';
-// import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setQuery, setSearchValue } from '../../store/slices/dataSlice';
 import { useAppSelector } from '../../store/slices/hooks';
-import { useSearchParams } from 'next/navigation';
+// import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 const Searching: React.FC = () => {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const router = useRouter();
   const [value, setValue] = useState('');
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
   const query = useAppSelector((state) => state.data.query);
-  const count = searchParams.get('count') || DEFAULT_COUNT;
+  // const count = searchParams.get('count') || DEFAULT_COUNT;
+  const count = router.query.count || DEFAULT_COUNT;
   const inputRef: React.RefObject<HTMLInputElement> = React.createRef();
   const searchButtonRef: React.RefObject<HTMLDivElement> = React.createRef();
 
@@ -36,7 +36,7 @@ const Searching: React.FC = () => {
   function handleSearchClick() {
     localStorage.setItem('searchValue', value);
     dispatch(setSearchValue(value));
-    // navigate(`/search/?page=1&count=${count}`);
+    router.push(`/search/?page=1&count=${count}`);
     const query = { type: 'searchValue', value: value };
     dispatch(setQuery(query));
   }

@@ -1,7 +1,6 @@
 import { AppProps } from './types';
 import Searching from '../Searching/Searching';
 import { useAppSelector } from '../../store/slices/hooks';
-// import './Layout.scss';
 import styles from './Layout.module.scss';
 
 const Layout: React.FC<AppProps> = ({ children }) => {

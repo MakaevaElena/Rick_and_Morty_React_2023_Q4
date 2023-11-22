@@ -1,4 +1,4 @@
-import Searching from "../Components/Searching/Searching";
+import Searching from '../Components/Searching/Searching';
 
 const PageNotFound: React.FC = () => {
   return (

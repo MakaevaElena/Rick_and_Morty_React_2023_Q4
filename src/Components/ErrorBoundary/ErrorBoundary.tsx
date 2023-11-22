@@ -39,7 +39,7 @@ export default class ErrorBoundary extends React.Component<Props, State> {
       return (
         <>
           <h1>Sorry.. there was an error</h1>
-          <Button children="Reload" onClick={this.reload} />
+          <Button onClick={this.reload}>{'Reload'}</Button>
         </>
       );
     }

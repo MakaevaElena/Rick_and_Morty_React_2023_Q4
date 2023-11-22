@@ -1,19 +1,17 @@
 import styles from './Info.module.scss';
 import Loader from '../Loader/Loader';
-import { useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
 import { useFetchRickandmortyDetailsQuery } from '../../api/rtkq-api';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setDetailesIsLoading } from '../../store/slices/dataSlice';
 import { useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 const Info: React.FC = () => {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
   const router = useRouter();
-  // const [pageQuery] = useSearchParams();
   const searchParams = useSearchParams();
   const id = searchParams.get('id') || 0;
   const currentPage = searchParams.get('page');
@@ -24,7 +22,6 @@ const Info: React.FC = () => {
   });
 
   const handlerCloseButton = () => {
-    // navigate(`/search/?page=${currentPage}&count=${count}`);
     router.push(`/search/?page=${currentPage}&count=${count}`);
   };
 
@@ -40,9 +37,11 @@ const Info: React.FC = () => {
         <Button
           style="close-button"
           dataTestid="close-button"
-          children="X"
+          // children="X"
           onClick={handlerCloseButton}
-        />
+        >
+          {'X'}
+        </Button>
         <h2>Info about: </h2>
         <h3>{data?.name}</h3>
         <img

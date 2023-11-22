@@ -1,18 +1,19 @@
+import React from 'react';
 import { describe, expect, it } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Searching from './Searching';
-import { BrowserRouter } from 'react-router-dom';
+// import { BrowserRouter } from 'react-router-dom';
 import CharacterList from '../Character-list/Character-list';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
 
 const TestComponent = () => {
   return (
-    <BrowserRouter>
-      <Provider store={store}>
-        <Searching />
-      </Provider>
-    </BrowserRouter>
+    // <BrowserRouter>
+    <Provider store={store}>
+      <Searching />
+    </Provider>
+    // </BrowserRouter>
   );
 };
 
@@ -44,12 +45,12 @@ describe('Tests for the Search component', () => {
   });
   it('Check that the Loader render', () => {
     render(
-      <BrowserRouter>
-        <Provider store={store}>
-          <Searching />
-          <CharacterList />
-        </Provider>
-      </BrowserRouter>
+      // <BrowserRouter>
+      <Provider store={store}>
+        <Searching />
+        <CharacterList />
+      </Provider>
+      // </BrowserRouter>
     );
     const searchButton = screen.getByTestId('search-button');
     fireEvent.click(searchButton);

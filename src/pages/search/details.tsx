@@ -6,7 +6,10 @@ import Info from '@/Components/Info/Info';
 const Details: React.FC<AppProps> = () => {
   return (
     <>
-      <CharacterList children={<Info />} />
+      {/* <CharacterList children={<Info />} /> */}
+      <CharacterList>
+        <Info />
+      </CharacterList>
     </>
   );
 };

@@ -1,6 +1,7 @@
+import React from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { act, fireEvent, render, renderHook, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+// import { BrowserRouter } from 'react-router-dom';
 import { useState } from 'react';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
@@ -33,11 +34,11 @@ describe('Pagination component', () => {
     });
 
     render(
-      <BrowserRouter>
-        <Provider store={store}>
-          <Pagination />
-        </Provider>
-      </BrowserRouter>
+      // <BrowserRouter>
+      <Provider store={store}>
+        <Pagination />
+      </Provider>
+      // </BrowserRouter>
     );
 
     const pageButton = screen.findByTestId('5');
@@ -49,11 +50,11 @@ describe('Pagination component', () => {
 
   it('Check that pagination battons exist', async () => {
     render(
-      <BrowserRouter>
-        <Provider store={store}>
-          <Pagination />
-        </Provider>
-      </BrowserRouter>
+      // <BrowserRouter>
+      <Provider store={store}>
+        <Pagination />
+      </Provider>
+      // </BrowserRouter>
     );
 
     const buttons = screen.getAllByRole('link', { current: 'page' });

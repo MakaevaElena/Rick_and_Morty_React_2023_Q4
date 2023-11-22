@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './Card.module.scss';
 import { DEFAULT_COUNT, DEFAULT_PAGE } from '../../constants';
-// import { Link } from 'react-router-dom';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { CardProps } from './types';
