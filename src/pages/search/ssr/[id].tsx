@@ -1,6 +1,6 @@
 import { fetchRickandmortyDetails, getRunningQueriesThunk } from '@/api/rtkq-api';
 // import { wrapper } from '../../../lib/store';
-import Character from './details';
+import Character from '../details';
 import { store } from '@/store/store';
 // import { wrapper } from '@/store/store';
 
