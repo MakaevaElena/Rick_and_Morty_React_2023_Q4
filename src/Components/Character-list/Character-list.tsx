@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './CharacterList.module.scss';
 import Card from '../Card/Card';
 import Loader from '../Loader/Loader';
@@ -7,10 +8,11 @@ import { useAppSelector } from '../../store/slices/hooks';
 import { useDispatch } from 'react-redux';
 import { setInit, setMainIsLoading, setViewMode } from '../../store/slices/dataSlice';
 import { useFetchDataByValueQuery } from '../../api/rtkq-api';
-// import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { CharacterListProps } from './types';
-// import { useRouter } from 'next/navigation';
+// import { vi } from 'vitest';
+
+// vi.mock('next/router', () => require('next-router-mock'));
 
 const CharacterList: React.FC<CharacterListProps> = ({ children }) => {
   const dispatch = useDispatch();
@@ -20,8 +22,6 @@ const CharacterList: React.FC<CharacterListProps> = ({ children }) => {
     isDetailsOpen = window.location.pathname.includes('details');
   }
 
-  // const searchParams = useSearchParams();
-  // const count = searchParams.get('count');
   const count = router.query.count;
 
   const page = useAppSelector((state) => state.data.page);

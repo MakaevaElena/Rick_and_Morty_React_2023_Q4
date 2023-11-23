@@ -1,11 +1,12 @@
+import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 import { mockCharacter } from '../../mocks/mocks';
-
 import { vi } from 'vitest';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
 import Info from './Info';
+
+// vi.mock('next/router', () => require('next-router-mock'));
 
 global.fetch = vi.fn().mockResolvedValue({
   json: async () => [mockCharacter],
@@ -14,11 +15,9 @@ global.fetch = vi.fn().mockResolvedValue({
 describe('Tests for the Detailed Card component', () => {
   it('Make sure the detailed card component correctly displays the detailed card data', async () => {
     render(
-      <MemoryRouter>
-        <Provider store={store}>
-          <Info />
-        </Provider>
-      </MemoryRouter>
+      <Provider store={store}>
+        <Info />
+      </Provider>
     );
     await waitFor(() => {
       const card = screen.getByTestId('info');
@@ -35,11 +34,11 @@ describe('Tests for the Detailed Card component', () => {
 
   it('Ensure that close button exist', async () => {
     render(
-      <MemoryRouter>
-        <Provider store={store}>
-          <Info />
-        </Provider>
-      </MemoryRouter>
+      // <MemoryRouter>
+      <Provider store={store}>
+        <Info />
+      </Provider>
+      // </MemoryRouter>
     );
     await waitFor(() => {
       const card = screen.getByTestId('info');
@@ -54,11 +53,11 @@ describe('Tests for the Detailed Card component', () => {
 
   it('Ensure that clicking the close button hides the component', async () => {
     render(
-      <MemoryRouter>
-        <Provider store={store}>
-          <Info />
-        </Provider>
-      </MemoryRouter>
+      // <MemoryRouter>
+      <Provider store={store}>
+        <Info />
+      </Provider>
+      // </MemoryRouter>
     );
     await waitFor(() => {
       const card = screen.getByTestId('info');

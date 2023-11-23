@@ -4,14 +4,13 @@ import Loader from '../Loader/Loader';
 import { useDispatch } from 'react-redux';
 import { setMainIsLoading } from '../../store/slices/dataSlice';
 import { useFetchDataByPageQuery } from '../../api/rtkq-api';
-import { useSearchParams } from 'next/navigation';
 import ButtonList from '../ButtonList/ButtonList';
+import { useRouter } from 'next/router';
 
 const Pagination: React.FC = () => {
   const dispatch = useDispatch();
-  const searchParams = useSearchParams();
-  const page = searchParams.get('page') || DEFAULT_PAGE;
-
+  const router = useRouter();
+  const page = router.query.page || DEFAULT_PAGE;
   const { isLoading } = useFetchDataByPageQuery(+page);
 
   useEffect(() => {

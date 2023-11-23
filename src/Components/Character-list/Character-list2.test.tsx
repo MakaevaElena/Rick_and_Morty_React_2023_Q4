@@ -1,6 +1,9 @@
+import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { expect, test, vi } from 'vitest';
 import { TestComponent } from '../../mocks/mocks-component';
+
+// vi.mock('next/router', () => require('next-router-mock'));
 
 describe('Tests for the Card List component', () => {
   test('Check that an appropriate message is displayed if no cards are present', async () => {

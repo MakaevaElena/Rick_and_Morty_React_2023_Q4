@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './Info.module.scss';
 import Loader from '../Loader/Loader';
 import Button from '../Button/Button';
@@ -5,17 +6,14 @@ import { useFetchRickandmortyDetailsQuery } from '../../api/rtkq-api';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setDetailesIsLoading } from '../../store/slices/dataSlice';
-import { useSearchParams } from 'next/navigation';
-// import { useRouter } from 'next/navigation';
 import { useRouter } from 'next/router';
 
 const Info: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const id = searchParams.get('id') || 0;
-  const currentPage = searchParams.get('page');
-  const count = searchParams.get('count');
+  const count = router.query.count;
+  const id = router.query.id || 0;
+  const currentPage = router.query.currentPage;
 
   const { data, isLoading } = useFetchRickandmortyDetailsQuery(+id, {
     skip: Boolean(id) === false,
@@ -34,12 +32,7 @@ const Info: React.FC = () => {
   ) : (
     <div className={styles['info']} data-testid="info">
       <div className={styles['card']}>
-        <Button
-          style="close-button"
-          dataTestid="close-button"
-          // children="X"
-          onClick={handlerCloseButton}
-        >
+        <Button style="close-button" dataTestid="close-button" onClick={handlerCloseButton}>
           {'X'}
         </Button>
         <h2>Info about: </h2>

@@ -2,15 +2,14 @@ import React from 'react';
 import styles from './Card.module.scss';
 import { DEFAULT_COUNT, DEFAULT_PAGE } from '../../constants';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 import { CardProps } from './types';
+import { useRouter } from 'next/router';
 
 const Card: React.FC<CardProps> = (props) => {
-  const searchParams = useSearchParams();
-  const page = searchParams.get('page');
-  const count = searchParams.get('count') || DEFAULT_COUNT;
-
+  const router = useRouter();
+  const page = router.query.page;
   const newPage = page ? page : DEFAULT_PAGE;
+  const count = router.query.count || DEFAULT_COUNT;
 
   return (
     <div className={styles['card']}>

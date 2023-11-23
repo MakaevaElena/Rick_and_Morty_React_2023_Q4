@@ -4,16 +4,13 @@ import { DEFAULT_COUNT } from '../../constants';
 import { useDispatch } from 'react-redux';
 import { setQuery, setSearchValue } from '../../store/slices/dataSlice';
 import { useAppSelector } from '../../store/slices/hooks';
-// import { useRouter, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 
 const Searching: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [value, setValue] = useState('');
-  // const searchParams = useSearchParams();
   const query = useAppSelector((state) => state.data.query);
-  // const count = searchParams.get('count') || DEFAULT_COUNT;
   const count = router.query.count || DEFAULT_COUNT;
   const inputRef: React.RefObject<HTMLInputElement> = React.createRef();
   const searchButtonRef: React.RefObject<HTMLDivElement> = React.createRef();

@@ -1,7 +1,10 @@
+import React from 'react';
 import { describe, expect, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import ErrorBoundary from './ErrorBoundary';
 import ErrorButton from '../ErrorButton/ErrorButton';
+
+// vi.mock('next/router', () => require('next-router-mock'));
 
 describe('Tests for Error Button', () => {
   test('Error button click should throw error', async () => {

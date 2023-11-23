@@ -1,12 +1,12 @@
 import React from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { act, fireEvent, render, renderHook, screen } from '@testing-library/react';
-// import { BrowserRouter } from 'react-router-dom';
 import { useState } from 'react';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
 import Pagination from './Pagination';
 
+// vi.mock('next/router', () => require('next-router-mock'));
 let mockSearchParam = `/search/?page=${3}&count=${20}`;
 
 describe('Pagination component', () => {
@@ -34,11 +34,9 @@ describe('Pagination component', () => {
     });
 
     render(
-      // <BrowserRouter>
       <Provider store={store}>
         <Pagination />
       </Provider>
-      // </BrowserRouter>
     );
 
     const pageButton = screen.findByTestId('5');

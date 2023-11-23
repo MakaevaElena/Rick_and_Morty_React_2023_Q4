@@ -2,18 +2,17 @@ import React from 'react';
 import { describe, expect, it } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Searching from './Searching';
-// import { BrowserRouter } from 'react-router-dom';
 import CharacterList from '../Character-list/Character-list';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
 
+// vi.mock('next/router', () => require('next-router-mock'));
+
 const TestComponent = () => {
   return (
-    // <BrowserRouter>
     <Provider store={store}>
       <Searching />
     </Provider>
-    // </BrowserRouter>
   );
 };
 

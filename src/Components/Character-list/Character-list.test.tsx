@@ -1,3 +1,4 @@
+import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { expect, test } from 'vitest';
 import { TestComponent } from '../../mocks/mocks-component';

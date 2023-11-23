@@ -4,7 +4,7 @@ const PageNotFound: React.FC = () => {
   return (
     <>
       <Searching />
-      <h1>My Page Not Found</h1>
+      <h1>Page Not Found</h1>
     </>
   );
 };

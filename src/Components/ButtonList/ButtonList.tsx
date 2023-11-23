@@ -6,14 +6,11 @@ import { useDispatch } from 'react-redux';
 import { setCountPerPage, setMainIsLoading, setPage, setQuery } from '../../store/slices/dataSlice';
 import { useFetchDataByPageQuery } from '../../api/rtkq-api';
 import { useAppSelector } from '../../store/slices/hooks';
-// import { useRouter, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 
 const ButtonList: React.FC = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  // const searchParams = useSearchParams();
-  // const page = searchParams.get('page') || DEFAULT_PAGE;
   const page = router.query.page || DEFAULT_PAGE;
   const countPerPage = useAppSelector((state) => state.data.countPerPage);
 

@@ -1,5 +1,6 @@
+import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Card from './Card';
 import { mockCharacter } from '../../mocks/mocks';
 import CharacterList from '../Character-list/Character-list';
@@ -7,15 +8,16 @@ import Info from '../Info/Info';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
+// import { vi } from 'vitest';
+
+// vi.mock('next/router', () => require('next-router-mock'));
 
 describe('Tests for the Card component', () => {
   it('Ensure that the card component renders the relevant card data', async () => {
     render(
-      <BrowserRouter>
-        <Provider store={store}>
-          <Card key={mockCharacter.id} RickandmortyData={mockCharacter} />
-        </Provider>
-      </BrowserRouter>
+      <Provider store={store}>
+        <Card key={mockCharacter.id} RickandmortyData={mockCharacter} />
+      </Provider>
     );
     await waitFor(() => {
       expect(screen.getAllByTestId('card')[0]).toBeInTheDocument();
@@ -34,17 +36,17 @@ describe('Tests for the Card component', () => {
 
   it('Validate that clicking on a card opens a detailed card component', async () => {
     render(
-      <BrowserRouter>
-        <Provider store={store}>
-          <Routes>
-            <Route path="/" element={<CharacterList />} />
-            <Route path={`/search/`} element={<CharacterList />}>
-              <Route path={`/search/details/`} element={<Info />} />
-            </Route>
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </Provider>
-      </BrowserRouter>
+      // <BrowserRouter>
+      <Provider store={store}>
+        <Routes>
+          <Route path="/" element={<CharacterList />} />
+          <Route path={`/search/`} element={<CharacterList />}>
+            <Route path={`/search/details/`} element={<Info />} />
+          </Route>
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </Provider>
+      // </BrowserRouter>
     );
 
     const info = screen.queryByTestId('info');
@@ -63,17 +65,17 @@ describe('Tests for the Card component', () => {
 
   it('Ensure that clicking the close button hides the component', async () => {
     render(
-      <BrowserRouter>
-        <Provider store={store}>
-          <Routes>
-            <Route path="/" element={<CharacterList />} />
-            <Route path={`/search/`} element={<CharacterList />}>
-              <Route path={`/search/details/`} element={<Info />} />
-            </Route>
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </Provider>
-      </BrowserRouter>
+      // <BrowserRouter>
+      <Provider store={store}>
+        <Routes>
+          <Route path="/" element={<CharacterList />} />
+          <Route path={`/search/`} element={<CharacterList />}>
+            <Route path={`/search/details/`} element={<Info />} />
+          </Route>
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </Provider>
+      // </BrowserRouter>
     );
 
     await waitFor(() => {
