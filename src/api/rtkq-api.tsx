@@ -40,4 +40,7 @@ export const {
   useFetchDataByPageQuery,
   useFetchDataByValueQuery,
   useFetchRickandmortyDetailsQuery,
+  util: { getRunningQueriesThunk },
 } = rtkqApi;
+
+export const { fetchRickandmortyDetails } = rtkqApi.endpoints;
