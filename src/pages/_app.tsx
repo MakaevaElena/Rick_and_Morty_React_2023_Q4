@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import ErrorBoundary from '../Components/ErrorBoundary/ErrorBoundary';
 import { store } from '../store/store';
 import Layout from '@/Components/Layout/Layout';
+// import { wrapper } from '@/store/store';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -16,3 +17,6 @@ export default function App({ Component, pageProps }: AppProps) {
     </ErrorBoundary>
   );
 }
+// const AppWithStore = wrapper.withRedux(App);
+
+// export default AppWithStore;

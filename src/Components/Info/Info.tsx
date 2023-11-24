@@ -7,13 +7,16 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setDetailesIsLoading } from '../../store/slices/dataSlice';
 import { useRouter } from 'next/router';
+import { useAppSelector } from '@/store/slices/hooks';
 
 const Info: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const count = router.query.count;
-  const id = router.query.id || 0;
-  const currentPage = router.query.currentPage;
+  // const count = router.query.count;
+  const count = useAppSelector((state) => state.data.countPerPage);
+  const id = router.query?.id || 0;
+  // const currentPage = router.query.currentPage;
+  const currentPage = useAppSelector((state) => state.data.page);
 
   const { data, isLoading } = useFetchRickandmortyDetailsQuery(+id, {
     skip: Boolean(id) === false,

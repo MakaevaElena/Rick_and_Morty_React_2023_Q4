@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { expect, test } from 'vitest';
 import { TestComponent } from '../../mocks/mocks-component';
+// import { useFetchDataByValueQuery } from '@/api/rtkq-api';
 
 describe('Tests for the Card List component', () => {
   test('Verify that the component not renders the tytle', () => {
@@ -17,4 +18,21 @@ describe('Tests for the Card List component', () => {
       expect(cards).toHaveLength(20);
     });
   });
+
+  // it('displayes "Character not found" if no cards are present', () => {
+  //   const useFetchData = () =>
+  //     useFetchDataByValueQuery({
+  //       type: 'searchValue',
+  //       value: 'string',
+  //     });
+
+  //   (useFetchData as Mock).mockImplementation(() => {
+  //     return {
+  //       data: [],
+  //     };
+  //   });
+  //   render(<TestComponent />);
+  //   const emtyList = screen.getByTestId('character-list');
+  //   expect(emtyList).toHaveTextContent('Character not found');
+  // });
 });

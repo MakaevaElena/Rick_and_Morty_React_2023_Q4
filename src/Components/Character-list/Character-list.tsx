@@ -10,9 +10,6 @@ import { setInit, setMainIsLoading, setViewMode } from '../../store/slices/dataS
 import { useFetchDataByValueQuery } from '../../api/rtkq-api';
 import { useRouter } from 'next/router';
 import { CharacterListProps } from './types';
-// import { vi } from 'vitest';
-
-// vi.mock('next/router', () => require('next-router-mock'));
 
 const CharacterList: React.FC<CharacterListProps> = ({ children }) => {
   const dispatch = useDispatch();
@@ -22,7 +19,8 @@ const CharacterList: React.FC<CharacterListProps> = ({ children }) => {
     isDetailsOpen = window.location.pathname.includes('details');
   }
 
-  const count = router.query.count;
+  // const count = router.query.count;
+  const count = useAppSelector((state) => state.data.countPerPage);
 
   const page = useAppSelector((state) => state.data.page);
   const countPerPage = useAppSelector((state) => state.data.countPerPage);

@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import { store } from '../../store/store';
 import Pagination from './Pagination';
 
-// vi.mock('next/router', () => require('next-router-mock'));
 let mockSearchParam = `/search/?page=${3}&count=${20}`;
 
 describe('Pagination component', () => {
@@ -48,11 +47,9 @@ describe('Pagination component', () => {
 
   it('Check that pagination battons exist', async () => {
     render(
-      // <BrowserRouter>
       <Provider store={store}>
         <Pagination />
       </Provider>
-      // </BrowserRouter>
     );
 
     const buttons = screen.getAllByRole('link', { current: 'page' });

@@ -2,6 +2,7 @@ import { fetchRickandmortyDetails, getRunningQueriesThunk } from '@/api/rtkq-api
 // import { wrapper } from '../../../lib/store';
 import Character from '../details';
 import { store } from '@/store/store';
+// import { GetServerSideProps } from 'next';
 // import { wrapper } from '@/store/store';
 
 export default Character;

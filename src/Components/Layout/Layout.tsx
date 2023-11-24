@@ -1,3 +1,4 @@
+import React from 'react';
 import { AppProps } from './types';
 import Searching from '../Searching/Searching';
 import { useAppSelector } from '../../store/slices/hooks';

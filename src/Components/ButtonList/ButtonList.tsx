@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 const ButtonList: React.FC = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const page = router.query.page || DEFAULT_PAGE;
+  const page = router.query?.page || DEFAULT_PAGE;
   const countPerPage = useAppSelector((state) => state.data.countPerPage);
 
   const { data, isLoading } = useFetchDataByPageQuery(+page);
@@ -45,7 +45,7 @@ const ButtonList: React.FC = () => {
   }
 
   return (
-    <div className={styles['pagination']}>
+    <div data-testid="button-list" className={styles['pagination']}>
       <h2>Pagination</h2>
       <select
         value={selectedValue}

@@ -6,8 +6,6 @@ import CharacterList from '../Character-list/Character-list';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
 
-// vi.mock('next/router', () => require('next-router-mock'));
-
 const TestComponent = () => {
   return (
     <Provider store={store}>
@@ -44,12 +42,10 @@ describe('Tests for the Search component', () => {
   });
   it('Check that the Loader render', () => {
     render(
-      // <BrowserRouter>
       <Provider store={store}>
         <Searching />
         <CharacterList />
       </Provider>
-      // </BrowserRouter>
     );
     const searchButton = screen.getByTestId('search-button');
     fireEvent.click(searchButton);

@@ -15,14 +15,22 @@ export const store = configureStore({
 setupListeners(store.dispatch);
 
 export type RootState = ReturnType<typeof store.getState>;
-
 export type AppDispatch = typeof store.dispatch;
-
-//https://www.coderdoc.ru/start/36_react-redux-ts/01_configurestore/1_16_store.php
-//https://github.com/shopot/react-101/tree/chapter-22
-//https://habr.com/ru/companies/domrf/articles/736336/
-
-// const makeStore = () => store;
-
 export type AppStore = ReturnType<typeof configureStore>;
-// export const wrapper = createWrapper<AppStore>(store., { debug: true });
+
+// export const makeStore = () =>
+//   configureStore({
+//     reducer: {
+//       data: dataReducer,
+//       [rtkqApi.reducerPath]: rtkqApi.reducer,
+//     },
+//     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(rtkqApi.middleware),
+//   });
+
+// const store = makeStore();
+
+// export type AppStore = ReturnType<typeof makeStore>;
+// export type RootState = ReturnType<AppStore['getState']>;
+// export type AppDispatch = AppStore['dispatch'];
+
+// export const wrapper = createWrapper<AppStore>(makeStore, { debug: true });

@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 const Pagination: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const page = router.query.page || DEFAULT_PAGE;
+  const page = router.query?.page || DEFAULT_PAGE;
   const { isLoading } = useFetchDataByPageQuery(+page);
 
   useEffect(() => {

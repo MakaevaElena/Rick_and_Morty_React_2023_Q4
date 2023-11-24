@@ -11,7 +11,8 @@ const Searching: React.FC = () => {
   const router = useRouter();
   const [value, setValue] = useState('');
   const query = useAppSelector((state) => state.data.query);
-  const count = router.query.count || DEFAULT_COUNT;
+  const count = useAppSelector((state) => state.data.countPerPage) || DEFAULT_COUNT;
+  // const count = router.query.count || DEFAULT_COUNT;
   const inputRef: React.RefObject<HTMLInputElement> = React.createRef();
   const searchButtonRef: React.RefObject<HTMLDivElement> = React.createRef();
 

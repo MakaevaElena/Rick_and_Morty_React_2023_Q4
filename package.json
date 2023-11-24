@@ -2,6 +2,7 @@
   "name": "rick_and_morty_react_2023_q4",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

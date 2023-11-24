@@ -1,16 +1,14 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-// import { Route, Routes } from 'react-router-dom';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Card from './Card';
 import { mockCharacter } from '../../mocks/mocks';
-// import CharacterList from '../Character-list/Character-list';
-// import Info from '../Info/Info';
-// import PageNotFound from '../PageNotFound/PageNotFound';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
+import Layout from '../Layout/Layout';
+import CharacterList from '../Character-list/Character-list';
+import Info from '../Info/Info';
 // import { vi } from 'vitest';
-
-// vi.mock('next/router', () => require('next-router-mock'));
+// import router from 'next/router';
 
 describe('Tests for the Card component', () => {
   it('Ensure that the card component renders the relevant card data', async () => {
@@ -34,44 +32,47 @@ describe('Tests for the Card component', () => {
     });
   });
 
-  // it('Validate that clicking on a card opens a detailed card component', async () => {
-  //   render(
-  //     <Provider store={store}>
-  //       <Routes>
-  //         <Route path="/" element={<CharacterList />} />
-  //         <Route path={`/search/`} element={<CharacterList />}>
-  //           <Route path={`/search/details/`} element={<Info />} />
-  //         </Route>
-  //         <Route path="*" element={<PageNotFound />} />
-  //       </Routes>
-  //     </Provider>
-  //   );
+  it('Validate that clicking on a card opens a detailed card component', async () => {
+    render(
+      <Provider store={store}>
+        <Layout>
+          <CharacterList>
+            <Info />
+          </CharacterList>
+        </Layout>
+      </Provider>
+    );
 
-  //   const info = screen.queryByTestId('info');
-  //   expect(info).not.toBeInTheDocument();
+    const info = screen.queryByTestId('info');
+    expect(info).not.toBeInTheDocument();
 
-  //   // todo
-  //   await waitFor(() => {
-  //     const card = screen.getAllByTestId('card')[0];
-  //     fireEvent.click(card);
-  //   });
+    await waitFor(() => {
+      const card = screen.getAllByTestId('card')[0];
+      fireEvent.click(card);
+    });
 
-  //   await waitFor(() => {
-  //     const info = screen.getByTestId('info');
-  //     expect(info).toBeInTheDocument();
-  //   });
-  // });
+    await waitFor(() => {
+      const info = screen.getByTestId('info');
+      expect(info).toBeInTheDocument();
+    });
+  });
 
   // it('Ensure that clicking the close button hides the component', async () => {
+  //   vi.mock('next/router', () => ({
+  //     useRouter() {
+  //       return {
+  //         route: `/search/?page=${1}&count=${20}`,
+  //       };
+  //     },
+  //   }));
+
   //   render(
   //     <Provider store={store}>
-  //       <Routes>
-  //         <Route path="/" element={<CharacterList />} />
-  //         <Route path={`/search/`} element={<CharacterList />}>
-  //           <Route path={`/search/details/`} element={<Info />} />
-  //         </Route>
-  //         <Route path="*" element={<PageNotFound />} />
-  //       </Routes>
+  //       <Layout>
+  //         <CharacterList>
+  //           <Info />
+  //         </CharacterList>
+  //       </Layout>
   //     </Provider>
   //   );
 
@@ -81,21 +82,33 @@ describe('Tests for the Card component', () => {
   //     fireEvent.click(card);
   //   });
 
-  //   await waitFor(() => {
-  //     const info = screen.getByTestId('info');
-  //     expect(info).toBeInTheDocument();
-  //   });
+  //   const info = screen.getByTestId('info');
+  //   expect(info).toBeInTheDocument();
 
-  //   await waitFor(() => {
-  //     const closeButton = screen.getByTestId('close-button');
-  //     expect(closeButton).toBeInTheDocument();
-  //     fireEvent.click(closeButton);
-  //   });
-  //   await waitFor(() => new Promise((resolve) => setTimeout(resolve, 100)));
+  //   // await waitFor(() => {
+  //   const closeButton = screen.getByTestId('close-button');
+  //   expect(closeButton).toBeInTheDocument();
+  //   fireEvent.click(closeButton);
+  //   // });
+  //   // await waitFor(() => new Promise((resolve) => setTimeout(resolve, 100)));
 
   //   await waitFor(() => {
   //     const card = screen.queryByTestId('info');
   //     expect(card).not.toBeInTheDocument();
   //   });
+  // });
+  // it('opens a detailed card component by clicking on a card and change search', () => {
+  //   render(
+  //     <Provider store={store}>
+  //       <Card key={mockCharacter.id} RickandmortyData={mockCharacter} />
+  //     </Provider>
+  //   );
+  //   const card = screen.getByTestId('card');
+  //   fireEvent.click(card);
+
+  //   // const searchParams = new URLSearchParams(JSON.stringify(router.query));
+
+  //   // expect(searchParams.has(`id`)).toBeTruthy();
+  //   // expect(searchParams.get('id')).toBe(String(mockCharacter.id));
   // });
 });
