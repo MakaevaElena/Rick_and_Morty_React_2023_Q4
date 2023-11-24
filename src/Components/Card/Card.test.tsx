@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Card from './Card';
-import { mockCharacter } from '../../mocks/mocks';
+import { mockCharacter, mockData } from '../../mocks/mocks';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
 import Layout from '../Layout/Layout';
@@ -36,8 +36,18 @@ describe('Tests for the Card component', () => {
     render(
       <Provider store={store}>
         <Layout>
-          <CharacterList>
-            <Info />
+          <CharacterList
+            characterList={{
+              info: {
+                count: 826,
+                pages: 42,
+                next: 'https://rickandmortyapi.com/api/character/?page=2',
+                prev: null,
+              },
+              results: mockData,
+            }}
+          >
+            <Info details={mockData[0]} />
           </CharacterList>
         </Layout>
       </Provider>

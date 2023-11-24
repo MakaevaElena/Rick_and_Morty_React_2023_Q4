@@ -11,7 +11,8 @@ import { useFetchDataByValueQuery } from '../../api/rtkq-api';
 import { useRouter } from 'next/router';
 import { CharacterListProps } from './types';
 
-const CharacterList: React.FC<CharacterListProps> = ({ children }) => {
+const CharacterList: React.FC<CharacterListProps> = ({ characterList, children }) => {
+  const data = characterList;
   const dispatch = useDispatch();
   const router = useRouter();
   let isDetailsOpen = false;
@@ -26,7 +27,8 @@ const CharacterList: React.FC<CharacterListProps> = ({ children }) => {
   const countPerPage = useAppSelector((state) => state.data.countPerPage);
   const query = useAppSelector((state) => state.data.query);
   const init = useAppSelector((state) => state.data.init);
-  const { data, isLoading, error } = useFetchDataByValueQuery(query);
+  // const { data, isLoading, error } = useFetchDataByValueQuery(query);
+  const { isLoading, error } = useFetchDataByValueQuery(query);
   const results = data ? data.results : [];
   results.slice(0, +countPerPage);
 

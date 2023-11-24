@@ -15,7 +15,7 @@ describe('Tests for the Card List component', () => {
     render(<TestComponent />);
     await waitFor(() => {
       const cards = screen.getAllByTestId('card');
-      expect(cards).toHaveLength(20);
+      expect(cards).toHaveLength(2);
     });
   });
 

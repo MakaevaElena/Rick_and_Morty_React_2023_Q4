@@ -8,8 +8,10 @@ import { useDispatch } from 'react-redux';
 import { setDetailesIsLoading } from '../../store/slices/dataSlice';
 import { useRouter } from 'next/router';
 import { useAppSelector } from '@/store/slices/hooks';
+import { InfoProps } from '@/types/common-types';
 
-const Info: React.FC = () => {
+const Info: React.FC<InfoProps> = ({ details }) => {
+  const data = details;
   const dispatch = useDispatch();
   const router = useRouter();
   // const count = router.query.count;
@@ -18,7 +20,10 @@ const Info: React.FC = () => {
   // const currentPage = router.query.currentPage;
   const currentPage = useAppSelector((state) => state.data.page);
 
-  const { data, isLoading } = useFetchRickandmortyDetailsQuery(+id, {
+  // const { data, isLoading } = useFetchRickandmortyDetailsQuery(+id, {
+  //   skip: Boolean(id) === false,
+  // });
+  const { isLoading } = useFetchRickandmortyDetailsQuery(+id, {
     skip: Boolean(id) === false,
   });
 

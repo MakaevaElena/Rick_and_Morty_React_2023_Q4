@@ -5,6 +5,26 @@ import { DataState } from './types';
 const initialState: DataState = {
   init: true,
   data: [],
+  // details: {
+  //   id: 0,
+  //   name: '',
+  //   status: '',
+  //   species: '',
+  //   type: '',
+  //   gender: '',
+  //   origin: {
+  //     name: '',
+  //     url: '',
+  //   },
+  //   location: {
+  //     name: '',
+  //     url: '',
+  //   },
+  //   image: '',
+  //   episode: [],
+  //   url: '',
+  //   created: '',
+  // },
   mainIsLoading: false,
   detailesIsLoading: false,
   page: DEFAULT_PAGE,
@@ -39,6 +59,9 @@ const dataSlice = createSlice({
     setData: (state, action) => {
       state.data = action.payload;
     },
+    // setDetails: (state, action) => {
+    //   state.details = action.payload;
+    // },
 
     setPage: (state, action) => {
       state.page = action.payload;

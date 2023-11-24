@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { DEFAULT_COUNT, DEFAULT_PAGE } from '../../constants';
+import React, { useEffect } from 'react';
+import { DEFAULT_PAGE } from '../../constants';
 import styles from './ButtonList.module.scss';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
@@ -12,16 +12,18 @@ const ButtonList: React.FC = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const page = router.query?.page || DEFAULT_PAGE;
+  const queryCountPerPage = router.query?.count;
   const countPerPage = useAppSelector((state) => state.data.countPerPage);
 
   const { data, isLoading } = useFetchDataByPageQuery(+page);
-  const [selectedValue, setSelectedValue] = useState<string>(DEFAULT_COUNT);
+  // const [selectedValue, setSelectedValue] = useState<string>(DEFAULT_COUNT);
 
   useEffect(() => {
     if (page) dispatch(setPage(+page));
-    setSelectedValue(countPerPage);
+    // setSelectedValue(countPerPage);
+    dispatch(setCountPerPage(queryCountPerPage));
     dispatch(setMainIsLoading(isLoading));
-  }, [countPerPage, dispatch, isLoading, page]);
+  }, [countPerPage, dispatch, isLoading, page, queryCountPerPage]);
 
   function getClassName(i: number) {
     if (page && +page === i + 1) {
@@ -32,9 +34,9 @@ const ButtonList: React.FC = () => {
 
   const handleChangeCount = (event: React.ChangeEvent<HTMLSelectElement>) => {
     if (event.target instanceof HTMLSelectElement) {
-      dispatch(setCountPerPage(event.target.value));
       dispatch(setPage(page));
       router.push(`/search/?page=${DEFAULT_PAGE}&count=${event.target.value}`);
+      dispatch(setCountPerPage(event.target.value));
     }
   };
 
@@ -48,7 +50,8 @@ const ButtonList: React.FC = () => {
     <div data-testid="button-list" className={styles['pagination']}>
       <h2>Pagination</h2>
       <select
-        value={selectedValue}
+        // value={selectedValue}
+        value={queryCountPerPage}
         data-testid="select"
         className={styles['change-count-select']}
         onChange={handleChangeCount}

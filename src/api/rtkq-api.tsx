@@ -43,4 +43,4 @@ export const {
   util: { getRunningQueriesThunk },
 } = rtkqApi;
 
-export const { fetchRickandmortyDetails, fetchDataByPage } = rtkqApi.endpoints;
+export const { fetchRickandmortyDetails, fetchDataByPage, fetchDataByValue } = rtkqApi.endpoints;
