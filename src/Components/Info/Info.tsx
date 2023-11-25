@@ -9,6 +9,7 @@ import { setDetailesIsLoading } from '../../store/slices/dataSlice';
 import { useRouter } from 'next/router';
 import { useAppSelector } from '@/store/slices/hooks';
 import { InfoProps } from '@/types/common-types';
+import Image from 'next/image';
 
 const Info: React.FC<InfoProps> = ({ details }) => {
   const data = details;
@@ -45,7 +46,10 @@ const Info: React.FC<InfoProps> = ({ details }) => {
         </Button>
         <h2>Info about: </h2>
         <h3>{data?.name}</h3>
-        <img
+        <Image
+          priority={true}
+          width={500}
+          height={500}
           data-testid="info-img"
           className={styles['character-img']}
           src={data?.image ? data.image : ''}

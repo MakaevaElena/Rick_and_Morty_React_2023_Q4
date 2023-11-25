@@ -16,7 +16,7 @@ export type InfoProps = {
 };
 
 export interface AppProps {
-  data: IRickandmortyAPI;
+  searchedList: IRickandmortyAPI;
   children?: ReactNode;
 }
 

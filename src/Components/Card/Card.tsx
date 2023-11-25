@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { CardProps } from './types';
 // import { useRouter } from 'next/router';
 import { useAppSelector } from '@/store/slices/hooks';
+import Image from 'next/image';
 
 const Card: React.FC<CardProps> = (props) => {
   // const router = useRouter();
@@ -30,7 +31,10 @@ const Card: React.FC<CardProps> = (props) => {
         }`}
       >
         <h3>{props.RickandmortyData.name}</h3>
-        <img
+        <Image
+          priority={true}
+          width={500}
+          height={500}
           className={styles['character-img']}
           src={props.RickandmortyData.image ? props.RickandmortyData.image : ''}
           alt="character-img"

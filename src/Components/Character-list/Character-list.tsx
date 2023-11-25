@@ -63,7 +63,6 @@ const CharacterList: React.FC<CharacterListProps> = ({ characterList, children }
             <h2>Character not found</h2>
           )}
         </section>
-        {/* <Outlet /> */}
         {children}
       </div>
 
