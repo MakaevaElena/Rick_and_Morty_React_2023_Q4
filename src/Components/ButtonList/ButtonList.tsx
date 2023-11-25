@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { DEFAULT_PAGE } from '../../constants';
+import { DEFAULT_COUNT, DEFAULT_PAGE } from '../../constants';
 import styles from './ButtonList.module.scss';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
@@ -12,7 +12,7 @@ const ButtonList: React.FC = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const page = router.query?.page || DEFAULT_PAGE;
-  const queryCountPerPage = router.query?.count;
+  const queryCountPerPage = router.query?.count || DEFAULT_COUNT;
   const countPerPage = useAppSelector((state) => state.data.countPerPage);
 
   const { data, isLoading } = useFetchDataByPageQuery(+page);

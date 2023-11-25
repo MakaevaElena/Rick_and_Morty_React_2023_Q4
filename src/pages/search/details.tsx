@@ -22,7 +22,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   const { data: details } = await store.dispatch(fetchRickandmortyDetails.initiate(+id));
   const { data: characterList } = await store.dispatch(fetchDataByPage.initiate(+page));
   await Promise.all(store.dispatch(getRunningQueriesThunk()));
-  console.log('State on server', store.getState());
+  // console.log('State on server', store.getState());
 
   return {
     // props: {},

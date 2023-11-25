@@ -5,6 +5,7 @@ import Searching from './Searching';
 import CharacterList from '../Character-list/Character-list';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
+import { mockData } from '@/mocks/mocks';
 
 const TestComponent = () => {
   return (
@@ -44,7 +45,17 @@ describe('Tests for the Search component', () => {
     render(
       <Provider store={store}>
         <Searching />
-        <CharacterList />
+        <CharacterList
+          characterList={{
+            info: {
+              count: 826,
+              pages: 42,
+              next: 'https://rickandmortyapi.com/api/character/?page=2',
+              prev: null,
+            },
+            results: mockData,
+          }}
+        />
       </Provider>
     );
     const searchButton = screen.getByTestId('search-button');
