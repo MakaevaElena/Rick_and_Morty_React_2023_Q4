@@ -7,7 +7,7 @@ export type SearchPageProps = {
 };
 
 export type DetailsProps = {
-  characterList: IRickandmortyAPI;
+  searchedList: IRickandmortyAPI;
   details: Rickandmorty;
 };
 

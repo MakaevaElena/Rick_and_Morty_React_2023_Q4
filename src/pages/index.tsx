@@ -23,10 +23,8 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   // const state = store.getState();
   // console.log('state.data.query', state.data.query);
   return {
-    // props: {},
     props: { data },
   };
-  // });
 });
 
 export default Home;

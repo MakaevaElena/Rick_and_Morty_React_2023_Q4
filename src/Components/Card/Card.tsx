@@ -8,6 +8,12 @@ import { useAppSelector } from '@/store/slices/hooks';
 
 const Card: React.FC<CardProps> = (props) => {
   // const router = useRouter();
+  // const searchValue = localStorage.getItem('searchValue');
+  const searchValue = useAppSelector((state) => state.data.searchValue);
+  // const searchValue = router.query?.searchValue;
+  const codedSearchValue =
+    searchValue && typeof searchValue === 'string' ? encodeURI(searchValue) : '';
+  // const router = useRouter();
   // const page = router.query.page;
 
   const page = useAppSelector((state) => state.data.page);
@@ -19,7 +25,9 @@ const Card: React.FC<CardProps> = (props) => {
     <div className={styles['card']}>
       <Link
         data-testid="card"
-        href={`/search/details/?page=${newPage}&count=${count}&id=${props.RickandmortyData.id}`}
+        href={`/search/details/?page=${newPage}&count=${count}&id=${props.RickandmortyData.id}${
+          searchValue && `&searchValue=${codedSearchValue}`
+        }`}
       >
         <h3>{props.RickandmortyData.name}</h3>
         <img

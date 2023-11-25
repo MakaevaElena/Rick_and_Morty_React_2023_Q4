@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { mockCharacter } from '../../mocks/mocks';
+import { mockCharacter, mockData } from '../../mocks/mocks';
 import { vi } from 'vitest';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
@@ -10,13 +10,17 @@ global.fetch = vi.fn().mockResolvedValue({
   json: async () => [mockCharacter],
 });
 
+export const RenderedComponent = () => {
+  return (
+    <Provider store={store}>
+      <Info details={mockData[0]} />
+    </Provider>
+  );
+};
+
 describe('Tests for the Detailed Card component', () => {
   it('Make sure the detailed card component correctly displays the detailed card data', async () => {
-    render(
-      <Provider store={store}>
-        <Info />
-      </Provider>
-    );
+    render(<RenderedComponent />);
     await waitFor(() => {
       const card = screen.getByTestId('info');
       expect(card).toBeInTheDocument();
@@ -31,11 +35,7 @@ describe('Tests for the Detailed Card component', () => {
   });
 
   it('Ensure that close button exist', async () => {
-    render(
-      <Provider store={store}>
-        <Info />
-      </Provider>
-    );
+    render(<RenderedComponent />);
     await waitFor(() => {
       const card = screen.getByTestId('info');
       expect(card).toBeInTheDocument();
@@ -48,11 +48,7 @@ describe('Tests for the Detailed Card component', () => {
   });
 
   it('Ensure that clicking the close button hides the component', async () => {
-    render(
-      <Provider store={store}>
-        <Info />
-      </Provider>
-    );
+    render(<RenderedComponent />);
     await waitFor(() => {
       const card = screen.getByTestId('info');
       expect(card).toBeInTheDocument();

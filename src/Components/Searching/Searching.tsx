@@ -35,7 +35,7 @@ const Searching: React.FC = () => {
     localStorage.setItem('searchValue', value);
     dispatch(setSearchValue(value));
     // router.push(`/search/?page=1&count=${count}`);
-    router.push(`/search/?page=1&count=${count}&search=${value}`);
+    router.push(`/search/?page=1&count=${count}&searchValue=${value}`);
     const query = { type: 'searchValue', value: value };
     dispatch(setQuery(query));
   }
