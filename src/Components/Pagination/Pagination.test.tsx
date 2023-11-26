@@ -12,8 +12,8 @@ describe('Pagination component', () => {
   it('Make sure the component updates URL query parameter when page changes', async () => {
     const { result } = renderHook(() => useState(''));
     const [page, setPage] = result.current;
-    vi.mock('react-router-dom', async () => {
-      const actual: object = await vi.importActual('react-router-dom');
+    vi.mock('next-router-mock', async () => {
+      const actual: object = await vi.importActual('next-router-mock');
       return {
         ...actual,
         useSearchParams: () => {
