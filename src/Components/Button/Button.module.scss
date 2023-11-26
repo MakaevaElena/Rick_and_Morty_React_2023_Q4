@@ -1,0 +1,24 @@
+.button {
+  width: 10vw;
+  height: 3em;
+  width: 200px;
+  border: 2px solid #7bab91;
+  border-radius: 3%;
+  outline: none;
+  background: #f9f0da;
+  color: #9e9c9c;
+  box-shadow: 0px 5px 10px 2px #556b4f;
+  transition: 0.2s;
+}
+
+.button:hover {
+  transform: scale(1.1);
+}
+
+.button:active {
+  border: none;
+}
+
+.close-button {
+  width: min-content;
+}

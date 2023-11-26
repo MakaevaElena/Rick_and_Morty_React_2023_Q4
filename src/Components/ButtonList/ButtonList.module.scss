@@ -1,0 +1,70 @@
+.pagination-buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+
+  flex-wrap: wrap;
+  padding: 1em;
+  border-radius: 5px;
+  box-shadow: 0px 5px 10px 2px #556b4f;
+  height: 3vh;
+}
+
+.pagination-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: inherit;
+  width: 1%;
+  min-width: 30px;
+  padding: 0.5vw;
+  border-radius: 3%;
+  background-color: #accea3;
+  cursor: pointer;
+
+  box-shadow:
+    0 1px 4px #000000,
+    -23px 0 20px -23px #000000cc,
+    23px 0 20px -23px #000000cc,
+    0 0 40px #0000001a inset;
+
+  &:hover {
+    transform: scale(1.1);
+    border: 1px solid #7e9777;
+    box-shadow: 10px -10px 8px 3px #00000080;
+  }
+
+  transition: 0.2s;
+
+  p {
+    font-size: 1.2vw;
+    margin: 0;
+  }
+}
+
+.chosen_button {
+  background-color: white;
+}
+
+.change-count-select {
+  width: 10vw;
+  height: 3em;
+  margin: 1rem;
+  min-width: 200px;
+  border: 2px solid #7bab91;
+  border-radius: 3%;
+  outline: none;
+  background: #f9f0da;
+  color: #9e9c9c;
+  box-shadow: 0px 5px 10px 2px #556b4f;
+  transition: 0.2s;
+}
+
+.button:hover {
+  transform: scale(1.1);
+}
+
+.button:active {
+  border: none;
+}
