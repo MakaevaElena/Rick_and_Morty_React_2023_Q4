@@ -13,9 +13,9 @@ const Layout: React.FC<AppProps> = ({ children }) => {
     <div className="container">
       <Searching />
       <div className={styles['info-from-store']}>
-        <h4>SearchValue from Store: {searchValue || 'Empty'}</h4>
-        <h4>CountPerPage from Store: {countPerPage || 'Empty'}</h4>
-        <h4>ViewMode from Store: {`${viewMode}` || 'Empty'}</h4>
+        <h4>SearchValue: {searchValue || 'Empty'}</h4>
+        <h4>CountPerPage: {countPerPage || 'Empty'}</h4>
+        <h4>ViewMode: {`${viewMode}` || 'Empty'}</h4>
       </div>
       {children}
     </div>

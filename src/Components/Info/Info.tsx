@@ -12,24 +12,25 @@ import { InfoProps } from '@/types/common-types';
 import Image from 'next/image';
 
 const Info: React.FC<InfoProps> = ({ details }) => {
+  const searchValue = useAppSelector((state) => state.data.searchValue);
+  const codedSearchValue =
+    searchValue && typeof searchValue === 'string' ? encodeURI(searchValue) : '';
   const data = details;
   const dispatch = useDispatch();
   const router = useRouter();
-  // const count = router.query.count;
   const count = useAppSelector((state) => state.data.countPerPage);
   const id = router.query?.id || 0;
-  // const currentPage = router.query.currentPage;
   const currentPage = useAppSelector((state) => state.data.page);
-
-  // const { data, isLoading } = useFetchRickandmortyDetailsQuery(+id, {
-  //   skip: Boolean(id) === false,
-  // });
   const { isLoading } = useFetchRickandmortyDetailsQuery(+id, {
     skip: Boolean(id) === false,
   });
 
   const handlerCloseButton = () => {
-    router.push(`/search/?page=${currentPage}&count=${count}`);
+    router.push(
+      `/search/?page=${currentPage}&count=${count}${
+        searchValue && `&searchValue=${codedSearchValue}`
+      }`
+    );
   };
 
   useEffect(() => {

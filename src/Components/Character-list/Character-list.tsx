@@ -20,14 +20,12 @@ const CharacterList: React.FC<CharacterListProps> = ({ characterList, children }
     isDetailsOpen = window.location.pathname.includes('details');
   }
 
-  // const count = router.query.count;
   const count = useAppSelector((state) => state.data.countPerPage);
 
   const page = useAppSelector((state) => state.data.page);
   const countPerPage = useAppSelector((state) => state.data.countPerPage);
   const query = useAppSelector((state) => state.data.query);
   const init = useAppSelector((state) => state.data.init);
-  // const { data, isLoading, error } = useFetchDataByValueQuery(query);
   const { isLoading, error } = useFetchDataByValueQuery(query);
   const results = data ? data.results : [];
   results.slice(0, +countPerPage);

@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom';
-// import { unmountComponentAtNode } from 'react-dom';
 import { createRoot } from 'react-dom/client';
 import { vi } from 'vitest';
 
@@ -12,8 +11,6 @@ beforeEach(() => {
 
 afterEach(() => {
   if (container) {
-    // unmountComponentAtNode(container);
-
     const root = createRoot(container);
 
     root.unmount();

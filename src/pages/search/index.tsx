@@ -15,7 +15,6 @@ const Search: React.FC<SearchPageProps> = ({ searchedList }) => {
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
   const serchValue = context.query.searchValue;
   const page = context.query.page || '1';
-  // const { data } = await store.dispatch(fetchDataByPage.initiate(+page));
   const { data: searchedList } = serchValue
     ? await store.dispatch(
         fetchDataByValue.initiate({
@@ -26,10 +25,9 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     : await store.dispatch(fetchDataByPage.initiate(+page));
 
   await Promise.all(store.dispatch(getRunningQueriesThunk()));
-  // console.log('State on server', store.getState());
 
   return {
-    props: { searchedList },
+    props: { searchedList: searchedList || null },
   };
 });
 

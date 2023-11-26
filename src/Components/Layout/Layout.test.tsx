@@ -15,6 +15,6 @@ describe('Tests for Layout component', () => {
       screen.getAllByRole('heading', {
         level: 4,
       })[0]
-    ).toHaveTextContent(/SearchValue from Store:/);
+    ).toHaveTextContent(/SearchValue:/);
   });
 });

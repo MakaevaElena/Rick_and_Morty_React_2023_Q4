@@ -16,11 +16,8 @@ const ButtonList: React.FC = () => {
   const countPerPage = useAppSelector((state) => state.data.countPerPage);
 
   const { data, isLoading } = useFetchDataByPageQuery(+page);
-  // const [selectedValue, setSelectedValue] = useState<string>(DEFAULT_COUNT);
-
   useEffect(() => {
     if (page) dispatch(setPage(+page));
-    // setSelectedValue(countPerPage);
     dispatch(setCountPerPage(queryCountPerPage));
     dispatch(setMainIsLoading(isLoading));
   }, [countPerPage, dispatch, isLoading, page, queryCountPerPage]);
@@ -50,7 +47,6 @@ const ButtonList: React.FC = () => {
     <div data-testid="button-list" className={styles['pagination']}>
       <h2>Pagination</h2>
       <select
-        // value={selectedValue}
         value={queryCountPerPage}
         data-testid="select"
         className={styles['change-count-select']}

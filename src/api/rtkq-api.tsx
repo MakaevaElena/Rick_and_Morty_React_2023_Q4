@@ -18,17 +18,12 @@ export const rtkqApi = createApi({
 
     fetchDataByValue: builder.query<IRickandmortyAPI, { type: string; value: string }>({
       query: (query) => {
-        // const searchValue = localStorage.getItem('searchValue');
-
         if (query.type === 'searchValue') {
           return `/character/?name=${query.value}`;
         }
         if (query.type === 'changePage') {
           return `/character/?page=${query.value}`;
         }
-        // if (searchValue) {
-        //   return `/character/?name=${searchValue}`;
-        // } else return `/character/`;
         return `/character/`;
       },
     }),

@@ -12,7 +12,6 @@ const Searching: React.FC = () => {
   const [value, setValue] = useState('');
   const query = useAppSelector((state) => state.data.query);
   const count = useAppSelector((state) => state.data.countPerPage) || DEFAULT_COUNT;
-  // const count = router.query.count || DEFAULT_COUNT;
   const inputRef: React.RefObject<HTMLInputElement> = React.createRef();
   const searchButtonRef: React.RefObject<HTMLDivElement> = React.createRef();
 
@@ -34,7 +33,6 @@ const Searching: React.FC = () => {
   function handleSearchClick() {
     localStorage.setItem('searchValue', value);
     dispatch(setSearchValue(value));
-    // router.push(`/search/?page=1&count=${count}`);
     router.push(`/search/?page=1&count=${count}&searchValue=${value}`);
     const query = { type: 'searchValue', value: value };
     dispatch(setQuery(query));

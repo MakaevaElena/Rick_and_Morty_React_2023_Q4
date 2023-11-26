@@ -5,12 +5,14 @@ import Searching from './Searching';
 import CharacterList from '../Character-list/Character-list';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
-import { mockData } from '@/mocks/mocks';
+import { mockCharacter, mockData } from '@/mocks/mocks';
+import Card from '../Card/Card';
 
 const TestComponent = () => {
   return (
     <Provider store={store}>
       <Searching />
+      <Card key={mockCharacter.id} RickandmortyData={mockCharacter} />
     </Provider>
   );
 };
