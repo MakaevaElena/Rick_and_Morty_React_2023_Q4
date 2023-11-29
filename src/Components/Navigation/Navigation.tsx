@@ -10,7 +10,6 @@ const Navigation: React.FC = () => {
 
   return (
     <div className="navigation">
-      <h2>Navigation</h2>
       <div className={style['navigation-buttons']}>
         {LINKS.map((link, i) => (
           <Link

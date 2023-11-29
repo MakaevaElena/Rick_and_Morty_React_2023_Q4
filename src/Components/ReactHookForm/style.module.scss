@@ -1,0 +1,27 @@
+.tytle {
+  text-align: center;
+}
+
+.form-container {
+  width: 500px;
+  border: 1px solid white;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+}
+
+label {
+  font-size: 1.2rem;
+}
+
+input {
+  width: 300px;
+  height: 2vh;
+}
