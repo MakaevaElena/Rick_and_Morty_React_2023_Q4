@@ -1,0 +1,32 @@
+import { Link } from 'react-router-dom';
+import style from './style.module.scss';
+
+const Navigation: React.FC = () => {
+  const LINKS = ['Home', 'ReactHookForm', 'UnControlledForm'];
+
+  function handleClickPage() {
+    console.log('');
+  }
+
+  return (
+    <div className="navigation">
+      <h2>Navigation</h2>
+      <div className={style['navigation-buttons']}>
+        {LINKS.map((link, i) => (
+          <Link
+            key={i + 1}
+            onClick={handleClickPage}
+            to={`/${link}`}
+            className={style[`navigation-button ${link}`]}
+          >
+            <div key={link} id={`link`}>
+              {link}
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Navigation;
