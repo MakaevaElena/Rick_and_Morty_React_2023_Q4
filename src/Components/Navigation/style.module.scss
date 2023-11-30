@@ -1,13 +1,18 @@
+.navigation {
+  background-color: #1a1a1a;
+}
+
 .navigation-buttons {
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
+  font-size: 1.2rem;
 
   flex-wrap: wrap;
   padding: 1em;
   border-radius: 5px;
-  box-shadow: 0px 5px 10px 2px #556b4f;
+  box-shadow: 0px 5px 10px 2px #393a38;
   height: 3vh;
 }
 
@@ -20,7 +25,7 @@
   min-width: 30px;
   padding: 0.5vw;
   border-radius: 3%;
-  background-color: #accea3;
+  background-color: #4e504d;
   cursor: pointer;
 
   box-shadow:
@@ -31,7 +36,7 @@
 
   &:hover {
     transform: scale(1.1);
-    border: 1px solid #7e9777;
+    border: 1px solid #4e504d;
     box-shadow: 10px -10px 8px 3px #00000080;
   }
 
@@ -52,12 +57,12 @@
   height: 3em;
   margin: 1rem;
   min-width: 200px;
-  border: 2px solid #7bab91;
+  border: 2px solid #4e504d;
   border-radius: 3%;
   outline: none;
   background: #f9f0da;
   color: #9e9c9c;
-  box-shadow: 0px 5px 10px 2px #556b4f;
+  box-shadow: 0px 5px 10px 2px #4e504d;
   transition: 0.2s;
 }
 

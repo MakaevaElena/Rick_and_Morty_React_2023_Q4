@@ -1,12 +1,13 @@
 :root {
   width: 100%;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: menlo, monospace;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 200;
+  font-style: italic;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* background-color: rgb(184, 184, 69); */
+  color: #ffffffde;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -16,7 +17,7 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #ffffffde;
   text-decoration: inherit;
 }
 a:hover {
@@ -49,8 +50,8 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    background-color: #131212;
+    color: #ffffffde;
   }
   a:hover {
     color: #747bff;

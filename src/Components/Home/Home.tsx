@@ -1,8 +1,12 @@
 import ResultTable from '../ResultTable/ResultTable';
-// import style from './style.module.scss';
+import styles from './style.module.scss';
 
 const Home: React.FC = () => {
-  return <ResultTable />;
+  return (
+    <div className={styles['home-conteiner']}>
+      <ResultTable />
+    </div>
+  );
 };
 
 export default Home;

@@ -3,8 +3,17 @@
 }
 
 .form-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.form {
   width: 500px;
   border: 1px solid white;
+  padding: 1rem;
+  background-color: #242424;
+  color: #ffffffde;
 }
 
 .form-row {
@@ -14,7 +23,7 @@
   align-items: center;
   gap: 1rem;
   align-items: center;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 label {
