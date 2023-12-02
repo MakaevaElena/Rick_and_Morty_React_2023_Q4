@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import style from './style.module.scss';
 import { getBase64 } from '../../utils/getBase64';
 import {
@@ -14,6 +15,7 @@ import {
 } from '../../store/slices/formSlice';
 
 const UnControlledForm: React.FC = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const nameRef = React.useRef<HTMLInputElement>(null);
@@ -39,6 +41,7 @@ const UnControlledForm: React.FC = () => {
     if (pictureRef.current?.files && pictureRef.current?.files?.length > 0)
       dispatch(setPicture(await getBase64(pictureRef.current?.files[0])));
     if (countryRef.current?.value) dispatch(setCountry(countryRef.current?.value));
+    navigate(`/Home`);
   };
 
   return (
