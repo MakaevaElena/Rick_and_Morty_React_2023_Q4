@@ -8,7 +8,7 @@ const initialState: FormState = {
   password: '',
   password_repeat: '',
   gender: '',
-  accept: true,
+  accept: false,
   picture: '',
   country: '',
 };

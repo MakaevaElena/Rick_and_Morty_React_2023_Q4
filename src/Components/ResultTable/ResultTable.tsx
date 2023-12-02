@@ -32,7 +32,7 @@ const ResultTable: React.FC = () => {
           <h3>password: {password}</h3>
           <h3>password_repeat: {password_repeat}</h3>
           <h3>gender: {gender}</h3>
-          <h3>accept: {accept}</h3>
+          <h3>accept: {accept === true ? 'yes' : 'no'}</h3>
           <h3>country: {country}</h3>
           <div className={styles['picture-block']}>
             <div>
