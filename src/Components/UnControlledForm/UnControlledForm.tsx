@@ -100,7 +100,7 @@ const UnControlledForm: React.FC = () => {
             </div>
             <div className={style['form-row']}>
               <label htmlFor="email">email</label>
-              <input type="email" id="email" ref={emailRef} defaultValue="myname@mail.xx" />
+              <input type="text" id="email" ref={emailRef} defaultValue="myname@mail.xx" />
             </div>
             <div className={style['form-row']}>
               <label htmlFor="password">password</label>

@@ -16,23 +16,13 @@ const ReactHookForm: React.FC = () => {
   const {
     register,
     handleSubmit,
-    clearErrors,
-    formState: { errors },
+    formState: { errors, isDirty, isValid },
   } = useForm<Form>({
-    defaultValues: {
-      name: 'Myname',
-      age: 18,
-      email: 'myname@mail.xx',
-      password: '123!@#qweQWE',
-      password_repeat: '123!@#qweQWE',
-      gender: '',
-      accept: false,
-    },
+    mode: 'onChange',
     resolver: yupResolver<Form>(schema),
   });
 
-  const submit: SubmitHandler<Form> = async (data) => {
-    console.log('data', data);
+  const onSubmit: SubmitHandler<Form> = async (data) => {
     const { name, age, email, password, password_repeat, gender, accept, country } = data;
 
     if (data.picture && data.picture.length > 0) {
@@ -63,7 +53,7 @@ const ReactHookForm: React.FC = () => {
         <div></div>
 
         <div className={styles['form']}>
-          <form onSubmit={handleSubmit(submit)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className={styles['form-row']}>
               <div>
                 <label htmlFor="name">name</label>
@@ -104,9 +94,7 @@ const ReactHookForm: React.FC = () => {
             </div>
             {errors.password && (
               <p className={styles['error-message']} role="alert">
-                {
-                  'should match, display the password strength: 1 number, 1 uppercased letter, 1 lowercased letter, 1 special character'
-                }
+                {errors.password?.message}
               </p>
             )}
 
@@ -178,9 +166,8 @@ const ReactHookForm: React.FC = () => {
             )}
 
             <div className={styles['form-row']}>
-              <button type="submit">Submit</button>
-              <button type="button" onClick={() => clearErrors()}>
-                Clear Error
+              <button type="submit" disabled={!isDirty || !isValid}>
+                Submit
               </button>
             </div>
           </form>

@@ -15,12 +15,20 @@ export const schema = yup
       .required('email required'),
     password: yup
       .string()
-      .matches(
-        /(?=(.*[0-9]))(?=.*[@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/gm,
-        {
-          excludeEmptyString: true,
+      .test('is strong password', 'password in not strong', (password) => {
+        if (password) return password?.length > 15;
+      })
+      .test(
+        'password format',
+        'should match, display the password strength: 1 number, 1 uppercased letter, 1 lowercased letter, 1 special character',
+        (password) => {
+          if (password)
+            return /(?=(.*[0-9]))(?=.*[@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/gm.test(
+              password
+            );
         }
       )
+      .defined()
       .required('password required'),
     password_repeat: yup
       .string()
@@ -50,6 +58,12 @@ export const schema = yup
       })
       .defined()
       .required('please upload picture'),
-    country: yup.string().required('please choose country'),
+    country: yup
+      .string()
+      .test('is country chosen', 'please choose country', (country) => {
+        if (country) return country.length > 0;
+      })
+      .defined()
+      .required('please choose country'),
   })
   .required();
