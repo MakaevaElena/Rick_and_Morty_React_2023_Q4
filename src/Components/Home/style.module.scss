@@ -1,0 +1,13 @@
+.home-container {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1rem;
+}
+
+h2 {
+  text-align: center;
+}
+
+.home-container :nth-child(1) {
+  border-color: yellow;
+}
