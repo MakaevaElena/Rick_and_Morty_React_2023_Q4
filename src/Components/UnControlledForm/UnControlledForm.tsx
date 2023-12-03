@@ -11,12 +11,15 @@ const UnControlledForm: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [errors, setErrors] = useState('');
-  const [country, setCountry] = useState('');
+  const [isChecked, setIsChecked] = useState(false);
+  const [maleGender, setMaleGender] = useState(false);
 
+  // const formRef = React.useRef<HTMLFormElement>(null);
   const nameRef = React.useRef<HTMLInputElement>(null);
   const ageRef = React.useRef<HTMLInputElement>(null);
   const emailRef = React.useRef<HTMLInputElement>(null);
-  const genderRef = React.useRef<HTMLInputElement>(null);
+  const genderFemaleRef = React.useRef<HTMLInputElement>(null);
+  const genderMaleRef = React.useRef<HTMLInputElement>(null);
   const acceptRef = React.useRef<HTMLInputElement>(null);
   const passwordRef = React.useRef<HTMLInputElement>(null);
   const passwordRepeatRef = React.useRef<HTMLInputElement>(null);
@@ -24,15 +27,17 @@ const UnControlledForm: React.FC = () => {
   const countryRef = React.useRef<HTMLInputElement>(null);
 
   const onValidate = () => {
-    console.log(acceptRef.current?.value);
+    // console.log(acceptRef.current?.value);
     return schema.validate({
       name: nameRef.current?.value,
       age: ageRef.current?.value,
       email: emailRef.current?.value,
       password: passwordRef.current?.value,
       password_repeat: passwordRepeatRef.current?.value,
-      gender: genderRef.current?.value,
-      accept: acceptRef.current?.value == 'on' ? true : false,
+      gender: genderMaleRef.current?.checked
+        ? genderMaleRef.current?.value
+        : genderFemaleRef.current?.value,
+      accept: isChecked,
       picture: pictureRef.current?.files,
       country: countryRef.current?.value,
     });
@@ -42,6 +47,7 @@ const UnControlledForm: React.FC = () => {
     event.preventDefault();
 
     // console.log(acceptRef.current?.value);
+    // console.log(genderRef.current?.value);
 
     onValidate()
       .then(async () => {
@@ -55,8 +61,10 @@ const UnControlledForm: React.FC = () => {
               email: emailRef.current?.value,
               password: passwordRef.current?.value,
               password_repeat: passwordRepeatRef.current?.value,
-              gender: genderRef.current?.value,
-              accept: acceptRef.current?.value == 'on' ? true : false,
+              gender: genderMaleRef.current?.checked
+                ? genderMaleRef.current?.value
+                : genderFemaleRef.current?.value,
+              accept: isChecked,
               picture: pictureInBase64,
               country: countryRef.current?.value,
             })
@@ -67,6 +75,14 @@ const UnControlledForm: React.FC = () => {
       .catch((error) => {
         setErrors(error.message);
       });
+  };
+
+  const changeCheckbox = () => {
+    setIsChecked(!isChecked);
+  };
+
+  const changeMaleGender = () => {
+    setMaleGender(!maleGender);
   };
 
   return (
@@ -108,10 +124,6 @@ const UnControlledForm: React.FC = () => {
 
             <fieldset>
               <legend>Select a gender:</legend>
-              <div className={style['form-row']}>
-                <input type="radio" id="gender_male" name="gender" value="male" ref={genderRef} />
-                <label htmlFor="gender_male">male</label>
-              </div>
 
               <div className={style['form-row']}>
                 <input
@@ -119,9 +131,22 @@ const UnControlledForm: React.FC = () => {
                   id="gender_femail"
                   name="gender"
                   value="femail"
-                  ref={genderRef}
+                  ref={genderFemaleRef}
                 />
                 <label htmlFor="gender_femail">femail</label>
+              </div>
+
+              <div className={style['form-row']}>
+                <input
+                  type="radio"
+                  id="gender_male"
+                  name="gender"
+                  value="male"
+                  ref={genderMaleRef}
+                  checked={true}
+                  onChange={changeMaleGender}
+                />
+                <label htmlFor="gender_male">male</label>
               </div>
             </fieldset>
 
@@ -132,7 +157,7 @@ const UnControlledForm: React.FC = () => {
                   terms and conditions
                 </Link>
               </label>
-              <input type="checkbox" ref={acceptRef} />
+              <input type="checkbox" id="accept" ref={acceptRef} onChange={changeCheckbox} />
             </div>
 
             <div className={style['form-row']}>
@@ -146,10 +171,10 @@ const UnControlledForm: React.FC = () => {
                 list="country"
                 id="country-list"
                 ref={countryRef}
-                value={country}
-                onChange={(evt) => {
-                  if (evt.target instanceof HTMLInputElement) setCountry(evt.target.value);
-                }}
+                // value={country}
+                // onChange={(evt) => {
+                //   if (evt.target instanceof HTMLInputElement) setCountry(evt.target.value);
+                // }}
               />
               <datalist id="country">
                 {COUNTRIES.map((item, key) => (

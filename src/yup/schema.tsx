@@ -29,7 +29,7 @@ export const schema = yup
       .string()
       .oneOf([yup.ref('password')], 'passwords not match')
       .required('password_repeat required'),
-    gender: yup.string().required(),
+    gender: yup.string().required('please choose gender'),
     accept: yup
       .boolean()
       .test('accept the terms', 'Please accept the terms', (accept) => {
@@ -44,7 +44,6 @@ export const schema = yup
       })
       .test('fileFormat', 'The file is wrong format', (file) => {
         if (file && file[0]) {
-          console.log(file[0].type);
           // if (!['image/jpeg', 'image/png'].includes(file[0].type)) return false;
           return (file && file[0].type === 'image/jpeg') || (file && file[0].type === 'image/png');
         }
