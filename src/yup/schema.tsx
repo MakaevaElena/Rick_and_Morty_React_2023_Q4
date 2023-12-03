@@ -7,25 +7,35 @@ export const schema = yup
       .string()
       .matches(/^[A-ZА-Я][a-zа-я]*$/)
       .required('required'),
-    age: yup.number().positive().integer(),
+    age: yup.number().positive().integer().required(),
     email: yup
       .string()
       .email('email format need to be xxx@xx.xx')
-      .matches(/[a-z0-9]+[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/),
+      .matches(/[a-z0-9]+[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/)
+      .required(),
     // /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/gm
     // /[a-z0-9]+[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/
-    password: yup.string().matches(
-      // /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/gm,
-      /(?=(.*[0-9]))(?=.*[@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/gm,
-      {
-        excludeEmptyString: true,
-      }
-    ),
-    password_repeat: yup.string().oneOf([yup.ref('password')], 'passwords not match'),
-    gender: yup.string(),
-    accept: yup.boolean().test('accept the terms', 'Please accept the terms', (accept) => {
-      return accept === true;
-    }),
+    password: yup
+      .string()
+      .matches(
+        // /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/gm,
+        /(?=(.*[0-9]))(?=.*[@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/gm,
+        {
+          excludeEmptyString: true,
+        }
+      )
+      .required(),
+    password_repeat: yup
+      .string()
+      .oneOf([yup.ref('password')], 'passwords not match')
+      .required(),
+    gender: yup.string().required(),
+    accept: yup
+      .boolean()
+      .test('accept the terms', 'Please accept the terms', (accept) => {
+        return accept === true;
+      })
+      .required(),
     // picture: yup.mixed().required('File is required'),
     picture: yup
       .mixed<FileList>()

@@ -4,36 +4,9 @@ import styles from './style.module.scss';
 import { useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '../../yup/schema';
-
-import {
-  setData,
-  setPicture,
-  // setAccept,
-  // setAge,
-  // setCountry,
-  // setEmail,
-  // setGender,
-  // setName,
-  // setPassword,
-  // setPasswordRepeat,
-} from '../../store/slices/formSlice';
+import { setData } from '../../store/slices/formSlice';
 import { getBase64 } from '../../utils/getBase64';
-
-// https://github.com/jquense/yup/issues/1183
-// https://htmlacademy.ru/blog/js/regexp-howto
-// https://stackoverflow.com/questions/54020719/validating-file-size-and-format-with-yup
-
-interface Form {
-  name?: string;
-  age?: number;
-  email?: string;
-  password?: string;
-  password_repeat?: string;
-  gender?: string;
-  accept?: boolean;
-  picture?: FileList;
-  country?: string;
-}
+import { Form } from '../../common-types/common-types';
 
 const ReactHookForm: React.FC = () => {
   const navigate = useNavigate();
@@ -81,16 +54,6 @@ const ReactHookForm: React.FC = () => {
         );
     }
 
-    // if (data.name) dispatch(setName(data.name));
-    // if (data.age) dispatch(setAge(data.age));
-    // if (data.email) dispatch(setEmail(data.email));
-    // if (data.password) dispatch(setPassword(data.password));
-    // if (data.password_repeat) dispatch(setPasswordRepeat(data.password_repeat));
-    // if (data.gender) dispatch(setGender(data.gender));
-    // if (data.accept) dispatch(setAccept(data.accept));
-    if (data.picture && data.picture.length > 0)
-      dispatch(setPicture(await getBase64(data.picture[0])));
-    // if (data.country) dispatch(setCountry(data.country));
     navigate(`/Home`);
   };
 
