@@ -3,73 +3,25 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from './style.module.scss';
 import { useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import { schema } from '../../yup/schema';
 
 import {
-  setAccept,
-  setAge,
-  setCountry,
-  setEmail,
-  setGender,
-  setName,
-  setPassword,
-  setPasswordRepeat,
+  setData,
   setPicture,
+  // setAccept,
+  // setAge,
+  // setCountry,
+  // setEmail,
+  // setGender,
+  // setName,
+  // setPassword,
+  // setPasswordRepeat,
 } from '../../store/slices/formSlice';
 import { getBase64 } from '../../utils/getBase64';
 
 // https://github.com/jquense/yup/issues/1183
 // https://htmlacademy.ru/blog/js/regexp-howto
 // https://stackoverflow.com/questions/54020719/validating-file-size-and-format-with-yup
-const schema = yup
-  .object()
-  .shape({
-    name: yup
-      .string()
-      .matches(/^[A-ZА-Я][a-zа-я]*$/)
-      .required('required'),
-    age: yup.number().positive().integer(),
-    email: yup
-      .string()
-      .email('email format need to be xxx@xx.xx')
-      .matches(/[a-z0-9]+[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/),
-    // /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/gm
-    // /[a-z0-9]+[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/
-    password: yup.string().matches(
-      // /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/gm,
-      /(?=(.*[0-9]))(?=.*[@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/gm,
-      {
-        excludeEmptyString: true,
-      }
-    ),
-    password_repeat: yup.string().oneOf([yup.ref('password')], 'passwords not match'),
-    gender: yup.string(),
-    accept: yup.boolean().test('accept the terms', 'Please accept the terms', (accept) => {
-      return accept === true;
-    }),
-    // picture: yup.mixed().required('File is required'),
-    picture: yup
-      .mixed<FileList>()
-      .test('fileExist', 'Please upload picture', (file) => {
-        return !!file && !!file[0];
-      })
-      .test('fileFormat', 'The file is wrong format', (file) => {
-        if (file && file[0]) {
-          // if (!['image/jpeg', 'image/png'].includes(file[0].type)) return false;
-          return (file && file[0].type === 'image/jpeg') || (file && file[0].type === 'image/png');
-        }
-      })
-      .test('fileSize', 'The file is too large', (file) => {
-        if (file && file[0]) {
-          // if (file && +file[0].size > 200000) return file && file[0].size <= 1;
-          return file && file[0].size <= 1024 * 1024;
-        }
-      })
-      .defined()
-      .required('please upload picture'),
-    country: yup.string(),
-  })
-  .required();
 
 interface Form {
   name?: string;
@@ -109,16 +61,36 @@ const ReactHookForm: React.FC = () => {
 
   const submit: SubmitHandler<Form> = async (data) => {
     console.log('data', data);
-    if (data.name) dispatch(setName(data.name));
-    if (data.age) dispatch(setAge(data.age));
-    if (data.email) dispatch(setEmail(data.email));
-    if (data.password) dispatch(setPassword(data.password));
-    if (data.password_repeat) dispatch(setPasswordRepeat(data.password_repeat));
-    if (data.gender) dispatch(setGender(data.gender));
-    if (data.accept) dispatch(setAccept(data.accept));
+    const { name, age, email, password, password_repeat, gender, accept, country } = data;
+
+    if (data.picture && data.picture.length > 0) {
+      const pictureInBase64 = await getBase64(data.picture[0]);
+      if (data)
+        dispatch(
+          setData({
+            name,
+            age,
+            email,
+            password,
+            password_repeat,
+            gender,
+            accept,
+            picture: pictureInBase64,
+            country,
+          })
+        );
+    }
+
+    // if (data.name) dispatch(setName(data.name));
+    // if (data.age) dispatch(setAge(data.age));
+    // if (data.email) dispatch(setEmail(data.email));
+    // if (data.password) dispatch(setPassword(data.password));
+    // if (data.password_repeat) dispatch(setPasswordRepeat(data.password_repeat));
+    // if (data.gender) dispatch(setGender(data.gender));
+    // if (data.accept) dispatch(setAccept(data.accept));
     if (data.picture && data.picture.length > 0)
       dispatch(setPicture(await getBase64(data.picture[0])));
-    if (data.country) dispatch(setCountry(data.country));
+    // if (data.country) dispatch(setCountry(data.country));
     navigate(`/Home`);
   };
 

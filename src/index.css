@@ -62,3 +62,8 @@ button:focus-visible {
 }
 
 /* MyStyles */
+.new {
+  border: 0.3rem solid #bbbb2a;
+  transition: 3s;
+  /* background-color: aqua; */
+}
