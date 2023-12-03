@@ -9,6 +9,7 @@ export default defineConfig({
     open: true,
   },
   plugins: [react()],
+  base: './',
   test: {
     globals: true,
     environment: 'jsdom',
