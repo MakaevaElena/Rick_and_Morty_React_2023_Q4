@@ -1,9 +1,6 @@
-// import { useEffect } from 'react';
-// import { useAppSelector } from '../../store/slices/hooks';
 import styles from './style.module.scss';
 import React from 'react';
 import { ResultData } from '../../store/types';
-// import { getBase64 } from '../../utils/getBase64';
 
 type ResultTablePropsType = {
   data: ResultData;
@@ -11,22 +8,7 @@ type ResultTablePropsType = {
 };
 
 const ResultTable: React.FC<ResultTablePropsType> = ({ data, blockStyles }) => {
-  // const data = useAppSelector((state) => state.data.data);
-  // const name = useAppSelector((state) => state.data.name);
-  // const age = useAppSelector((state) => state.data.age);
-  // const email = useAppSelector((state) => state.data.email);
-  // const password = useAppSelector((state) => state.data.password);
-  // const password_repeat = useAppSelector((state) => state.data.password_repeat);
-  // const gender = useAppSelector((state) => state.data.gender);
-  // const accept = useAppSelector((state) => state.data.accept);
-  // const picture = useAppSelector((state) => state.data.picture);
-  // const country = useAppSelector((state) => state.data.country);
-
   const nameRef = React.useRef<HTMLHeadingElement>(null);
-
-  // useEffect(() => {
-  //   nameRef.current?.classList.add('changed');
-  // }, [name]);
 
   return (
     <>
@@ -47,7 +29,6 @@ const ResultTable: React.FC<ResultTablePropsType> = ({ data, blockStyles }) => {
             </div>
             <div>
               <img className={styles['picture']} src={data.picture} alt="" />
-              {/* <img className={styles['picture']} src={getBase64(data.picture[0])} alt="" /> */}
             </div>
           </div>
         </div>

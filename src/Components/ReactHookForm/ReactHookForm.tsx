@@ -27,8 +27,6 @@ const ReactHookForm: React.FC = () => {
       password_repeat: '123!@#qweQWE',
       gender: '',
       accept: false,
-      // picture: new FileList(),
-      // country: '',
     },
     resolver: yupResolver<Form>(schema),
   });
@@ -180,7 +178,6 @@ const ReactHookForm: React.FC = () => {
             )}
 
             <div className={styles['form-row']}>
-              {/* <button type="submit" disabled={!isValid}> */}
               <button type="submit">Submit</button>
               <button type="button" onClick={() => clearErrors()}>
                 Clear Error

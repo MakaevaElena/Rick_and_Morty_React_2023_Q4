@@ -13,12 +13,9 @@ export const schema = yup
       .email('email format need to be xxx@xx.xx')
       .matches(/[a-z0-9]+[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/)
       .required('email required'),
-    // /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/gm
-    // /[a-z0-9]+[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/
     password: yup
       .string()
       .matches(
-        // /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/gm,
         /(?=(.*[0-9]))(?=.*[@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/gm,
         {
           excludeEmptyString: true,
@@ -36,7 +33,6 @@ export const schema = yup
         return accept === true;
       })
       .required('accept required'),
-    // picture: yup.mixed().required('File is required'),
     picture: yup
       .mixed<FileList>()
       .test('fileExist', 'Please upload picture', (file) => {
@@ -44,13 +40,11 @@ export const schema = yup
       })
       .test('fileFormat', 'The file is wrong format', (file) => {
         if (file && file[0]) {
-          // if (!['image/jpeg', 'image/png'].includes(file[0].type)) return false;
           return (file && file[0].type === 'image/jpeg') || (file && file[0].type === 'image/png');
         }
       })
       .test('fileSize', 'The file is too large', (file) => {
         if (file && file[0]) {
-          // if (file && +file[0].size > 200000) return file && file[0].size <= 1;
           return file && file[0].size <= 1024 * 1024;
         }
       })

@@ -13,8 +13,6 @@ const UnControlledForm: React.FC = () => {
   const [errors, setErrors] = useState('');
   const [isChecked, setIsChecked] = useState(false);
   const [maleGender, setMaleGender] = useState(false);
-
-  // const formRef = React.useRef<HTMLFormElement>(null);
   const nameRef = React.useRef<HTMLInputElement>(null);
   const ageRef = React.useRef<HTMLInputElement>(null);
   const emailRef = React.useRef<HTMLInputElement>(null);
@@ -27,7 +25,6 @@ const UnControlledForm: React.FC = () => {
   const countryRef = React.useRef<HTMLInputElement>(null);
 
   const onValidate = () => {
-    // console.log(acceptRef.current?.value);
     return schema.validate({
       name: nameRef.current?.value,
       age: ageRef.current?.value,
@@ -45,9 +42,6 @@ const UnControlledForm: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    // console.log(acceptRef.current?.value);
-    // console.log(genderRef.current?.value);
 
     onValidate()
       .then(async () => {
@@ -167,15 +161,7 @@ const UnControlledForm: React.FC = () => {
 
             <div className={style['form-row']}>
               <label htmlFor="country-list">country</label>
-              <input
-                list="country"
-                id="country-list"
-                ref={countryRef}
-                // value={country}
-                // onChange={(evt) => {
-                //   if (evt.target instanceof HTMLInputElement) setCountry(evt.target.value);
-                // }}
-              />
+              <input list="country" id="country-list" ref={countryRef} />
               <datalist id="country">
                 {COUNTRIES.map((item, key) => (
                   <option key={key} value={item} />
