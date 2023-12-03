@@ -7,12 +7,12 @@ export const schema = yup
       .string()
       .matches(/^[A-ZА-Я][a-zа-я]*$/)
       .required('required'),
-    age: yup.number().positive().integer().required(),
+    age: yup.number().positive().integer().required('name required'),
     email: yup
       .string()
       .email('email format need to be xxx@xx.xx')
       .matches(/[a-z0-9]+[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/)
-      .required(),
+      .required('email required'),
     // /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/gm
     // /[a-z0-9]+[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/
     password: yup
@@ -24,18 +24,18 @@ export const schema = yup
           excludeEmptyString: true,
         }
       )
-      .required(),
+      .required('password required'),
     password_repeat: yup
       .string()
       .oneOf([yup.ref('password')], 'passwords not match')
-      .required(),
+      .required('password_repeat required'),
     gender: yup.string().required(),
     accept: yup
       .boolean()
       .test('accept the terms', 'Please accept the terms', (accept) => {
         return accept === true;
       })
-      .required(),
+      .required('accept required'),
     // picture: yup.mixed().required('File is required'),
     picture: yup
       .mixed<FileList>()
@@ -44,6 +44,7 @@ export const schema = yup
       })
       .test('fileFormat', 'The file is wrong format', (file) => {
         if (file && file[0]) {
+          console.log(file[0].type);
           // if (!['image/jpeg', 'image/png'].includes(file[0].type)) return false;
           return (file && file[0].type === 'image/jpeg') || (file && file[0].type === 'image/png');
         }
@@ -56,6 +57,6 @@ export const schema = yup
       })
       .defined()
       .required('please upload picture'),
-    country: yup.string(),
+    country: yup.string().required('please choose country'),
   })
   .required();

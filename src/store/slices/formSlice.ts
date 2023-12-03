@@ -24,7 +24,6 @@ const dataSlice = createSlice({
     setData: (state, action) => {
       // state.data = action.payload;
       state.data.push(action.payload);
-      console.log(action.payload);
     },
   },
 });

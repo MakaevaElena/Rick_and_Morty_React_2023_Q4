@@ -7,6 +7,7 @@ import { schema } from '../../yup/schema';
 import { setData } from '../../store/slices/formSlice';
 import { getBase64 } from '../../utils/getBase64';
 import { Form } from '../../common-types/common-types';
+import { COUNTRIES } from '../../constants';
 
 const ReactHookForm: React.FC = () => {
   const navigate = useNavigate();
@@ -167,10 +168,9 @@ const ReactHookForm: React.FC = () => {
               <label htmlFor="country-list">country</label>
               <input list="country" id="country-list" {...register('country')} />
               <datalist id="country">
-                <option value="NeverLand">NeverLand</option>
-                <option value="Australia">Australia</option>
-                <option value="Russia">Russia</option>
-                <option value="Great Britain">Great Britain</option>
+                {COUNTRIES.map((item, key) => (
+                  <option key={key} value={item} />
+                ))}
               </datalist>
             </div>
             {errors.country && (
@@ -180,6 +180,7 @@ const ReactHookForm: React.FC = () => {
             )}
 
             <div className={styles['form-row']}>
+              {/* <button type="submit" disabled={!isValid}> */}
               <button type="submit">Submit</button>
               <button type="button" onClick={() => clearErrors()}>
                 Clear Error
